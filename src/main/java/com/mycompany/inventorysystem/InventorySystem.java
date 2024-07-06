@@ -13,6 +13,6 @@ public class InventorySystem {
     public static void main(String[] args) {
         MainWindow log = new MainWindow();
         log.show();
-        /*added this line of code to test the commiting shit if it works */
+        
     }
 }
