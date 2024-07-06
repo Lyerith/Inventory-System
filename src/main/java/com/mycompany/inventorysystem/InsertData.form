@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[400, 575]"/>
+    </Property>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="Insert_Button" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Component id="Cancel_Button" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="OnHandCardLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ShortageOverageLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BalCardLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="UnitValueLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="UnitMeasureLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ValueLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="QuantityLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="RemarksLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="UnitMeasureField" alignment="1" pref="257" max="32767" attributes="0"/>
+                          <Component id="UnitValueField" alignment="1" max="32767" attributes="0"/>
+                          <Component id="BalPerCardField" alignment="1" max="32767" attributes="0"/>
+                          <Component id="OnHandCountField" alignment="1" max="32767" attributes="0"/>
+                          <Component id="QuantityField" alignment="1" max="32767" attributes="0"/>
+                          <Component id="ValueField" alignment="1" max="32767" attributes="0"/>
+                          <Component id="RemarksField" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="DescLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="StockLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Item" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="StockNoField" max="32767" attributes="0"/>
+                          <Component id="DescriptionField" max="32767" attributes="0"/>
+                          <Component id="ItemField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Item" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ItemField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="DescLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="DescriptionField" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="StockLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="StockNoField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="UnitMeasureLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="UnitMeasureField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="UnitValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="UnitValueField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="BalCardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BalPerCardField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="OnHandCardLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="OnHandCountField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="ShortageOverageLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="QuantityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="QuantityField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ValueLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ValueField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="RemarksLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="RemarksField" alignment="3" min="-2" pref="95" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="Insert_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Cancel_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="58" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="Item">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Item:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="DescLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Description:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="DescriptionField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="StockLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Stock No.:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="StockNoField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="UnitMeasureLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Unit of Measure:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="UnitValueLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Unit Value:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="BalCardLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Balance Per Card:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="OnHandCardLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="On Hand Per Count:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ShortageOverageLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Shortage/Overage"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="QuantityLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Quantity:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="ValueLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Value:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="RemarksLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Remarks"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="UnitMeasureField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="UnitValueField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="BalPerCardField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="OnHandCountField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="QuantityField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="ValueField">
+    </Component>
+    <Component class="javax.swing.JButton" name="Insert_Button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insert"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Insert_ButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Cancel_Button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Cancel_ButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="RemarksField">
+    </Component>
+    <Component class="javax.swing.JTextField" name="ItemField">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Employee:"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
