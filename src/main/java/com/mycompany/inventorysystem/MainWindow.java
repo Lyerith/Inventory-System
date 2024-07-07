@@ -33,28 +33,36 @@ public class MainWindow extends javax.swing.JFrame {
         Employee_Button = new javax.swing.JButton();
         Tabs = new javax.swing.JTabbedPane();
         BlankTab = new javax.swing.JPanel();
-        EmployeeTab = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        Employee = new javax.swing.JPanel();
+        EmployeePane = new javax.swing.JScrollPane();
         EmployeeTable = new javax.swing.JTable();
         AddEmployeeButton = new javax.swing.JButton();
         SearchBar = new javax.swing.JTextField();
         Export_Button1 = new javax.swing.JButton();
         Close_Button1 = new javax.swing.JButton();
         SearchEmployeeLabel = new javax.swing.JLabel();
-        ItemsTab = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        Search_Employee_Button = new javax.swing.JButton();
+        Items = new javax.swing.JPanel();
+        ItemsContent = new javax.swing.JTabbedPane();
+        FurnituresPanel = new javax.swing.JPanel();
+        FurnituresPane = new javax.swing.JScrollPane();
+        FurnituresTable = new javax.swing.JTable();
+        SchoolSuppliesPanel = new javax.swing.JPanel();
+        SchoolSuppliesPane = new javax.swing.JScrollPane();
+        SchoolSuppliesTable = new javax.swing.JTable();
+        OfficeSuppliesEtcPanel = new javax.swing.JPanel();
+        OfficeSuppliesEtcPane = new javax.swing.JScrollPane();
+        OfficeSuppliesEtcTable = new javax.swing.JTable();
         SearchEmployeeLabel1 = new javax.swing.JLabel();
-        SearchBar1 = new javax.swing.JTextField();
-        AddEmployeeButton1 = new javax.swing.JButton();
+        ItemSearchBar = new javax.swing.JTextField();
+        Add_Item_Button = new javax.swing.JButton();
         Export_Button2 = new javax.swing.JButton();
         Close_Button2 = new javax.swing.JButton();
-        InventoryTab = new javax.swing.JPanel();
+        Search_Item_Button = new javax.swing.JButton();
+        Inventory = new javax.swing.JPanel();
         ChooseEmployeeLabel = new javax.swing.JLabel();
         EmployeeDropdownBox = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        InventoryPane = new javax.swing.JScrollPane();
         InventoryDataTable = new javax.swing.JTable();
         Export_Button = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
@@ -148,10 +156,23 @@ public class MainWindow extends javax.swing.JFrame {
             new String [] {
                 "Employee Name", "Employee Position"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         EmployeeTable.setMinimumSize(new java.awt.Dimension(750, 80));
         EmployeeTable.setPreferredSize(new java.awt.Dimension(750, 80));
-        jScrollPane1.setViewportView(EmployeeTable);
+        EmployeeTable.getTableHeader().setReorderingAllowed(false);
+        EmployeePane.setViewportView(EmployeeTable);
+        if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
+            EmployeeTable.getColumnModel().getColumn(1).setMinWidth(300);
+            EmployeeTable.getColumnModel().getColumn(1).setMaxWidth(300);
+        }
 
         AddEmployeeButton.setText("Add Employee");
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -179,95 +200,177 @@ public class MainWindow extends javax.swing.JFrame {
         SearchEmployeeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchEmployeeLabel.setText("Search Employee:");
 
-        javax.swing.GroupLayout EmployeeTabLayout = new javax.swing.GroupLayout(EmployeeTab);
-        EmployeeTab.setLayout(EmployeeTabLayout);
-        EmployeeTabLayout.setHorizontalGroup(
-            EmployeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeeTabLayout.createSequentialGroup()
+        Search_Employee_Button.setText("Search Employee");
+        Search_Employee_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Search_Employee_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EmployeeLayout = new javax.swing.GroupLayout(Employee);
+        Employee.setLayout(EmployeeLayout);
+        EmployeeLayout.setHorizontalGroup(
+            EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EmployeeLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(EmployeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(EmployeeTabLayout.createSequentialGroup()
+                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(EmployeeLayout.createSequentialGroup()
                         .addComponent(Export_Button1)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button1))
-                    .addGroup(EmployeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(EmployeeTabLayout.createSequentialGroup()
+                    .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(EmployeeLayout.createSequentialGroup()
                             .addComponent(SearchEmployeeLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(SearchBar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Search_Employee_Button)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(AddEmployeeButton))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(EmployeePane, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42))
         );
-        EmployeeTabLayout.setVerticalGroup(
-            EmployeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeeTabLayout.createSequentialGroup()
+        EmployeeLayout.setVerticalGroup(
+            EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EmployeeLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(EmployeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddEmployeeButton)
-                    .addComponent(SearchEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SearchEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Search_Employee_Button))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmployeePane, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(EmployeeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button1)
                     .addComponent(Export_Button1))
                 .addGap(41, 41, 41))
         );
 
-        Tabs.addTab("tab1", EmployeeTab);
+        Tabs.addTab("tab1", Employee);
 
-        ItemsTab.setPreferredSize(new java.awt.Dimension(1000, 600));
+        Items.setPreferredSize(new java.awt.Dimension(1000, 600));
 
-        jTabbedPane1.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(150, 80));
+        ItemsContent.setMaximumSize(new java.awt.Dimension(2147483647, 80));
+        ItemsContent.setMinimumSize(new java.awt.Dimension(150, 80));
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(750, 80));
+        FurnituresPanel.setPreferredSize(new java.awt.Dimension(750, 80));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 789, Short.MAX_VALUE)
+        FurnituresTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Furniture  No.", "Furniture Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        FurnituresTable.getTableHeader().setReorderingAllowed(false);
+        FurnituresPane.setViewportView(FurnituresTable);
+        if (FurnituresTable.getColumnModel().getColumnCount() > 0) {
+            FurnituresTable.getColumnModel().getColumn(0).setMinWidth(250);
+            FurnituresTable.getColumnModel().getColumn(0).setMaxWidth(250);
+        }
+
+        javax.swing.GroupLayout FurnituresPanelLayout = new javax.swing.GroupLayout(FurnituresPanel);
+        FurnituresPanel.setLayout(FurnituresPanelLayout);
+        FurnituresPanelLayout.setHorizontalGroup(
+            FurnituresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(FurnituresPane, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Furnitures", jPanel2);
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(750, 80));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 789, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("School Supplies", jPanel3);
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(750, 80));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 789, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+        FurnituresPanelLayout.setVerticalGroup(
+            FurnituresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(FurnituresPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Other Office Supplies and Equipment", jPanel4);
+        ItemsContent.addTab("Furnitures", FurnituresPanel);
+
+        SchoolSuppliesPanel.setPreferredSize(new java.awt.Dimension(750, 80));
+
+        SchoolSuppliesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "School Supply No.", "School Supply Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        SchoolSuppliesTable.getTableHeader().setReorderingAllowed(false);
+        SchoolSuppliesPane.setViewportView(SchoolSuppliesTable);
+        if (SchoolSuppliesTable.getColumnModel().getColumnCount() > 0) {
+            SchoolSuppliesTable.getColumnModel().getColumn(0).setMinWidth(250);
+            SchoolSuppliesTable.getColumnModel().getColumn(0).setMaxWidth(250);
+        }
+
+        javax.swing.GroupLayout SchoolSuppliesPanelLayout = new javax.swing.GroupLayout(SchoolSuppliesPanel);
+        SchoolSuppliesPanel.setLayout(SchoolSuppliesPanelLayout);
+        SchoolSuppliesPanelLayout.setHorizontalGroup(
+            SchoolSuppliesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(SchoolSuppliesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
+        );
+        SchoolSuppliesPanelLayout.setVerticalGroup(
+            SchoolSuppliesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(SchoolSuppliesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+        );
+
+        ItemsContent.addTab("School Supplies", SchoolSuppliesPanel);
+
+        OfficeSuppliesEtcPanel.setPreferredSize(new java.awt.Dimension(750, 80));
+
+        OfficeSuppliesEtcTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Office Supply No.", "Office Supply Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        OfficeSuppliesEtcTable.getTableHeader().setReorderingAllowed(false);
+        OfficeSuppliesEtcPane.setViewportView(OfficeSuppliesEtcTable);
+        if (OfficeSuppliesEtcTable.getColumnModel().getColumnCount() > 0) {
+            OfficeSuppliesEtcTable.getColumnModel().getColumn(0).setMinWidth(250);
+            OfficeSuppliesEtcTable.getColumnModel().getColumn(0).setMaxWidth(250);
+        }
+
+        javax.swing.GroupLayout OfficeSuppliesEtcPanelLayout = new javax.swing.GroupLayout(OfficeSuppliesEtcPanel);
+        OfficeSuppliesEtcPanel.setLayout(OfficeSuppliesEtcPanelLayout);
+        OfficeSuppliesEtcPanelLayout.setHorizontalGroup(
+            OfficeSuppliesEtcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(OfficeSuppliesEtcPane, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
+        );
+        OfficeSuppliesEtcPanelLayout.setVerticalGroup(
+            OfficeSuppliesEtcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(OfficeSuppliesEtcPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+        );
+
+        ItemsContent.addTab("Other Office Supplies and Equipment", OfficeSuppliesEtcPanel);
 
         SearchEmployeeLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchEmployeeLabel1.setText("Search Item:");
@@ -275,12 +378,12 @@ public class MainWindow extends javax.swing.JFrame {
         SearchEmployeeLabel1.setMinimumSize(new java.awt.Dimension(109, 20));
         SearchEmployeeLabel1.setPreferredSize(new java.awt.Dimension(109, 20));
 
-        SearchBar1.setText("Search Bar");
+        ItemSearchBar.setText("Search Bar");
 
-        AddEmployeeButton1.setText("Add Item/s");
-        AddEmployeeButton1.addActionListener(new java.awt.event.ActionListener() {
+        Add_Item_Button.setText("Add Item/s");
+        Add_Item_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddEmployeeButton1ActionPerformed(evt);
+                Add_Item_ButtonActionPerformed(evt);
             }
         });
 
@@ -298,50 +401,60 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout ItemsTabLayout = new javax.swing.GroupLayout(ItemsTab);
-        ItemsTab.setLayout(ItemsTabLayout);
-        ItemsTabLayout.setHorizontalGroup(
-            ItemsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ItemsTabLayout.createSequentialGroup()
+        Search_Item_Button.setText("Search Item");
+        Search_Item_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Search_Item_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ItemsLayout = new javax.swing.GroupLayout(Items);
+        Items.setLayout(ItemsLayout);
+        ItemsLayout.setHorizontalGroup(
+            ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ItemsLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(ItemsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(ItemsTabLayout.createSequentialGroup()
+                .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ItemsLayout.createSequentialGroup()
                         .addComponent(Export_Button2)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button2))
-                    .addGroup(ItemsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(ItemsTabLayout.createSequentialGroup()
+                    .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(ItemsLayout.createSequentialGroup()
                             .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(SearchBar1)
+                            .addComponent(ItemSearchBar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(AddEmployeeButton1))
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Search_Item_Button)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(Add_Item_Button))
+                        .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
-        ItemsTabLayout.setVerticalGroup(
-            ItemsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ItemsTabLayout.createSequentialGroup()
+        ItemsLayout.setVerticalGroup(
+            ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ItemsLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(ItemsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SearchBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddEmployeeButton1)
-                    .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ItemSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Add_Item_Button)
+                    .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Search_Item_Button))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(ItemsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button2)
                     .addComponent(Export_Button2))
                 .addGap(41, 41, 41))
         );
 
-        Tabs.addTab("tab3", ItemsTab);
+        Tabs.addTab("tab3", Items);
 
-        InventoryTab.setPreferredSize(new java.awt.Dimension(866, 605));
+        Inventory.setPreferredSize(new java.awt.Dimension(866, 605));
 
         ChooseEmployeeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ChooseEmployeeLabel.setText("Choose Employee");
+        ChooseEmployeeLabel.setText("Choose Employee:");
 
         EmployeeDropdownBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         EmployeeDropdownBox.addActionListener(new java.awt.event.ActionListener() {
@@ -361,7 +474,7 @@ public class MainWindow extends javax.swing.JFrame {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
             }
         ));
-        jScrollPane2.setViewportView(InventoryDataTable);
+        InventoryPane.setViewportView(InventoryDataTable);
 
         Export_Button.setText("Export");
         Export_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -384,20 +497,20 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout InventoryTabLayout = new javax.swing.GroupLayout(InventoryTab);
-        InventoryTab.setLayout(InventoryTabLayout);
-        InventoryTabLayout.setHorizontalGroup(
-            InventoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InventoryTabLayout.createSequentialGroup()
+        javax.swing.GroupLayout InventoryLayout = new javax.swing.GroupLayout(Inventory);
+        Inventory.setLayout(InventoryLayout);
+        InventoryLayout.setHorizontalGroup(
+            InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InventoryLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(InventoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(InventoryTabLayout.createSequentialGroup()
+                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(InventoryLayout.createSequentialGroup()
                         .addComponent(Export_Button)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button))
-                    .addGroup(InventoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane2)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryTabLayout.createSequentialGroup()
+                    .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(InventoryPane)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
                             .addComponent(ChooseEmployeeLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(EmployeeDropdownBox, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,24 +518,24 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(InsertDataButton))))
                 .addGap(57, 57, 57))
         );
-        InventoryTabLayout.setVerticalGroup(
-            InventoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InventoryTabLayout.createSequentialGroup()
+        InventoryLayout.setVerticalGroup(
+            InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InventoryLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(InventoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EmployeeDropdownBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChooseEmployeeLabel)
                     .addComponent(InsertDataButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(InventoryPane, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addGroup(InventoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
                     .addComponent(Export_Button))
                 .addGap(47, 47, 47))
         );
 
-        Tabs.addTab("tab1", InventoryTab);
+        Tabs.addTab("tab1", Inventory);
 
         getContentPane().add(Tabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, -35, 850, 640));
 
@@ -470,12 +583,12 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Export_Button1ActionPerformed
 
     private void Close_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_Button1ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_Close_Button1ActionPerformed
 
-    private void AddEmployeeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButton1ActionPerformed
+    private void Add_Item_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Item_ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddEmployeeButton1ActionPerformed
+    }//GEN-LAST:event_Add_Item_ButtonActionPerformed
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
         AddEmployee add = new AddEmployee();
@@ -487,8 +600,16 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Export_Button2ActionPerformed
 
     private void Close_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_Button2ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_Close_Button2ActionPerformed
+
+    private void Search_Item_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Item_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Search_Item_ButtonActionPerformed
+
+    private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -527,36 +648,44 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
-    private javax.swing.JButton AddEmployeeButton1;
+    private javax.swing.JButton Add_Item_Button;
     private javax.swing.JPanel BlankTab;
     private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JLabel ChooseEmployeeLabel;
     private javax.swing.JButton Close_Button;
     private javax.swing.JButton Close_Button1;
     private javax.swing.JButton Close_Button2;
+    private javax.swing.JPanel Employee;
     private javax.swing.JComboBox<String> EmployeeDropdownBox;
-    private javax.swing.JPanel EmployeeTab;
+    private javax.swing.JScrollPane EmployeePane;
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JButton Employee_Button;
     private javax.swing.JButton Export_Button;
     private javax.swing.JButton Export_Button1;
     private javax.swing.JButton Export_Button2;
+    private javax.swing.JScrollPane FurnituresPane;
+    private javax.swing.JPanel FurnituresPanel;
+    private javax.swing.JTable FurnituresTable;
     private javax.swing.JButton InsertDataButton;
+    private javax.swing.JPanel Inventory;
     private javax.swing.JTable InventoryDataTable;
-    private javax.swing.JPanel InventoryTab;
+    private javax.swing.JScrollPane InventoryPane;
     private javax.swing.JButton Inventory_Button;
-    private javax.swing.JPanel ItemsTab;
+    private javax.swing.JTextField ItemSearchBar;
+    private javax.swing.JPanel Items;
+    private javax.swing.JTabbedPane ItemsContent;
     private javax.swing.JButton Items_Button;
+    private javax.swing.JScrollPane OfficeSuppliesEtcPane;
+    private javax.swing.JPanel OfficeSuppliesEtcPanel;
+    private javax.swing.JTable OfficeSuppliesEtcTable;
+    private javax.swing.JScrollPane SchoolSuppliesPane;
+    private javax.swing.JPanel SchoolSuppliesPanel;
+    private javax.swing.JTable SchoolSuppliesTable;
     private javax.swing.JTextField SearchBar;
-    private javax.swing.JTextField SearchBar1;
     private javax.swing.JLabel SearchEmployeeLabel;
     private javax.swing.JLabel SearchEmployeeLabel1;
+    private javax.swing.JButton Search_Employee_Button;
+    private javax.swing.JButton Search_Item_Button;
     private javax.swing.JTabbedPane Tabs;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
