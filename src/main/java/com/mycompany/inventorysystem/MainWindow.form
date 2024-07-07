@@ -640,7 +640,7 @@
                               <Component id="Close_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jScrollPane2" max="32767" attributes="0"/>
+                              <Component id="InventoryPane" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="ChooseEmployeeLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -664,7 +664,7 @@
                           <Component id="InsertDataButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="459" max="-2" attributes="0"/>
+                      <Component id="InventoryPane" min="-2" pref="459" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Close_Button" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -681,7 +681,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Choose Employee"/>
+                <Property name="text" type="java.lang.String" value="Choose Employee:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="EmployeeDropdownBox">
@@ -702,7 +702,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+            <Container class="javax.swing.JScrollPane" name="InventoryPane">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>

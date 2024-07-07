@@ -62,7 +62,7 @@ public class MainWindow extends javax.swing.JFrame {
         Inventory = new javax.swing.JPanel();
         ChooseEmployeeLabel = new javax.swing.JLabel();
         EmployeeDropdownBox = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        InventoryPane = new javax.swing.JScrollPane();
         InventoryDataTable = new javax.swing.JTable();
         Export_Button = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
@@ -454,7 +454,7 @@ public class MainWindow extends javax.swing.JFrame {
         Inventory.setPreferredSize(new java.awt.Dimension(866, 605));
 
         ChooseEmployeeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ChooseEmployeeLabel.setText("Choose Employee");
+        ChooseEmployeeLabel.setText("Choose Employee:");
 
         EmployeeDropdownBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         EmployeeDropdownBox.addActionListener(new java.awt.event.ActionListener() {
@@ -474,7 +474,7 @@ public class MainWindow extends javax.swing.JFrame {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
             }
         ));
-        jScrollPane2.setViewportView(InventoryDataTable);
+        InventoryPane.setViewportView(InventoryDataTable);
 
         Export_Button.setText("Export");
         Export_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -509,7 +509,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button))
                     .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane2)
+                        .addComponent(InventoryPane)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
                             .addComponent(ChooseEmployeeLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -527,7 +527,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(ChooseEmployeeLabel)
                     .addComponent(InsertDataButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(InventoryPane, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
@@ -669,6 +669,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton InsertDataButton;
     private javax.swing.JPanel Inventory;
     private javax.swing.JTable InventoryDataTable;
+    private javax.swing.JScrollPane InventoryPane;
     private javax.swing.JButton Inventory_Button;
     private javax.swing.JTextField ItemSearchBar;
     private javax.swing.JPanel Items;
@@ -686,6 +687,5 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Search_Employee_Button;
     private javax.swing.JButton Search_Item_Button;
     private javax.swing.JTabbedPane Tabs;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
