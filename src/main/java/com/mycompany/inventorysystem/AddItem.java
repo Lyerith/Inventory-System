@@ -11,7 +11,7 @@ package com.mycompany.inventorysystem;
 public class AddItem extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddItem
+     * Creates new form AddEmployee
      */
     public AddItem() {
         initComponents();
@@ -27,23 +27,21 @@ public class AddItem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EmployeeNameField = new javax.swing.JTextField();
         Employee_Name_Label = new javax.swing.JLabel();
         Employee_Position_Label = new javax.swing.JLabel();
-        AddEmployeeButton = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
+        AddEmployeeButton = new javax.swing.JButton();
+        EmployeeNameField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(414, 167));
+        setResizable(false);
 
         Employee_Name_Label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Employee_Name_Label.setText("Input Item:");
+        Employee_Name_Label.setText("Item Category:");
 
         Employee_Position_Label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Employee_Position_Label.setText("Select Category:");
-
-        AddEmployeeButton.setText("Add Item");
+        Employee_Position_Label.setText("Item Name:");
 
         Close_Button.setText("Close");
         Close_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +49,8 @@ public class AddItem extends javax.swing.JFrame {
                 Close_ButtonActionPerformed(evt);
             }
         });
+
+        AddEmployeeButton.setText("Add Item");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -69,10 +69,10 @@ public class AddItem extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Employee_Position_Label)
                             .addComponent(Employee_Name_Label))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EmployeeNameField)
-                            .addComponent(jComboBox1, 0, 279, Short.MAX_VALUE))))
+                            .addComponent(jComboBox1, 0, 287, Short.MAX_VALUE)
+                            .addComponent(EmployeeNameField1))))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -80,12 +80,12 @@ public class AddItem extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EmployeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Employee_Name_Label))
+                    .addComponent(Employee_Name_Label)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Employee_Position_Label)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmployeeNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
@@ -94,6 +94,7 @@ public class AddItem extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_ButtonActionPerformed
@@ -126,6 +127,9 @@ public class AddItem extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AddItem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -138,7 +142,7 @@ public class AddItem extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
     private javax.swing.JButton Close_Button;
-    private javax.swing.JTextField EmployeeNameField;
+    private javax.swing.JTextField EmployeeNameField1;
     private javax.swing.JLabel Employee_Name_Label;
     private javax.swing.JLabel Employee_Position_Label;
     private javax.swing.JComboBox<String> jComboBox1;

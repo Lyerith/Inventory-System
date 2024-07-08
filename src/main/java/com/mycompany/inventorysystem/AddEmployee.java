@@ -35,6 +35,7 @@ public class AddEmployee extends javax.swing.JFrame {
         AddEmployeeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         Employee_Name_Label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Employee_Name_Label.setText("Employee Name");

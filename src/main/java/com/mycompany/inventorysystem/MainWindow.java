@@ -575,7 +575,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
     private void Items_ButtonAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Items_ButtonAncestorMoved
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_Items_ButtonAncestorMoved
 
     private void Export_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button1ActionPerformed
@@ -587,7 +587,8 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_Button1ActionPerformed
 
     private void Add_Item_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Item_ButtonActionPerformed
-        // TODO add your handling code here:
+        AddItem add = new AddItem();
+        add.show();
     }//GEN-LAST:event_Add_Item_ButtonActionPerformed
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
