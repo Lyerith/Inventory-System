@@ -4,15 +4,10 @@
  */
 package com.mycompany.inventorysystem;
 
-/**
- *
- * @author User-PC
- */
+
 public class MainWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainWindow
-     */
+
     public MainWindow() {
         initComponents();
         setTitle("Inventory System");
@@ -76,15 +71,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Items_Button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Items_Button.setText("Items List");
-        Items_Button.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                Items_ButtonAncestorMoved(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         Items_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Items_ButtonActionPerformed(evt);
@@ -574,10 +560,6 @@ public class MainWindow extends javax.swing.JFrame {
         Tabs.setSelectedIndex(2);
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
-    private void Items_ButtonAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Items_ButtonAncestorMoved
-
-    }//GEN-LAST:event_Items_ButtonAncestorMoved
-
     private void Export_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Export_Button1ActionPerformed
@@ -587,13 +569,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_Button1ActionPerformed
 
     private void Add_Item_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Item_ButtonActionPerformed
-        AddItem add = new AddItem();
-        add.show();
+        AddItem item = new AddItem();
+        item.show();
     }//GEN-LAST:event_Add_Item_ButtonActionPerformed
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
-        AddEmployee add = new AddEmployee();
-        add.show();
+        AddEmployee employee = new AddEmployee();
+        employee.show();
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     private void Export_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button2ActionPerformed

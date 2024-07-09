@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.inventorysystem;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
@@ -33,6 +38,7 @@ public class AddEmployee extends javax.swing.JFrame {
         EmployeePositionField = new javax.swing.JTextField();
         Close_Button = new javax.swing.JButton();
         AddEmployeeButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -57,6 +63,13 @@ public class AddEmployee extends javax.swing.JFrame {
         });
 
         AddEmployeeButton.setText("Add Employee");
+        AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddEmployeeButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Import Employee Data");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,8 +77,10 @@ public class AddEmployee extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(AddEmployeeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Close_Button))
@@ -93,7 +108,8 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
-                    .addComponent(AddEmployeeButton))
+                    .addComponent(AddEmployeeButton)
+                    .addComponent(jButton1))
                 .addGap(35, 35, 35))
         );
 
@@ -108,6 +124,35 @@ public class AddEmployee extends javax.swing.JFrame {
     private void Close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_ButtonActionPerformed
         dispose();
     }//GEN-LAST:event_Close_ButtonActionPerformed
+
+    private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
+        String Employee = EmployeeNameField.getText();
+        String Position = EmployeePositionField.getText();
+        
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+         PreparedStatement statement = conn.prepareStatement("CREATE DATABASE IF NOT EXISTS mydatabase")) {
+        statement.executeUpdate();
+        System.out.println("Database created successfully.");
+    } catch (SQLException ex) {
+        System.out.println("Failed to create database: " + ex.getMessage());
+    }
+        
+        /*if(Employee.equals("")&&Position.equals("")){
+            JOptionPane.showMessageDialog(this, "No Input Added");
+        }
+        else if(Employee.equals("") || Position.equals("")){
+            JOptionPane.showMessageDialog(this, "Missing Inputs");
+        }
+        else{
+            try{
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/System, root,""");
+                
+                Statement stm = con.createStatement();
+                    String sql = "INSERT INTO Sys"
+            }
+        }*/
+    }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,5 +196,9 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField EmployeePositionField;
     private javax.swing.JLabel Employee_Name_Label;
     private javax.swing.JLabel Employee_Position_Label;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/InventorySystem";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "";
 }
