@@ -4,6 +4,8 @@
  */
 package com.mycompany.inventorysystem;
 
+import javax.swing.event.AncestorEvent;
+
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -68,6 +70,8 @@ public class MainWindow extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 345));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ButtonsPanel.setBackground(new java.awt.Color(153, 153, 153));
 
         Items_Button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Items_Button.setText("Items List");
@@ -593,6 +597,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
+
+    private void Items_ButtonAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Items_ButtonAncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Items_ButtonAncestorRemoved
 
     /**
      * @param args the command line arguments

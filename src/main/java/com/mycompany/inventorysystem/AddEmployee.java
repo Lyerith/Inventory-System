@@ -126,32 +126,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_ButtonActionPerformed
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
-        String Employee = EmployeeNameField.getText();
-        String Position = EmployeePositionField.getText();
-        
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-         PreparedStatement statement = conn.prepareStatement("CREATE DATABASE IF NOT EXISTS mydatabase")) {
-        statement.executeUpdate();
-        System.out.println("Database created successfully.");
-    } catch (SQLException ex) {
-        System.out.println("Failed to create database: " + ex.getMessage());
-    }
-        
-        /*if(Employee.equals("")&&Position.equals("")){
-            JOptionPane.showMessageDialog(this, "No Input Added");
-        }
-        else if(Employee.equals("") || Position.equals("")){
-            JOptionPane.showMessageDialog(this, "Missing Inputs");
-        }
-        else{
-            try{
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/System, root,""");
-                
-                Statement stm = con.createStatement();
-                    String sql = "INSERT INTO Sys"
-            }
-        }*/
+
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     /**
