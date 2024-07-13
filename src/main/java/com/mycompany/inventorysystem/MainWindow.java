@@ -624,9 +624,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Items_ButtonAncestorRemoved
 
     private void createDatabaseIfNotExists(String databaseName) {
-                String url = "jdbc:mysql://localhost:3306/";
+        String url = "jdbc:mysql://localhost:3306/";
         String user = "root"; // Your MySQL username
-        String password = "password"; // Your MySQL password
+        String password = ""; // Your MySQL password
 
         Connection conn = null;
         Statement stmt = null;
@@ -667,7 +667,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void Connect_DB_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Connect_DB_ButtonActionPerformed
-        createDatabaseIfNotExists("example.db");
+        createDatabaseIfNotExists("test2");
     }//GEN-LAST:event_Connect_DB_ButtonActionPerformed
 
     /**
