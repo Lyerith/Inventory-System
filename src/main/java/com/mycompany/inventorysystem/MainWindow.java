@@ -5,6 +5,15 @@
 package com.mycompany.inventorysystem;
 
 import javax.swing.event.AncestorEvent;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 
 public class MainWindow extends javax.swing.JFrame {
@@ -76,16 +85,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Items_Button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Items_Button.setText("Items List");
-        Items_Button.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                Items_ButtonAncestorMoved(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                Items_ButtonAncestorRemoved(evt);
-            }
-        });
         Items_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Items_ButtonActionPerformed(evt);
@@ -624,10 +623,53 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Items_ButtonAncestorRemoved
 
-    private void Connect_DB_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Connect_DB_ButtonActionPerformed
-        
-    }//GEN-LAST:event_Connect_DB_ButtonActionPerformed
+    private void createDatabaseIfNotExists(String databaseName) {
+                String url = "jdbc:mysql://localhost:3306/";
+        String user = "root"; // Your MySQL username
+        String password = "password"; // Your MySQL password
+
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stmt = conn.createStatement();
+
+            // Check if the database exists
+            String checkDbQuery = "SHOW DATABASES LIKE '" + databaseName + "'";
+            var rs = stmt.executeQuery(checkDbQuery);
+            if (!rs.next()) {
+                // Database does not exist, create it
+                String createDbQuery = "CREATE DATABASE " + databaseName;
+                stmt.executeUpdate(createDbQuery);
+                System.out.println("A new database has been created.");
+                
+                // Optionally, create a table in the new database
+                String useDbQuery = "USE " + databaseName;
+                stmt.executeUpdate(useDbQuery);
+                String createTableQuery = "CREATE TABLE example_table (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255))";
+                stmt.executeUpdate(createTableQuery);
+                System.out.println("A new table has been created in the database.");
+            } else {
+                System.out.println("Database already exists.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources: " + ex.getMessage());
+            }
+        }
+    }
     
+    private void Connect_DB_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Connect_DB_ButtonActionPerformed
+        createDatabaseIfNotExists("example.db");
+    }//GEN-LAST:event_Connect_DB_ButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
