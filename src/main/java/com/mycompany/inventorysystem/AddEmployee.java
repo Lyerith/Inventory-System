@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -127,11 +128,42 @@ public class AddEmployee extends javax.swing.JFrame {
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
 
+        String Employee= EmployeeNameField.getText();
+        String Position= EmployeePositionField.getText();
+        
+        if(Employee.equals("") && Position.equals("")){
+            JOptionPane.showMessageDialog(this ,"No Input Added");
+        }
+        else if(Employee.equals("")||Position.equals("")){
+            JOptionPane.showMessageDialog(this, "Missing Credentials");
+        }
+        else{
+            Connection con = null;
+            PreparedStatement pstmt = null;
+            try {
+                
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+                    String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
+                    pstmt = con.prepareStatement(sql);
+                    pstmt.setString(1, Employee);
+                    pstmt.setString(2, Position);
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Added Successfully");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources: " + ex.getMessage());
+            }
+        }
+        }
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
