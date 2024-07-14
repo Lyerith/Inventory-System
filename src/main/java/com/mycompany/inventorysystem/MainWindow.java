@@ -4,15 +4,21 @@
  */
 package com.mycompany.inventorysystem;
 
-/**
- *
- * @author User-PC
- */
+import javax.swing.event.AncestorEvent;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+
 public class MainWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainWindow
-     */
+
     public MainWindow() {
         initComponents();
         setTitle("Inventory System");
@@ -31,6 +37,7 @@ public class MainWindow extends javax.swing.JFrame {
         Items_Button = new javax.swing.JButton();
         Inventory_Button = new javax.swing.JButton();
         Employee_Button = new javax.swing.JButton();
+        Connect_DB_Button = new javax.swing.JButton();
         Tabs = new javax.swing.JTabbedPane();
         BlankTab = new javax.swing.JPanel();
         Employee = new javax.swing.JPanel();
@@ -74,6 +81,8 @@ public class MainWindow extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        ButtonsPanel.setBackground(new java.awt.Color(153, 153, 153));
+
         Items_Button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Items_Button.setText("Items List");
         Items_Button.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -83,6 +92,7 @@ public class MainWindow extends javax.swing.JFrame {
                 Items_ButtonAncestorMoved(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                Items_ButtonAncestorRemoved(evt);
             }
         });
         Items_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +117,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        Connect_DB_Button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Connect_DB_Button.setText("Connect DB");
+        Connect_DB_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Connect_DB_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
         ButtonsPanel.setLayout(ButtonsPanelLayout);
         ButtonsPanelLayout.setHorizontalGroup(
@@ -116,7 +134,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(Inventory_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Employee_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Items_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Items_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Connect_DB_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         ButtonsPanelLayout.setVerticalGroup(
@@ -128,7 +147,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(Items_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Inventory_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Connect_DB_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(326, Short.MAX_VALUE))
         );
 
         getContentPane().add(ButtonsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
@@ -137,7 +158,7 @@ public class MainWindow extends javax.swing.JFrame {
         BlankTab.setLayout(BlankTabLayout);
         BlankTabLayout.setHorizontalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 853, Short.MAX_VALUE)
         );
         BlankTabLayout.setVerticalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,10 +189,15 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeTable.setMinimumSize(new java.awt.Dimension(750, 80));
         EmployeeTable.setPreferredSize(new java.awt.Dimension(750, 80));
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
+        EmployeeTable.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                EmployeeTableComponentShown(evt);
+            }
+        });
         EmployeePane.setViewportView(EmployeeTable);
         if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
-            EmployeeTable.getColumnModel().getColumn(1).setMinWidth(300);
-            EmployeeTable.getColumnModel().getColumn(1).setMaxWidth(300);
+            EmployeeTable.getColumnModel().getColumn(0).setResizable(false);
+            EmployeeTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         AddEmployeeButton.setText("Add Employee");
@@ -429,7 +455,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(Add_Item_Button))
                         .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         ItemsLayout.setVerticalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,10 +600,6 @@ public class MainWindow extends javax.swing.JFrame {
         Tabs.setSelectedIndex(2);
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
-    private void Items_ButtonAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Items_ButtonAncestorMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Items_ButtonAncestorMoved
-
     private void Export_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Export_Button1ActionPerformed
@@ -587,12 +609,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_Button1ActionPerformed
 
     private void Add_Item_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Item_ButtonActionPerformed
-        // TODO add your handling code here:
+        AddItem item = new AddItem();
+        item.show();
     }//GEN-LAST:event_Add_Item_ButtonActionPerformed
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
-        AddEmployee add = new AddEmployee();
-        add.show();
+        AddEmployee employee = new AddEmployee();
+        employee.show();
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     private void Export_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button2ActionPerformed
@@ -611,9 +634,62 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void Items_ButtonAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Items_ButtonAncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Items_ButtonAncestorRemoved
+
+    private void createDatabaseIfNotExists(String databaseName) {
+        String url = "jdbc:mysql://localhost:3306/";
+        String user = "root"; // Your MySQL username
+        String password = ""; // Your MySQL password
+
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stmt = conn.createStatement();
+
+            // Check if the database exists
+            String checkDbQuery = "SHOW DATABASES LIKE '" + databaseName + "'";
+            var rs = stmt.executeQuery(checkDbQuery);
+            if (!rs.next()) {
+                // Database does not exist, create it
+                String createDbQuery = "CREATE DATABASE " + databaseName;
+                stmt.executeUpdate(createDbQuery);
+                System.out.println("A new database has been created.");
+                
+                // Optionally, create a table in the new database
+                String useDbQuery = "USE " + databaseName;
+                stmt.executeUpdate(useDbQuery);
+                String createTableQuery1 = "CREATE TABLE employees (employee_id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), position VARCHAR(255))";
+                //String createTableQuery2 = "CREATE TABLE inventory (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255))";
+                //String createTableQuery3 = "CREATE TABLE items (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255))";
+                stmt.executeUpdate(createTableQuery1);
+                //stmt.executeUpdate(createTableQuery2);
+                //stmt.executeUpdate(createTableQuery3);
+
+                
+            } else {
+                System.out.println("Database already exists.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources: " + ex.getMessage());
+            }
+        }
+    }
+    
+    private void Connect_DB_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Connect_DB_ButtonActionPerformed
+        createDatabaseIfNotExists("Inventory_System");
+    }//GEN-LAST:event_Connect_DB_ButtonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -655,6 +731,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Close_Button;
     private javax.swing.JButton Close_Button1;
     private javax.swing.JButton Close_Button2;
+    private javax.swing.JButton Connect_DB_Button;
     private javax.swing.JPanel Employee;
     private javax.swing.JComboBox<String> EmployeeDropdownBox;
     private javax.swing.JScrollPane EmployeePane;

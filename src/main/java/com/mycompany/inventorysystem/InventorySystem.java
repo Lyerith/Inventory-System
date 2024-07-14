@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.inventorysystem;
 
-/**
- *
- * @author User-PC
- */
 public class InventorySystem {
 
     public static void main(String[] args) {
