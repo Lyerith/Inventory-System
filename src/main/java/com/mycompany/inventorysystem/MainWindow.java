@@ -13,6 +13,8 @@ import java.sql.Statement;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -159,17 +161,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null}
             },
             new String [] {
-                "Employee Name", "Employee Position"
+                "Employee ID", "Employee Name", "Employee Position"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -179,11 +178,13 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeTable.setMinimumSize(new java.awt.Dimension(750, 80));
         EmployeeTable.setPreferredSize(new java.awt.Dimension(750, 80));
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
-       
         EmployeePane.setViewportView(EmployeeTable);
         if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
             EmployeeTable.getColumnModel().getColumn(0).setResizable(false);
+            EmployeeTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             EmployeeTable.getColumnModel().getColumn(1).setResizable(false);
+            EmployeeTable.getColumnModel().getColumn(1).setPreferredWidth(500);
+            EmployeeTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
         AddEmployeeButton.setText("Add Employee");
@@ -554,9 +555,15 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void loadEmployeeData() {
+        DefaultTableModel model = DatabaseUtils.getEmployeeData();
+        EmployeeTable.setModel(model);
+    }
+    
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
+        loadEmployeeData();
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
@@ -619,10 +626,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
-
-    private void Items_ButtonAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Items_ButtonAncestorRemoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Items_ButtonAncestorRemoved
 
     private void createDatabaseIfNotExists(String databaseName) {
         String url = "jdbc:mysql://localhost:3306/";
