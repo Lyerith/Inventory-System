@@ -133,7 +133,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_ButtonActionPerformed
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
-
+        
         String employee = EmployeeNameField.getText();
         String position = EmployeePositionField.getText();
 
@@ -155,9 +155,8 @@ public class AddEmployee extends javax.swing.JFrame {
                 ResultSet rs = stmt.executeQuery(checkTableQuery);
 
                 if (!rs.next()) {
-                    // Table does not exist, create it
                     String createTableQuery = "CREATE TABLE employees ("
-                            + "id INT PRIMARY KEY AUTO_INCREMENT, "
+                            + "employee_id INT PRIMARY KEY AUTO_INCREMENT, "
                             + "name VARCHAR(255) NOT NULL, "
                             + "position VARCHAR(255) NOT NULL)";
                     stmt.executeUpdate(createTableQuery);
