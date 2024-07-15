@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -39,7 +40,7 @@ public class AddEmployee extends javax.swing.JFrame {
         EmployeePositionField = new javax.swing.JTextField();
         Close_Button = new javax.swing.JButton();
         AddEmployeeButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ImportEmployee = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -70,7 +71,12 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Import Employee Data");
+        ImportEmployee.setText("Import Employee Data");
+        ImportEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportEmployeeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +86,7 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(ImportEmployee)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(AddEmployeeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -110,7 +116,7 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
                     .addComponent(AddEmployeeButton)
-                    .addComponent(jButton1))
+                    .addComponent(ImportEmployee))
                 .addGap(35, 35, 35))
         );
 
@@ -128,40 +134,64 @@ public class AddEmployee extends javax.swing.JFrame {
 
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
 
-        String Employee= EmployeeNameField.getText();
-        String Position= EmployeePositionField.getText();
-        
-        if(Employee.equals("") && Position.equals("")){
-            JOptionPane.showMessageDialog(this ,"No Input Added");
-        }
-        else if(Employee.equals("")||Position.equals("")){
+        String employee = EmployeeNameField.getText();
+        String position = EmployeePositionField.getText();
+
+        if (employee.equals("") && position.equals("")) {
+            JOptionPane.showMessageDialog(this, "No Input Added");
+        } else if (employee.equals("") || position.equals("")) {
             JOptionPane.showMessageDialog(this, "Missing Credentials");
-        }
-        else{
+        } else {
             Connection con = null;
+            Statement stmt = null;
             PreparedStatement pstmt = null;
             try {
-                
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
-                    String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
-                    pstmt = con.prepareStatement(sql);
-                    pstmt.setString(1, Employee);
-                    pstmt.setString(2, Position);
-                    pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Added Successfully");
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        } finally {
-            try {
-                if (pstmt != null) pstmt.close();
-                if (con != null) con.close();
-            } catch (SQLException ex) {
-                System.out.println("Error closing resources: " + ex.getMessage());
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+                stmt = con.createStatement();
+
+                // Check if the table exists
+                String checkTableQuery = "SHOW TABLES LIKE 'employees'";
+                ResultSet rs = stmt.executeQuery(checkTableQuery);
+
+                if (!rs.next()) {
+                    // Table does not exist, create it
+                    String createTableQuery = "CREATE TABLE employees ("
+                            + "id INT PRIMARY KEY AUTO_INCREMENT, "
+                            + "name VARCHAR(255) NOT NULL, "
+                            + "position VARCHAR(255) NOT NULL)";
+                    stmt.executeUpdate(createTableQuery);
+                    System.out.println("Table 'employees' has been created.");
+                } else {
+                    System.out.println("Table 'employees' already exists.");
+                }
+
+                // Insert data into the table
+                String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
+                pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, employee);
+                pstmt.setString(2, position);
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Added Successfully");
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            } finally {
+                try {
+                    if (pstmt != null) pstmt.close();
+                    if (stmt != null) stmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error closing resources: " + ex.getMessage());
+                }
             }
         }
-        }
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
+
+    private void ImportEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportEmployeeActionPerformed
+        ImportEmployeeData Import = new ImportEmployeeData();
+        Import.show();
+    }//GEN-LAST:event_ImportEmployeeActionPerformed
 
 
     public static void main(String args[]) {
@@ -203,7 +233,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField EmployeePositionField;
     private javax.swing.JLabel Employee_Name_Label;
     private javax.swing.JLabel Employee_Position_Label;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ImportEmployee;
     // End of variables declaration//GEN-END:variables
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/InventorySystem";
     private static final String USERNAME = "root";

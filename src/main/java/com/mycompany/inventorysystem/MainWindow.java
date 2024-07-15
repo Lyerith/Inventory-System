@@ -85,16 +85,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Items_Button.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Items_Button.setText("Items List");
-        Items_Button.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                Items_ButtonAncestorMoved(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                Items_ButtonAncestorRemoved(evt);
-            }
-        });
         Items_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Items_ButtonActionPerformed(evt);
@@ -189,11 +179,7 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeTable.setMinimumSize(new java.awt.Dimension(750, 80));
         EmployeeTable.setPreferredSize(new java.awt.Dimension(750, 80));
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
-        EmployeeTable.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                EmployeeTableComponentShown(evt);
-            }
-        });
+       
         EmployeePane.setViewportView(EmployeeTable);
         if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
             EmployeeTable.getColumnModel().getColumn(0).setResizable(false);
@@ -656,21 +642,9 @@ public class MainWindow extends javax.swing.JFrame {
                 // Database does not exist, create it
                 String createDbQuery = "CREATE DATABASE " + databaseName;
                 stmt.executeUpdate(createDbQuery);
-                System.out.println("A new database has been created.");
-                
-                // Optionally, create a table in the new database
-                String useDbQuery = "USE " + databaseName;
-                stmt.executeUpdate(useDbQuery);
-                String createTableQuery1 = "CREATE TABLE employees (employee_id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255), position VARCHAR(255))";
-                //String createTableQuery2 = "CREATE TABLE inventory (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255))";
-                //String createTableQuery3 = "CREATE TABLE items (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255))";
-                stmt.executeUpdate(createTableQuery1);
-                //stmt.executeUpdate(createTableQuery2);
-                //stmt.executeUpdate(createTableQuery3);
-
-                
+                System.out.println("A new database has been created.");          
             } else {
-                System.out.println("Database already exists.");
+                System.out.println("Database Exists");
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
@@ -689,6 +663,39 @@ public class MainWindow extends javax.swing.JFrame {
     private void Connect_DB_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Connect_DB_ButtonActionPerformed
         createDatabaseIfNotExists("Inventory_System");
     }//GEN-LAST:event_Connect_DB_ButtonActionPerformed
+
+    /*private void loadEmployeeData() {
+        DefaultTableModel model = (DefaultTableModel) EmployeeTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+            stmt = con.createStatement();
+            String query = "SELECT name, position FROM employees";
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String position = rs.getString("position");
+                model.addRow(new Object[] { name, position });
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (con != null) con.close();
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources: " + ex.getMessage());
+            }
+        }
+}*/
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -713,7 +720,7 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        //createDatabaseIfNotExists("Inventory_System");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
