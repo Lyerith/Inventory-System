@@ -28,19 +28,19 @@
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="AddEmployeeButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="AddItemButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="Close_Button" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Employee_Position_Label" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Employee_Name_Label" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="ItemNamelabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Item_Category_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox1" pref="287" max="32767" attributes="0"/>
-                          <Component id="EmployeeNameField1" max="32767" attributes="0"/>
+                          <Component id="CategoryBox" pref="287" max="32767" attributes="0"/>
+                          <Component id="ItemNameField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -53,18 +53,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Employee_Name_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Item_Category_Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="CategoryBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Employee_Position_Label" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="EmployeeNameField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ItemNamelabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ItemNameField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Close_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="AddEmployeeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="AddItemButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
@@ -72,7 +72,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="Employee_Name_Label">
+    <Component class="javax.swing.JLabel" name="Item_Category_Label">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -80,7 +80,7 @@
         <Property name="text" type="java.lang.String" value="Item Category:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="Employee_Position_Label">
+    <Component class="javax.swing.JLabel" name="ItemNamelabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -96,14 +96,17 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Close_ButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="AddEmployeeButton">
+    <Component class="javax.swing.JButton" name="AddItemButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Item"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddItemButtonActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="EmployeeNameField1">
+    <Component class="javax.swing.JTextField" name="ItemNameField">
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="CategoryBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
