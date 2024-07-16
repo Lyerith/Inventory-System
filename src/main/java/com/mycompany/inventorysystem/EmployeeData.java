@@ -6,7 +6,7 @@ package com.mycompany.inventorysystem;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
-public class DatabaseUtils {
+public class EmployeeData {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
     private static final String USER = "root";

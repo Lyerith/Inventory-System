@@ -4,16 +4,10 @@
  */
 package com.mycompany.inventorysystem;
 
-import javax.swing.event.AncestorEvent;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -150,6 +144,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+
             },
             new String [] {
                 "Employee ID", "Employee Name", "Employee Position"
@@ -165,6 +160,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         EmployeeTable.setMinimumSize(new java.awt.Dimension(750, 80));
         EmployeeTable.setPreferredSize(new java.awt.Dimension(750, 80));
+        EmployeeTable.setRowSelectionAllowed(false);
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
         EmployeePane.setViewportView(EmployeeTable);
         if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
@@ -173,6 +169,7 @@ public class MainWindow extends javax.swing.JFrame {
             EmployeeTable.getColumnModel().getColumn(1).setResizable(false);
             EmployeeTable.getColumnModel().getColumn(1).setPreferredWidth(500);
             EmployeeTable.getColumnModel().getColumn(2).setResizable(false);
+            EmployeeTable.getColumnModel().getColumn(2).setPreferredWidth(200);
         }
 
         AddEmployeeButton.setText("Add Employee");
@@ -546,7 +543,7 @@ public class MainWindow extends javax.swing.JFrame {
         
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
-        DefaultTableModel model = DatabaseUtils.getEmployeeData();
+        DefaultTableModel model = AddEmployee.getEmployeeData();
         EmployeeTable.setModel(model);
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
@@ -648,28 +645,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
         
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
