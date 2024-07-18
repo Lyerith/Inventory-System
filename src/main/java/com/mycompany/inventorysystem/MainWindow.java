@@ -38,14 +38,14 @@ public class MainWindow extends javax.swing.JFrame {
         Tabs = new javax.swing.JTabbedPane();
         BlankTab = new javax.swing.JPanel();
         Employee = new javax.swing.JPanel();
-        OfficeSuppliesEtcPane1 = new javax.swing.JScrollPane();
-        EmployeeTable = new javax.swing.JTable();
         AddEmployeeButton = new javax.swing.JButton();
         SearchBar = new javax.swing.JTextField();
         Export_Button1 = new javax.swing.JButton();
         Close_Button1 = new javax.swing.JButton();
         SearchEmployeeLabel = new javax.swing.JLabel();
         Search_Employee_Button = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EmployeeTable = new javax.swing.JTable();
         Items = new javax.swing.JPanel();
         ItemsContent = new javax.swing.JTabbedPane();
         FurnituresPanel = new javax.swing.JPanel();
@@ -133,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame {
         BlankTab.setLayout(BlankTabLayout);
         BlankTabLayout.setHorizontalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 853, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
         BlankTabLayout.setVerticalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,29 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         Tabs.addTab("tab4", BlankTab);
 
-        EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Employee Name", "Employee Position"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        EmployeeTable.getTableHeader().setReorderingAllowed(false);
-        OfficeSuppliesEtcPane1.setViewportView(EmployeeTable);
-        if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
-            EmployeeTable.getColumnModel().getColumn(0).setMinWidth(250);
-            EmployeeTable.getColumnModel().getColumn(0).setMaxWidth(250);
-        }
+        Employee.setPreferredSize(new java.awt.Dimension(1000, 600));
 
         AddEmployeeButton.setText("Add Employee");
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,13 +177,27 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Employee ID", "Employee Name", "Employee Position"
+            }
+        ));
+        EmployeeTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(EmployeeTable);
+
         javax.swing.GroupLayout EmployeeLayout = new javax.swing.GroupLayout(Employee);
         Employee.setLayout(EmployeeLayout);
         EmployeeLayout.setHorizontalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EmployeeLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(EmployeeLayout.createSequentialGroup()
                         .addComponent(Export_Button1)
                         .addGap(18, 18, 18)
@@ -217,13 +209,9 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Search_Employee_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AddEmployeeButton)))
-                .addGap(42, 42, 42))
-            .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(EmployeeLayout.createSequentialGroup()
-                    .addGap(31, 31, 31)
-                    .addComponent(OfficeSuppliesEtcPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
-                    .addGap(31, 31, 31)))
+                        .addComponent(AddEmployeeButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(57, 57, 57))
         );
         EmployeeLayout.setVerticalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,16 +222,13 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(AddEmployeeButton)
                     .addComponent(SearchEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search_Employee_Button))
-                .addGap(487, 487, 487)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button1)
                     .addComponent(Export_Button1))
                 .addGap(41, 41, 41))
-            .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(EmployeeLayout.createSequentialGroup()
-                    .addGap(90, 90, 90)
-                    .addComponent(OfficeSuppliesEtcPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-                    .addGap(91, 91, 91)))
         );
 
         Tabs.addTab("tab1", Employee);
@@ -427,7 +412,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(Add_Item_Button))
                         .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         ItemsLayout.setVerticalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -540,7 +525,6 @@ public class MainWindow extends javax.swing.JFrame {
         Tabs.setSelectedIndex(1);
         DefaultTableModel model= AddEmployee.getEmployeeData();
         EmployeeTable.setModel(model);
-        
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
@@ -564,8 +548,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void Items_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
-        DefaultTableModel model = AddItem.getFurnituresData();
-        FurnituresTable.setModel(model);
+        DefaultTableModel model1 = AddItem.getFurnituresData();
+        FurnituresTable.setModel(model1);
         DefaultTableModel model2 = AddItem.getSchoolSuppliesData();
         SchoolSuppliesTable.setModel(model2);
         DefaultTableModel model3 = AddItem.getOthersData();
@@ -678,7 +662,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane ItemsContent;
     private javax.swing.JButton Items_Button;
     private javax.swing.JScrollPane OfficeSuppliesEtcPane;
-    private javax.swing.JScrollPane OfficeSuppliesEtcPane1;
     private javax.swing.JPanel OfficeSuppliesEtcPanel;
     private javax.swing.JTable OfficeSuppliesEtcTable;
     private javax.swing.JScrollPane SchoolSuppliesPane;
@@ -690,6 +673,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Search_Employee_Button;
     private javax.swing.JButton Search_Item_Button;
     private javax.swing.JTabbedPane Tabs;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
     private static final String USER = "root";
