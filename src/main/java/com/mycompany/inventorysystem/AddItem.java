@@ -4,6 +4,15 @@
  */
 package com.mycompany.inventorysystem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User-PC
@@ -57,7 +66,7 @@ public class AddItem extends javax.swing.JFrame {
             }
         });
 
-        CategoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CategoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"", "Furnitures", "School Supplies", "Others"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,9 +116,117 @@ public class AddItem extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_ButtonActionPerformed
 
     private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddItemButtonActionPerformed
+        String Category = String.valueOf(CategoryBox.getSelectedItem());
+        String ItemName = ItemNameField.getText();
+        
+        if (Category.equals("") && ItemName.equals("")) {
+            JOptionPane.showMessageDialog(this, "No Input Added");
+        } else if (Category.equals("") || ItemName.equals("")) {
+            JOptionPane.showMessageDialog(this, "Missing Credentials");
+        } else {
+            Connection con = null;
+            Statement stmt = null;
+            PreparedStatement pstmt = null;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+                stmt = con.createStatement();
 
+                // Check if the table exists
+                String checkTableQuery = "SHOW TABLES LIKE 'items'";
+                ResultSet rs = stmt.executeQuery(checkTableQuery);
+
+                if (!rs.next()) {
+                    String createTableQuery = "CREATE TABLE items ("
+                            + "item_id INT PRIMARY KEY AUTO_INCREMENT, "
+                            + "item_name VARCHAR(255) NOT NULL, "
+                            + "category VARCHAR(255) NOT NULL)";
+                    stmt.executeUpdate(createTableQuery);
+                    System.out.println("Table 'items' has been created.");
+                } else {
+                    System.out.println("Table 'items' already exists.");
+                }
+
+                // Insert data into the table
+                String sql = "INSERT INTO items (item_name, category) VALUES (?, ?)";
+                pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, ItemName);
+                pstmt.setString(2, Category);
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Added Successfully");
+                
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            } finally {
+                try {
+                    if (pstmt != null) pstmt.close();
+                    if (stmt != null) stmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error closing resources: " + ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_AddItemButtonActionPerformed
+    
+    public static DefaultTableModel getFurnituresData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Furniture No.", "Furniture Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Furnitures'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
+    public static DefaultTableModel getSchoolSuppliesData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"School Supply No.", "School Supply Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='School Supplies'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
+    public static DefaultTableModel getOthersData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Others'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -156,4 +273,7 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JLabel ItemNamelabel;
     private javax.swing.JLabel Item_Category_Label;
     // End of variables declaration//GEN-END:variables
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 }

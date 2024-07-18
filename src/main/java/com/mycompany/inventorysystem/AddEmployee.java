@@ -172,7 +172,6 @@ public class AddEmployee extends javax.swing.JFrame {
                 pstmt.setString(1, employee);
                 pstmt.setString(2, position);
                 pstmt.executeUpdate();
-                getEmployeeData();
                 JOptionPane.showMessageDialog(this, "Added Successfully");
                 
 
@@ -189,19 +188,18 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
-
+    
     public static DefaultTableModel getEmployeeData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Name", "Position"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Employee Name", " Employee Position"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM employees")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM employees'")) {
 
             while (rs.next()) {
-                int id = rs.getInt("employee_id");
                 String name = rs.getString("name");
                 String position = rs.getString("position");
-                model.addRow(new Object[]{id, name, position});
+                model.addRow(new Object[]{name, position});
             }
         } catch (SQLException e) {
             e.printStackTrace();
