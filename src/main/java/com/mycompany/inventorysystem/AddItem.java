@@ -4,6 +4,15 @@
  */
 package com.mycompany.inventorysystem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User-PC
@@ -27,21 +36,21 @@ public class AddItem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Employee_Name_Label = new javax.swing.JLabel();
-        Employee_Position_Label = new javax.swing.JLabel();
+        Item_Category_Label = new javax.swing.JLabel();
+        ItemNamelabel = new javax.swing.JLabel();
         Close_Button = new javax.swing.JButton();
-        AddEmployeeButton = new javax.swing.JButton();
-        EmployeeNameField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        AddItemButton = new javax.swing.JButton();
+        ItemNameField = new javax.swing.JTextField();
+        CategoryBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        Employee_Name_Label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Employee_Name_Label.setText("Item Category:");
+        Item_Category_Label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Item_Category_Label.setText("Item Category:");
 
-        Employee_Position_Label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Employee_Position_Label.setText("Item Name:");
+        ItemNamelabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ItemNamelabel.setText("Item Name:");
 
         Close_Button.setText("Close");
         Close_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -50,9 +59,14 @@ public class AddItem extends javax.swing.JFrame {
             }
         });
 
-        AddEmployeeButton.setText("Add Item");
+        AddItemButton.setText("Add Item");
+        AddItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddItemButtonActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CategoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"", "Furnitures", "School Supplies", "Others"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,17 +76,17 @@ public class AddItem extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddEmployeeButton)
+                        .addComponent(AddItemButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Close_Button))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Employee_Position_Label)
-                            .addComponent(Employee_Name_Label))
+                            .addComponent(ItemNamelabel)
+                            .addComponent(Item_Category_Label))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, 287, Short.MAX_VALUE)
-                            .addComponent(EmployeeNameField1))))
+                            .addComponent(CategoryBox, 0, 287, Short.MAX_VALUE)
+                            .addComponent(ItemNameField))))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -80,16 +94,16 @@ public class AddItem extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Employee_Name_Label)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Item_Category_Label)
+                    .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Employee_Position_Label)
-                    .addComponent(EmployeeNameField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ItemNamelabel)
+                    .addComponent(ItemNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
-                    .addComponent(AddEmployeeButton))
+                    .addComponent(AddItemButton))
                 .addGap(35, 35, 35))
         );
 
@@ -101,6 +115,118 @@ public class AddItem extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_Close_ButtonActionPerformed
 
+    private void AddItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemButtonActionPerformed
+        String Category = String.valueOf(CategoryBox.getSelectedItem());
+        String ItemName = ItemNameField.getText();
+        
+        if (Category.equals("") && ItemName.equals("")) {
+            JOptionPane.showMessageDialog(this, "No Input Added");
+        } else if (Category.equals("") || ItemName.equals("")) {
+            JOptionPane.showMessageDialog(this, "Missing Credentials");
+        } else {
+            Connection con = null;
+            Statement stmt = null;
+            PreparedStatement pstmt = null;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+                stmt = con.createStatement();
+
+                // Check if the table exists
+                String checkTableQuery = "SHOW TABLES LIKE 'items'";
+                ResultSet rs = stmt.executeQuery(checkTableQuery);
+
+                if (!rs.next()) {
+                    String createTableQuery = "CREATE TABLE items ("
+                            + "item_id INT PRIMARY KEY AUTO_INCREMENT, "
+                            + "item_name VARCHAR(255) NOT NULL, "
+                            + "category VARCHAR(255) NOT NULL)";
+                    stmt.executeUpdate(createTableQuery);
+                    System.out.println("Table 'items' has been created.");
+                } else {
+                    System.out.println("Table 'items' already exists.");
+                }
+
+                // Insert data into the table
+                String sql = "INSERT INTO items (item_name, category) VALUES (?, ?)";
+                pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, ItemName);
+                pstmt.setString(2, Category);
+                pstmt.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Added Successfully");
+                
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            } finally {
+                try {
+                    if (pstmt != null) pstmt.close();
+                    if (stmt != null) stmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error closing resources: " + ex.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_AddItemButtonActionPerformed
+    
+    public static DefaultTableModel getFurnituresData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Furniture No.", "Furniture Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Furnitures'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
+    public static DefaultTableModel getSchoolSuppliesData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"School Supply No.", "School Supply Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='School Supplies'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
+    public static DefaultTableModel getOthersData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Others'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -140,11 +266,14 @@ public class AddItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddEmployeeButton;
+    private javax.swing.JButton AddItemButton;
+    private javax.swing.JComboBox<String> CategoryBox;
     private javax.swing.JButton Close_Button;
-    private javax.swing.JTextField EmployeeNameField1;
-    private javax.swing.JLabel Employee_Name_Label;
-    private javax.swing.JLabel Employee_Position_Label;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField ItemNameField;
+    private javax.swing.JLabel ItemNamelabel;
+    private javax.swing.JLabel Item_Category_Label;
     // End of variables declaration//GEN-END:variables
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 }

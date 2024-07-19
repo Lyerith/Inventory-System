@@ -4,16 +4,11 @@
  */
 package com.mycompany.inventorysystem;
 
-import javax.swing.event.AncestorEvent;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -43,14 +38,14 @@ public class MainWindow extends javax.swing.JFrame {
         Tabs = new javax.swing.JTabbedPane();
         BlankTab = new javax.swing.JPanel();
         Employee = new javax.swing.JPanel();
-        EmployeePane = new javax.swing.JScrollPane();
-        EmployeeTable = new javax.swing.JTable();
         AddEmployeeButton = new javax.swing.JButton();
         SearchBar = new javax.swing.JTextField();
         Export_Button1 = new javax.swing.JButton();
         Close_Button1 = new javax.swing.JButton();
         SearchEmployeeLabel = new javax.swing.JLabel();
         Search_Employee_Button = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EmployeeTable = new javax.swing.JTable();
         Items = new javax.swing.JPanel();
         ItemsContent = new javax.swing.JTabbedPane();
         FurnituresPanel = new javax.swing.JPanel();
@@ -79,7 +74,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
-        setPreferredSize(new java.awt.Dimension(800, 345));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -139,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame {
         BlankTab.setLayout(BlankTabLayout);
         BlankTabLayout.setHorizontalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 853, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
         BlankTabLayout.setVerticalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,32 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         Tabs.addTab("tab4", BlankTab);
 
-        EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-            },
-            new String [] {
-                "Employee ID", "Employee Name", "Employee Position"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        EmployeeTable.setMinimumSize(new java.awt.Dimension(750, 80));
-        EmployeeTable.setPreferredSize(new java.awt.Dimension(750, 80));
-        EmployeeTable.getTableHeader().setReorderingAllowed(false);
-        EmployeePane.setViewportView(EmployeeTable);
-        if (EmployeeTable.getColumnModel().getColumnCount() > 0) {
-            EmployeeTable.getColumnModel().getColumn(0).setResizable(false);
-            EmployeeTable.getColumnModel().getColumn(0).setPreferredWidth(100);
-            EmployeeTable.getColumnModel().getColumn(1).setResizable(false);
-            EmployeeTable.getColumnModel().getColumn(1).setPreferredWidth(500);
-            EmployeeTable.getColumnModel().getColumn(2).setResizable(false);
-        }
+        Employee.setPreferredSize(new java.awt.Dimension(1000, 600));
 
         AddEmployeeButton.setText("Add Employee");
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -208,28 +177,41 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Employee ID", "Employee Name", "Employee Position"
+            }
+        ));
+        EmployeeTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(EmployeeTable);
+
         javax.swing.GroupLayout EmployeeLayout = new javax.swing.GroupLayout(Employee);
         Employee.setLayout(EmployeeLayout);
         EmployeeLayout.setHorizontalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EmployeeLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(EmployeeLayout.createSequentialGroup()
                         .addComponent(Export_Button1)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button1))
-                    .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(EmployeeLayout.createSequentialGroup()
-                            .addComponent(SearchEmployeeLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(SearchBar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Search_Employee_Button)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(AddEmployeeButton))
-                        .addComponent(EmployeePane, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42))
+                    .addGroup(EmployeeLayout.createSequentialGroup()
+                        .addComponent(SearchEmployeeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Search_Employee_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AddEmployeeButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(57, 57, 57))
         );
         EmployeeLayout.setVerticalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,8 +223,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(SearchEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search_Employee_Button))
                 .addGap(18, 18, 18)
-                .addComponent(EmployeePane, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button1)
                     .addComponent(Export_Button1))
@@ -430,7 +412,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(Add_Item_Button))
                         .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         ItemsLayout.setVerticalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,11 +440,6 @@ public class MainWindow extends javax.swing.JFrame {
         ChooseEmployeeLabel.setText("Choose Employee:");
 
         EmployeeDropdownBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        EmployeeDropdownBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeDropdownBoxActionPerformed(evt);
-            }
-        });
 
         InventoryDataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -546,7 +523,7 @@ public class MainWindow extends javax.swing.JFrame {
         
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
-        DefaultTableModel model = DatabaseUtils.getEmployeeData();
+        DefaultTableModel model= AddEmployee.getEmployeeData();
         EmployeeTable.setModel(model);
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
@@ -555,10 +532,6 @@ public class MainWindow extends javax.swing.JFrame {
         /*Inventory log =new Inventory();
         log.show();*/
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
-
-    private void EmployeeDropdownBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
 
     private void Export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_ButtonActionPerformed
         // TODO add your handling code here:
@@ -575,6 +548,13 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void Items_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
+        DefaultTableModel model1 = AddItem.getFurnituresData();
+        FurnituresTable.setModel(model1);
+        DefaultTableModel model2 = AddItem.getSchoolSuppliesData();
+        SchoolSuppliesTable.setModel(model2);
+        DefaultTableModel model3 = AddItem.getOthersData();
+        OfficeSuppliesEtcTable.setModel(model3);
+        //model.addRow(new Object[]{"Furniture No.", "Furniture Name"});
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
     private void Export_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button1ActionPerformed
@@ -612,14 +592,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
 
     public static void createDatabaseIfNotExists(String databaseName) {
-        String url = "jdbc:mysql://localhost:3306/";
-        String user = "root"; // Your MySQL username
-        String password = ""; // Your MySQL password
 
         Connection conn = null;
         Statement stmt = null;
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             stmt = conn.createStatement();
 
             // Check if the database exists
@@ -648,28 +625,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
         
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -689,7 +644,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Close_Button2;
     private javax.swing.JPanel Employee;
     private javax.swing.JComboBox<String> EmployeeDropdownBox;
-    private javax.swing.JScrollPane EmployeePane;
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JButton Employee_Button;
     private javax.swing.JButton Export_Button;
@@ -719,5 +673,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Search_Employee_Button;
     private javax.swing.JButton Search_Item_Button;
     private javax.swing.JTabbedPane Tabs;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 }
