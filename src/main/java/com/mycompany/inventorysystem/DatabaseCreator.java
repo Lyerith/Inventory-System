@@ -33,8 +33,8 @@ public class DatabaseCreator {
                 stmt.executeUpdate(createDbQuery);
                 System.out.println("A new database has been created.");  
 
-                createEmployeeTable(databaseName);
-                createItemsTable(databaseName);
+                //createEmployeeTable(databaseName);
+                //createItemsTable(databaseName);
                 
             } else {
                 System.out.println("Database Exists");
@@ -63,7 +63,7 @@ public class DatabaseCreator {
             String createEmployeeTable = "CREATE TABLE IF NOT EXISTS employees ("
                     + "employee_id INT PRIMARY KEY AUTO_INCREMENT, "
                     + "name VARCHAR(255) NOT NULL, "
-                    + "position INT NOT NULL, ";
+                    + "position VARCHAR(255) NOT NULL)";
             stmt.executeUpdate(createEmployeeTable);
             System.out.println("Table 'employees' has been created or already exists."); 
             
@@ -91,8 +91,7 @@ public class DatabaseCreator {
             String createItemsTable = "CREATE TABLE IF NOT EXISTS items ("
                     + "item_id INT PRIMARY KEY AUTO_INCREMENT, "
                     + "item_name VARCHAR(255) NOT NULL, "
-                    + "quantity INT NOT NULL, "
-                    + "price DECIMAL(10, 2) NOT NULL)";
+                    + "category VARCHAR(255) NOT NULL)";
             stmt.executeUpdate(createItemsTable);
             System.out.println("Table 'items' has been created or already exists."); 
             

@@ -182,7 +182,7 @@ public class AddEmployee extends javax.swing.JFrame {
              ResultSet rs = stmt.executeQuery("SELECT * FROM employees")) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("employee_id");
                 String name = rs.getString("name");
                 String position = rs.getString("position");
                 model.addRow(new Object[]{id, name, position});
@@ -240,7 +240,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel Employee_Position_Label;
     private javax.swing.JButton ImportEmployee;
     // End of variables declaration//GEN-END:variables
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 }
