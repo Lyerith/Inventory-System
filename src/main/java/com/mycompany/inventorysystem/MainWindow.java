@@ -19,7 +19,6 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         setTitle("Inventory System");
-        createDatabaseIfNotExists("Inventory_System");
     }
 
     /**
@@ -590,40 +589,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
-
-    public static void createDatabaseIfNotExists(String databaseName) {
-
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            stmt = conn.createStatement();
-
-            // Check if the database exists
-            String checkDbQuery = "SHOW DATABASES LIKE '" + databaseName + "'";
-            var rs = stmt.executeQuery(checkDbQuery);
-            if (!rs.next()) {
-                // Database does not exist, create it
-                String createDbQuery = "CREATE DATABASE " + databaseName;
-                stmt.executeUpdate(createDbQuery);
-                System.out.println("A new database has been created.");          
-            } else {
-                System.out.println("Database Exists");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Close resources
-            try {
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException ex) {
-                System.out.println("Error closing resources: " + ex.getMessage());
-            }
-        }
-    }
-        
+       
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -675,7 +641,4 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
 }
