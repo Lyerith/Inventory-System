@@ -132,21 +132,6 @@ public class AddItem extends javax.swing.JFrame {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
                 stmt = con.createStatement();
 
-                // Check if the table exists
-                String checkTableQuery = "SHOW TABLES LIKE 'items'";
-                ResultSet rs = stmt.executeQuery(checkTableQuery);
-
-                if (!rs.next()) {
-                    String createTableQuery = "CREATE TABLE items ("
-                            + "item_id INT PRIMARY KEY AUTO_INCREMENT, "
-                            + "item_name VARCHAR(255) NOT NULL, "
-                            + "category VARCHAR(255) NOT NULL)";
-                    stmt.executeUpdate(createTableQuery);
-                    System.out.println("Table 'items' has been created.");
-                } else {
-                    System.out.println("Table 'items' already exists.");
-                }
-
                 // Insert data into the table
                 String sql = "INSERT INTO items (item_name, category) VALUES (?, ?)";
                 pstmt = con.prepareStatement(sql);

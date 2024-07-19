@@ -148,31 +148,16 @@ public class AddEmployee extends javax.swing.JFrame {
             PreparedStatement pstmt = null;
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
-                stmt = con.createStatement();
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+                    stmt = con.createStatement();
 
-                // Check if the table exists
-                String checkTableQuery = "SHOW TABLES LIKE 'employees'";
-                ResultSet rs = stmt.executeQuery(checkTableQuery);
-
-                if (!rs.next()) {
-                    String createTableQuery = "CREATE TABLE employees ("
-                            + "employee_id INT PRIMARY KEY AUTO_INCREMENT, "
-                            + "name VARCHAR(255) NOT NULL, "
-                            + "position VARCHAR(255) NOT NULL)";
-                    stmt.executeUpdate(createTableQuery);
-                    System.out.println("Table 'employees' has been created.");
-                } else {
-                    System.out.println("Table 'employees' already exists.");
-                }
-
-                // Insert data into the table
-                String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
-                pstmt = con.prepareStatement(sql);
-                pstmt.setString(1, employee);
-                pstmt.setString(2, position);
-                pstmt.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Added Successfully");
+                    // Insert data into the table
+                    String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
+                    pstmt = con.prepareStatement(sql);
+                    pstmt.setString(1, employee);
+                    pstmt.setString(2, position);
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Added Successfully");
                 
 
             } catch (Exception e) {
@@ -255,7 +240,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel Employee_Position_Label;
     private javax.swing.JButton ImportEmployee;
     // End of variables declaration//GEN-END:variables
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/Inventory_System";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 }
