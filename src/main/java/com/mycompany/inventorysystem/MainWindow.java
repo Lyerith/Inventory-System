@@ -6,9 +6,9 @@ package com.mycompany.inventorysystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         setTitle("Inventory System");
+        EmployeeCombo();
     }
 
     /**
@@ -565,17 +566,11 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-        
-    private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
-        Tabs.setSelectedIndex(1);
-        DefaultTableModel model= AddEmployee.getEmployeeData();
-        EmployeeTable.setModel(model);
-    }//GEN-LAST:event_Inventory_ButtonActionPerformed
-        
+                
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
-        /*Inventory log =new Inventory();
-        log.show();*/
+        DefaultTableModel model= AddEmployee.getEmployeeData();
+        EmployeeTable.setModel(model);
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     private void Export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_ButtonActionPerformed
@@ -646,7 +641,35 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No matching employee found.", "Search Result", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
-       
+
+    private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
+        Tabs.setSelectedIndex(1);
+    }//GEN-LAST:event_Inventory_ButtonActionPerformed
+      
+    private void EmployeeCombo() {
+        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+        String USER = "root";
+        String PASSWORD = "";
+
+        String sql = "SELECT name FROM employees";
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement pst = con.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            EmployeeDropdownBox.removeAllItems(); // Clear existing items
+
+            while (rs.next()) {
+                EmployeeDropdownBox.addItem(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Optionally, show a message dialog
+            JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

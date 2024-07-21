@@ -4,12 +4,22 @@
  */
 package com.mycompany.inventorysystem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 public class InsertData extends javax.swing.JFrame {
 
     public InsertData() {
         initComponents();
         setTitle("Insert Data");
+        EmployeeCombo();
+        ItemCombo();
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -92,12 +102,8 @@ public class InsertData extends javax.swing.JFrame {
             }
         });
 
-        EmployeeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Employee:");
-
-        ItemBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,6 +211,55 @@ public class InsertData extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void EmployeeCombo() {
+        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+        String USER = "root";
+        String PASSWORD = "";
+
+        String sql = "SELECT name FROM employees";
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement pst = con.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            EmployeeBox.removeAllItems(); // Clear existing items
+
+            while (rs.next()) {
+                EmployeeBox.addItem(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Optionally, show a message dialog
+            JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void ItemCombo() {
+    String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+    String USER = "root";
+    String PASSWORD = "";
+    
+    String sql = "SELECT item_name FROM items";
+    
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+
+        ItemBox.removeAllItems(); // Clear existing items
+
+        while (rs.next()) {
+            ItemBox.addItem(rs.getString("item_name"));
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Optionally, show a message dialog
+        JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    
     private void Insert_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_ButtonActionPerformed
         //String Item =ItemField.getText();
         String Description = DescriptionField.getText();
