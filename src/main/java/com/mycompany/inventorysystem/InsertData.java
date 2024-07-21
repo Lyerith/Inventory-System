@@ -38,12 +38,11 @@ public class InsertData extends javax.swing.JFrame {
         Insert_Button = new javax.swing.JButton();
         Cancel_Button = new javax.swing.JButton();
         RemarksField = new javax.swing.JTextField();
-        ItemField = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        EmployeeBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        ItemBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(400, 575));
         setResizable(false);
 
         Item.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -93,10 +92,12 @@ public class InsertData extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        EmployeeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Employee:");
+
+        ItemBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,8 +141,8 @@ public class InsertData extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(StockNoField)
                             .addComponent(DescriptionField)
-                            .addComponent(ItemField)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(EmployeeBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ItemBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,12 +150,12 @@ public class InsertData extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmployeeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Item)
-                    .addComponent(ItemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ItemBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(DescLabel)
@@ -205,7 +206,7 @@ public class InsertData extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Insert_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_ButtonActionPerformed
-        String Item =ItemField.getText();
+        //String Item =ItemField.getText();
         String Description = DescriptionField.getText();
         String StockNo= StockNoField.getText();
         String UnitMeasure = UnitMeasureField.getText();
@@ -260,9 +261,10 @@ public class InsertData extends javax.swing.JFrame {
     private javax.swing.JButton Cancel_Button;
     private javax.swing.JLabel DescLabel;
     private javax.swing.JTextField DescriptionField;
+    private javax.swing.JComboBox<String> EmployeeBox;
     private javax.swing.JButton Insert_Button;
     private javax.swing.JLabel Item;
-    private javax.swing.JTextField ItemField;
+    private javax.swing.JComboBox<String> ItemBox;
     private javax.swing.JLabel OnHandCardLabel;
     private javax.swing.JTextField OnHandCountField;
     private javax.swing.JTextField QuantityField;
@@ -278,7 +280,6 @@ public class InsertData extends javax.swing.JFrame {
     private javax.swing.JLabel UnitValueLabel;
     private javax.swing.JTextField ValueField;
     private javax.swing.JLabel ValueLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

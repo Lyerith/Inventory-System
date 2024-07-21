@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -130,20 +131,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         getContentPane().add(ButtonsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
 
+        BlankTab.setPreferredSize(new java.awt.Dimension(866, 605));
+
         javax.swing.GroupLayout BlankTabLayout = new javax.swing.GroupLayout(BlankTab);
         BlankTab.setLayout(BlankTabLayout);
         BlankTabLayout.setHorizontalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 861, Short.MAX_VALUE)
         );
         BlankTabLayout.setVerticalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
         Tabs.addTab("tab4", BlankTab);
 
-        Employee.setPreferredSize(new java.awt.Dimension(1000, 600));
+        Employee.setPreferredSize(new java.awt.Dimension(866, 605));
 
         AddEmployeeButton.setText("Add Employee");
         AddEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +172,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         SearchEmployeeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchEmployeeLabel.setText("Search Employee:");
+        SearchEmployeeLabel.setText("Search:");
 
         Search_Employee_Button.setText("Search Employee");
         Search_Employee_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -196,23 +199,26 @@ public class MainWindow extends javax.swing.JFrame {
         Employee.setLayout(EmployeeLayout);
         EmployeeLayout.setHorizontalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeeLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeLayout.createSequentialGroup()
+                .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(EmployeeLayout.createSequentialGroup()
-                        .addComponent(Export_Button1)
-                        .addGap(18, 18, 18)
-                        .addComponent(Close_Button1))
-                    .addGroup(EmployeeLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addComponent(SearchEmployeeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SearchBar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Search_Employee_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AddEmployeeButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(57, 57, 57))
+                    .addGroup(EmployeeLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(EmployeeLayout.createSequentialGroup()
+                                .addComponent(Export_Button1)
+                                .addGap(18, 18, 18)
+                                .addComponent(Close_Button1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(44, 44, 44))
         );
         EmployeeLayout.setVerticalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,17 +230,17 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(SearchEmployeeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search_Employee_Button))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button1)
                     .addComponent(Export_Button1))
-                .addGap(41, 41, 41))
+                .addContainerGap())
         );
 
         Tabs.addTab("tab1", Employee);
 
-        Items.setPreferredSize(new java.awt.Dimension(1000, 600));
+        Items.setPreferredSize(new java.awt.Dimension(866, 605));
 
         ItemsContent.setMaximumSize(new java.awt.Dimension(2147483647, 80));
         ItemsContent.setMinimumSize(new java.awt.Dimension(150, 80));
@@ -413,7 +419,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(Add_Item_Button))
                         .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         ItemsLayout.setVerticalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,15 +493,15 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(Export_Button)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button))
-                    .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(InventoryPane)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, InventoryLayout.createSequentialGroup()
+                    .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(InventoryLayout.createSequentialGroup()
                             .addComponent(ChooseEmployeeLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(EmployeeDropdownBox, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EmployeeDropdownBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(InsertDataButton))))
-                .addGap(57, 57, 57))
+                            .addComponent(InsertDataButton))
+                        .addComponent(InventoryPane, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44))
         );
         InventoryLayout.setVerticalGroup(
             InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -506,8 +512,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(ChooseEmployeeLabel)
                     .addComponent(InsertDataButton))
                 .addGap(18, 18, 18)
-                .addComponent(InventoryPane, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(InventoryPane, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
                     .addComponent(Export_Button))
@@ -589,10 +595,16 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Search_Item_ButtonActionPerformed
 
     private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
-       DefaultTableModel ob=(DefaultTableModel) EmployeeTable.getModel();
-       TableRowSorter<DefaultTableModel> obj=new TableRowSorter<>(ob);
-       EmployeeTable.setRowSorter(obj);
-       obj.setRowFilter(RowFilter.regexFilter(SearchBar.getText()));
+        DefaultTableModel model = (DefaultTableModel) EmployeeTable.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        EmployeeTable.setRowSorter(sorter);
+        String searchText = SearchBar.getText();
+        sorter.setRowFilter(RowFilter.regexFilter(searchText));
+
+        if (sorter.getViewRowCount() == 0) {
+            // No matching items found
+            JOptionPane.showMessageDialog(this, "No matching employee found.", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
        
     public static void main(String args[]) {
