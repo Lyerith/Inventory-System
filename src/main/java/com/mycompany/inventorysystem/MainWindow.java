@@ -200,9 +200,9 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeLayout.setHorizontalGroup(
             EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmployeeLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(EmployeeLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(SearchEmployeeLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(SearchBar)
@@ -211,13 +211,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AddEmployeeButton))
                     .addGroup(EmployeeLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(EmployeeLayout.createSequentialGroup()
-                                .addComponent(Export_Button1)
-                                .addGap(18, 18, 18)
-                                .addComponent(Close_Button1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(Export_Button1)
+                        .addGap(18, 18, 18)
+                        .addComponent(Close_Button1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44))
         );
         EmployeeLayout.setVerticalGroup(
@@ -363,7 +360,7 @@ public class MainWindow extends javax.swing.JFrame {
         ItemsContent.addTab("Other Office Supplies and Equipment", OfficeSuppliesEtcPanel);
 
         SearchEmployeeLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchEmployeeLabel1.setText("Search Item:");
+        SearchEmployeeLabel1.setText("Search:");
         SearchEmployeeLabel1.setMaximumSize(new java.awt.Dimension(109, 20));
         SearchEmployeeLabel1.setMinimumSize(new java.awt.Dimension(109, 20));
         SearchEmployeeLabel1.setPreferredSize(new java.awt.Dimension(109, 20));
@@ -411,7 +408,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(Close_Button2))
                     .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(ItemsLayout.createSequentialGroup()
-                            .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(ItemSearchBar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -419,7 +416,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(Add_Item_Button))
                         .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         ItemsLayout.setVerticalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
