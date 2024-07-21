@@ -237,40 +237,44 @@ public class InsertData extends javax.swing.JFrame {
     }
     
     private void ItemCombo() {
-    String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
-    String USER = "root";
-    String PASSWORD = "";
-    
-    String sql = "SELECT item_name FROM items";
-    
-    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-         PreparedStatement pst = con.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
+        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+        String USER = "root";
+        String PASSWORD = "";
 
-        ItemBox.removeAllItems(); // Clear existing items
+        String sql = "SELECT item_name FROM items";
 
-        while (rs.next()) {
-            ItemBox.addItem(rs.getString("item_name"));
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement pst = con.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            ItemBox.removeAllItems(); // Clear existing items
+
+            while (rs.next()) {
+                ItemBox.addItem(rs.getString("item_name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Optionally, show a message dialog
+            JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Optionally, show a message dialog
-        JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
     
     private void Insert_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_ButtonActionPerformed
         //String Item =ItemField.getText();
-        String Description = DescriptionField.getText();
-        String StockNo= StockNoField.getText();
-        String UnitMeasure = UnitMeasureField.getText();
-        String UnitValue = UnitValueField.getText();
-        String BalPerCard = BalPerCardField.getText();
-        String OnHandCount = OnHandCountField.getText();
-        String Quantity = QuantityField.getText();
-        String Value = ValueField.getText();
-        String Remarks = RemarksField.getText();
+        //String Description = DescriptionField.getText();
+        //String StockNo= StockNoField.getText();
+        //String UnitMeasure = UnitMeasureField.getText();
+        //String UnitValue = UnitValueField.getText();
+        //String BalPerCard = BalPerCardField.getText();
+        //String OnHandCount = OnHandCountField.getText();
+        //String Quantity = QuantityField.getText();
+        //String Value = ValueField.getText();
+        //String Remarks = RemarksField.getText();
+        
+        String Employee = (String) ItemBox.getSelectedItem();
+        //System.out.println(Employee);
+        JOptionPane.showMessageDialog(this, Employee);
     }//GEN-LAST:event_Insert_ButtonActionPerformed
 
     private void Cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_ButtonActionPerformed
