@@ -261,20 +261,19 @@ public class InsertData extends javax.swing.JFrame {
     }
     
     private void Insert_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_ButtonActionPerformed
-        //String Item =ItemField.getText();
-        //String Description = DescriptionField.getText();
-        //String StockNo= StockNoField.getText();
-        //String UnitMeasure = UnitMeasureField.getText();
-        //String UnitValue = UnitValueField.getText();
-        //String BalPerCard = BalPerCardField.getText();
-        //String OnHandCount = OnHandCountField.getText();
-        //String Quantity = QuantityField.getText();
-        //String Value = ValueField.getText();
-        //String Remarks = RemarksField.getText();
         
         String Employee = (String) EmployeeBox.getSelectedItem();
-        //System.out.println(Employee);
-        JOptionPane.showMessageDialog(this, Employee);
+        String Item =(String)ItemBox.getSelectedItem();
+        String Description = DescriptionField.getText();
+        String StockNo= StockNoField.getText();
+        String UnitMeasure = UnitMeasureField.getText();
+        String UnitValue = UnitValueField.getText();
+        String BalPerCard = BalPerCardField.getText();
+        String OnHandCount = OnHandCountField.getText();
+        String Quantity = QuantityField.getText();
+        String Value = ValueField.getText();
+        String Remarks = RemarksField.getText();
+        
     }//GEN-LAST:event_Insert_ButtonActionPerformed
 
     private void Cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_ButtonActionPerformed
