@@ -76,6 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(965, 605));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -530,7 +531,7 @@ public class MainWindow extends javax.swing.JFrame {
         DefaultTableModel model= AddEmployee.getEmployeeData();
         EmployeeTable.setModel(model);
     }//GEN-LAST:event_Employee_ButtonActionPerformed
-
+        
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(3);
         /*Inventory log =new Inventory();
