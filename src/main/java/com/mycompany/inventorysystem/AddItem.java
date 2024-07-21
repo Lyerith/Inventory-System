@@ -66,7 +66,7 @@ public class AddItem extends javax.swing.JFrame {
             }
         });
 
-        CategoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"", "Furnitures", "School Supplies", "Others"}));
+        CategoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"", "Furnitures", "School Supplies","Equipments", "Others"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,7 +138,7 @@ public class AddItem extends javax.swing.JFrame {
                 pstmt.setString(1, ItemName);
                 pstmt.setString(2, Category);
                 pstmt.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Added Successfully");
+                //JOptionPane.showMessageDialog(this, "Added Successfully");
                 
 
             } catch (Exception e) {
@@ -180,6 +180,25 @@ public class AddItem extends javax.swing.JFrame {
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='School Supplies'")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String position = rs.getString("category");
+                model.addRow(new Object[]{id, name});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+    
+    public static DefaultTableModel getEquipmentsData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Equipment No.", "Equipment Name"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Equipments'")) {
 
             while (rs.next()) {
                 int id = rs.getInt("item_id");
