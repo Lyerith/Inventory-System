@@ -9,7 +9,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 
@@ -587,7 +589,10 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Search_Item_ButtonActionPerformed
 
     private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
-        // TODO add your handling code here:
+       DefaultTableModel ob=(DefaultTableModel) EmployeeTable.getModel();
+       TableRowSorter<DefaultTableModel> obj=new TableRowSorter<>(ob);
+       EmployeeTable.setRowSorter(obj);
+       obj.setRowFilter(RowFilter.regexFilter(SearchBar.getText()));
     }//GEN-LAST:event_Search_Employee_ButtonActionPerformed
        
     public static void main(String args[]) {
