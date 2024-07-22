@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
@@ -45,7 +46,7 @@ public class InsertData extends javax.swing.JFrame {
         OnHandCountField = new javax.swing.JTextField();
         QuantityField = new javax.swing.JTextField();
         ValueField = new javax.swing.JTextField();
-        Insert_Button = new javax.swing.JButton();
+        InsertButton = new javax.swing.JButton();
         Cancel_Button = new javax.swing.JButton();
         RemarksField = new javax.swing.JTextField();
         EmployeeBox = new javax.swing.JComboBox<>();
@@ -88,10 +89,10 @@ public class InsertData extends javax.swing.JFrame {
         RemarksLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         RemarksLabel.setText("Remarks");
 
-        Insert_Button.setText("Insert");
-        Insert_Button.addActionListener(new java.awt.event.ActionListener() {
+        InsertButton.setText("Insert");
+        InsertButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Insert_ButtonActionPerformed(evt);
+                InsertButtonActionPerformed(evt);
             }
         });
 
@@ -113,8 +114,8 @@ public class InsertData extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Insert_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(InsertButton)
                         .addGap(15, 15, 15)
                         .addComponent(Cancel_Button))
                     .addGroup(layout.createSequentialGroup()
@@ -202,9 +203,9 @@ public class InsertData extends javax.swing.JFrame {
                     .addComponent(RemarksField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Insert_Button)
+                    .addComponent(InsertButton)
                     .addComponent(Cancel_Button))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -213,9 +214,6 @@ public class InsertData extends javax.swing.JFrame {
 
     
     private void EmployeeCombo() {
-        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
-        String USER = "root";
-        String PASSWORD = "";
 
         String sql = "SELECT name FROM employees";
 
@@ -237,33 +235,32 @@ public class InsertData extends javax.swing.JFrame {
     }
     
     private void ItemCombo() {
-    String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
-    String USER = "root";
-    String PASSWORD = "";
-    
-    String sql = "SELECT item_name FROM items";
-    
-    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-         PreparedStatement pst = con.prepareStatement(sql);
-         ResultSet rs = pst.executeQuery()) {
 
-        ItemBox.removeAllItems(); // Clear existing items
+        String sql = "SELECT item_name FROM items";
 
-        while (rs.next()) {
-            ItemBox.addItem(rs.getString("item_name"));
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement pst = con.prepareStatement(sql); 
+             ResultSet rs = pst.executeQuery()) {
+
+            ItemBox.removeAllItems(); // Clear existing items
+
+            while (rs.next()) {
+                ItemBox.addItem(rs.getString("item_name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Optionally, show a message dialog
+            JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // Optionally, show a message dialog
-        JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
     
-    private void Insert_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insert_ButtonActionPerformed
-        //String Item =ItemField.getText();
+    private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
+        
+        String Name = (String) EmployeeBox.getSelectedItem();
+        String Item = (String) ItemBox.getSelectedItem();
         String Description = DescriptionField.getText();
-        String StockNo= StockNoField.getText();
+        String StockNo = StockNoField.getText();
         String UnitMeasure = UnitMeasureField.getText();
         String UnitValue = UnitValueField.getText();
         String BalPerCard = BalPerCardField.getText();
@@ -271,12 +268,52 @@ public class InsertData extends javax.swing.JFrame {
         String Quantity = QuantityField.getText();
         String Value = ValueField.getText();
         String Remarks = RemarksField.getText();
+<<<<<<< HEAD
         
         
         String Employee = (String)EmployeeBox.getSelectedItem();
         JOptionPane.showMessageDialog(this, Employee);
     }//GEN-LAST:event_Insert_ButtonActionPerformed
+=======
+>>>>>>> Acer-Laptop
 
+            Connection con = null;
+            Statement stmt = null;
+            PreparedStatement pstmt = null;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
+                    stmt = con.createStatement();
+
+                String sql = "INSERT INTO inventory (name, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                pstmt = con.prepareStatement(sql);
+                pstmt.setString(1, Name);
+                pstmt.setString(2, Item);
+                pstmt.setString(3, Description);
+                pstmt.setString(4, StockNo);
+                pstmt.setString(5, UnitMeasure);
+                pstmt.setString(6, UnitValue);
+                pstmt.setString(7, BalPerCard);
+                pstmt.setString(8, OnHandCount);
+                pstmt.setString(9, Quantity);
+                pstmt.setString(10, Value);
+                pstmt.setString(11, Remarks);
+                pstmt.executeUpdate(); 
+                JOptionPane.showMessageDialog(this, "Added Successfully");
+                
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            } finally {
+                try {
+                    if (pstmt != null) pstmt.close();
+                    if (stmt != null) stmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException ex) {
+                    System.out.println("Error closing resources: " + ex.getMessage());
+                }
+            }
+    }//GEN-LAST:event_InsertButtonActionPerformed
+    
     private void Cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_ButtonActionPerformed
         dispose();
     }//GEN-LAST:event_Cancel_ButtonActionPerformed
@@ -321,7 +358,7 @@ public class InsertData extends javax.swing.JFrame {
     private javax.swing.JLabel DescLabel;
     private javax.swing.JTextField DescriptionField;
     private javax.swing.JComboBox<String> EmployeeBox;
-    private javax.swing.JButton Insert_Button;
+    private javax.swing.JButton InsertButton;
     private javax.swing.JLabel Item;
     private javax.swing.JComboBox<String> ItemBox;
     private javax.swing.JLabel OnHandCardLabel;
@@ -341,4 +378,7 @@ public class InsertData extends javax.swing.JFrame {
     private javax.swing.JLabel ValueLabel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 }

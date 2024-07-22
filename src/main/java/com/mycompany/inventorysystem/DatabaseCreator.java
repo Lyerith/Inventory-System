@@ -6,15 +6,37 @@ package com.mycompany.inventorysystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author User-PC
  */
 public class DatabaseCreator {
+    
+    public static void CheckConnect() {
+        String DB_URL = "jdbc:mysql://localhost:3306/";
+        String USER = "root";
+        String PASSWORD = "";
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            // Show a message dialog for successful connection
+            createDatabaseIfNotExists("Inventory_System");
+            //createEmployeeTable("Inventory_System");
+            //createItemsTable("Inventory_System");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Show a message dialog for connection errors
+            /*            JOptionPane.showMessageDialog(this, "E/rror connecting to Database: " + e.getMessage(), "Connection Error", JOptionPane.ERROR_MESSAGE);
+        */}
+    }
+    
     
     public static void createDatabaseIfNotExists(String databaseName) {
         
@@ -33,8 +55,9 @@ public class DatabaseCreator {
                 stmt.executeUpdate(createDbQuery);
                 System.out.println("A new database has been created.");  
 
-                //createEmployeeTable(databaseName);
-                //createItemsTable(databaseName);
+                createEmployeeTable(databaseName);
+                createItemsTable(databaseName);
+                createInventoryTable(databaseName);
                 
             } else {
                 System.out.println("Database Exists");
@@ -108,6 +131,47 @@ public class DatabaseCreator {
             }
         }
     }
+    
+    public static void createInventoryTable(String databaseName) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL + databaseName, USER, PASSWORD);
+            stmt = conn.createStatement();
+
+        String createInventoryTable = "CREATE TABLE IF NOT EXISTS inventory ("
+            + "inventory_id INT PRIMARY KEY AUTO_INCREMENT, "
+            + "employee_id INT NOT NULL, "
+            + "item_id INT NOT NULL, "
+            + "description VARCHAR(255), "
+            + "stockno INT, "
+            + "unitmeasure VARCHAR(255), "
+            + "unitvalue VARCHAR(255), "
+            + "balpercard VARCHAR(255), "
+            + "onhandcount VARCHAR(255), "
+            + "quantity VARCHAR(255), "
+            + "value VARCHAR(255), "
+            + "remarks VARCHAR(255), "
+            + "FOREIGN KEY (employee_id) REFERENCES employees(employee_id), "
+            + "FOREIGN KEY (item_id) REFERENCES items(item_id)"
+            + ")";
+        stmt.executeUpdate(createInventoryTable);
+        System.out.println("Table 'inventory' has been created or already exists."); 
+            
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException ex) {
+                System.out.println("Error closing resources: " + ex.getMessage());
+            }
+        }
+    }
+    
     private static final String DB_URL = "jdbc:mysql://localhost:3306/";
     private static final String USER = "root";
     private static final String PASSWORD = "";

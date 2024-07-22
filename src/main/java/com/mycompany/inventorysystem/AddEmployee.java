@@ -157,8 +157,8 @@ public class AddEmployee extends javax.swing.JFrame {
                     pstmt.setString(1, employee);
                     pstmt.setString(2, position);
                     pstmt.executeUpdate();
-                    //JOptionPane.showMessageDialog(this, "Added Successfully");
-                
+                    EmployeeNameField.setText("");
+                    EmployeePositionField.setText("");
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
