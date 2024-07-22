@@ -9,7 +9,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class InsertData extends javax.swing.JFrame {
@@ -302,6 +304,35 @@ public class InsertData extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_InsertButtonActionPerformed
+    
+    public static DefaultTableModel getInventoryData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+        }, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory")) {
+
+            while (rs.next()) {
+                String item = rs.getString("item");
+                String description = rs.getString("description");
+                String stockNo = rs.getString("stockno");
+                String unitMeasure = rs.getString("unitmeasure");
+                double unitValue = rs.getDouble("unitvalue");
+                int balancePerCard = rs.getInt("balpercard");
+                int onHandPerCount = rs.getInt("onhandcount");
+                int shortageOverageQuantity = rs.getInt("quantity");
+                double shortageOverageValue = rs.getDouble("value");
+                String remarks = rs.getString("remarks");
+                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
     
     private void Cancel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_ButtonActionPerformed
         dispose();
