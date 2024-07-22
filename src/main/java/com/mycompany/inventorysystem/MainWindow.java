@@ -22,7 +22,6 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         setTitle("Inventory System");
-        EmployeeCombo();
     }
 
     /**
@@ -644,6 +643,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
+        EmployeeCombo();
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
       
     private void EmployeeCombo() {
