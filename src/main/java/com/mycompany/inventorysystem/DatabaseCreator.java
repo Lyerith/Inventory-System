@@ -140,23 +140,20 @@ public class DatabaseCreator {
             stmt = conn.createStatement();
 
         String createInventoryTable = "CREATE TABLE IF NOT EXISTS inventory ("
-            + "inventory_id INT PRIMARY KEY AUTO_INCREMENT, "
-            + "employee_id INT NOT NULL, "
-            + "item_id INT NOT NULL, "
-            + "description VARCHAR(255), "
-            + "stockno INT, "
-            + "unitmeasure VARCHAR(255), "
-            + "unitvalue VARCHAR(255), "
-            + "balpercard VARCHAR(255), "
-            + "onhandcount VARCHAR(255), "
-            + "quantity VARCHAR(255), "
-            + "value VARCHAR(255), "
-            + "remarks VARCHAR(255), "
-            + "FOREIGN KEY (employee_id) REFERENCES employees(employee_id), "
-            + "FOREIGN KEY (item_id) REFERENCES items(item_id)"
-            + ")";
+                + "inventory_id INT PRIMARY KEY AUTO_INCREMENT, "
+                + "name VARCHAR(255) NOT NULL, "
+                + "item VARCHAR(255) NOT NULL, "
+                + "description VARCHAR(255) NULL, "
+                + "stockno VARCHAR(255) NULL, "
+                + "unitmeasure VARCHAR(255) NULL, "
+                + "unitvalue VARCHAR(255) NULL, "
+                + "balpercard VARCHAR(255) NULL, "
+                + "onhandcount VARCHAR(255) NULL, "
+                + "quantity VARCHAR(255) NULL, "
+                + "value VARCHAR(255) NULL, "
+                + "remarks VARCHAR(255) NULL)";
         stmt.executeUpdate(createInventoryTable);
-        System.out.println("Table 'inventory' has been created or already exists."); 
+        System.out.println("Table 'inventory' has been created or already exists.");
             
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
