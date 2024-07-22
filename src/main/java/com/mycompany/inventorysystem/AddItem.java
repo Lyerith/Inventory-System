@@ -139,12 +139,7 @@ public class AddItem extends javax.swing.JFrame {
                 pstmt.setString(2, Category);
                 pstmt.executeUpdate();
                 //JOptionPane.showMessageDialog(this, "Added Successfully");
-                ItemNameField.setText("");
-                CategoryBox.setSelectedIndex(0);
-                getFurnituresData();
-                getSchoolSuppliesData();
-                getEquipmentsData();
-                getOthersData();
+                
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
