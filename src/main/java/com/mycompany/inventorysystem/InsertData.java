@@ -268,14 +268,6 @@ public class InsertData extends javax.swing.JFrame {
         String Quantity = QuantityField.getText();
         String Value = ValueField.getText();
         String Remarks = RemarksField.getText();
-<<<<<<< HEAD
-        
-        
-        String Employee = (String)EmployeeBox.getSelectedItem();
-        JOptionPane.showMessageDialog(this, Employee);
-    }//GEN-LAST:event_Insert_ButtonActionPerformed
-=======
->>>>>>> Acer-Laptop
 
             Connection con = null;
             Statement stmt = null;
