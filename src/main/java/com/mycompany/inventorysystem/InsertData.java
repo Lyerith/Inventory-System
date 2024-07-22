@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 
@@ -257,26 +256,25 @@ public class InsertData extends javax.swing.JFrame {
     
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
         
-        String Name = (String) EmployeeBox.getSelectedItem();
-        String Item = (String) ItemBox.getSelectedItem();
-        String Description = DescriptionField.getText();
-        String StockNo = StockNoField.getText();
-        String UnitMeasure = UnitMeasureField.getText();
-        String UnitValue = UnitValueField.getText();
-        String BalPerCard = BalPerCardField.getText();
-        String OnHandCount = OnHandCountField.getText();
-        String Quantity = QuantityField.getText();
-        String Value = ValueField.getText();
-        String Remarks = RemarksField.getText();
+            String Name = (String) EmployeeBox.getSelectedItem();
+            String Item = (String) ItemBox.getSelectedItem();
+            String Description = DescriptionField.getText();
+            String StockNo = StockNoField.getText();
+            String UnitMeasure = UnitMeasureField.getText();
+            String UnitValue = UnitValueField.getText();
+            String BalPerCard = BalPerCardField.getText();
+            String OnHandCount = OnHandCountField.getText();
+            String Quantity = QuantityField.getText();
+            String Value = ValueField.getText();
+            String Remarks = RemarksField.getText();
 
             Connection con = null;
-            Statement stmt = null;
             PreparedStatement pstmt = null;
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
-                    stmt = con.createStatement();
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
 
+                // Insert data into the table
                 String sql = "INSERT INTO inventory (name, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Name);
@@ -292,13 +290,13 @@ public class InsertData extends javax.swing.JFrame {
                 pstmt.setString(11, Remarks);
                 pstmt.executeUpdate(); 
                 JOptionPane.showMessageDialog(this, "Added Successfully");
-                
+
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
                 try {
                     if (pstmt != null) pstmt.close();
-                    if (stmt != null) stmt.close();
                     if (con != null) con.close();
                 } catch (SQLException ex) {
                     System.out.println("Error closing resources: " + ex.getMessage());
