@@ -43,7 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
         ChooseEmployeeLabel = new javax.swing.JLabel();
         EmployeeDropdownBox = new javax.swing.JComboBox<>();
         InventoryPane = new javax.swing.JScrollPane();
-        InventoryDataTable = new javax.swing.JTable();
+        InventoryTable = new javax.swing.JTable();
         Export_Button = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
         InsertDataButton = new javax.swing.JButton();
@@ -156,8 +156,13 @@ public class MainWindow extends javax.swing.JFrame {
         ChooseEmployeeLabel.setText("Choose Employee:");
 
         EmployeeDropdownBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        EmployeeDropdownBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmployeeDropdownBoxActionPerformed(evt);
+            }
+        });
 
-        InventoryDataTable.setModel(new javax.swing.table.DefaultTableModel(
+        InventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -168,7 +173,7 @@ public class MainWindow extends javax.swing.JFrame {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
             }
         ));
-        InventoryPane.setViewportView(InventoryDataTable);
+        InventoryPane.setViewportView(InventoryTable);
 
         Export_Button.setText("Export");
         Export_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -565,7 +570,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-                
+    
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
         DefaultTableModel model= AddEmployee.getEmployeeData();
@@ -644,8 +649,62 @@ public class MainWindow extends javax.swing.JFrame {
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
         EmployeeCombo();
+        //DefaultTableModel model = InsertData.getInventoryData();
+        //InventoryTable.setModel(model);
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
+
+    private void EmployeeDropdownBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBoxActionPerformed
+        String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
+        if (selectedEmployee != null) {
+            updateInventoryTable(selectedEmployee);
+        }
+    }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
       
+    private void updateInventoryTable(String employeeName) {
+        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+        String USER = "root";
+        String PASSWORD = "";
+
+        // Adjust the SQL query to fetch data related to the selected employee
+        String sql = "SELECT item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory WHERE name = ?";
+
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+        }, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1, employeeName); // Set the employee name parameter
+            ResultSet rs = pst.executeQuery(); // Execute the query and get the result set
+
+            while (rs.next()) {
+                String item = rs.getString("item");
+                String description = rs.getString("description");
+                String stockNo = rs.getString("stockno");
+                String unitMeasure = rs.getString("unitmeasure");
+                double unitValue = rs.getDouble("unitvalue");
+                int balancePerCard = rs.getInt("balpercard");
+                int onHandPerCount = rs.getInt("onhandcount");
+                int shortageOverageQuantity = rs.getInt("quantity");
+                double shortageOverageValue = rs.getDouble("value");
+                String remarks = rs.getString("remarks");
+
+                // Add the row to the table model
+                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+            }
+
+            // Set the updated model to the InventoryTable
+            InventoryTable.setModel(model);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Optionally, show a message dialog
+            JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void EmployeeCombo() {
         String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
         String USER = "root";
@@ -669,7 +728,7 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+        
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -702,8 +761,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable FurnituresTable;
     private javax.swing.JButton InsertDataButton;
     private javax.swing.JPanel Inventory;
-    private javax.swing.JTable InventoryDataTable;
     private javax.swing.JScrollPane InventoryPane;
+    private javax.swing.JTable InventoryTable;
     private javax.swing.JButton Inventory_Button;
     private javax.swing.JTextField ItemSearchBar;
     private javax.swing.JPanel Items;
