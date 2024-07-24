@@ -360,9 +360,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="SearchBar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Search Bar"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="Export_Button1">
               <Properties>
@@ -793,7 +790,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="ItemSearchBar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search Bar"/>
+                <Property name="text" type="java.lang.String" value="&#xa;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="Add_Item_Button">

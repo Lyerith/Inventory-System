@@ -4,14 +4,25 @@
  */
 package com.mycompany.inventorysystem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -42,6 +53,7 @@ public class AddItem extends javax.swing.JFrame {
         AddItemButton = new javax.swing.JButton();
         ItemNameField = new javax.swing.JTextField();
         CategoryBox = new javax.swing.JComboBox<>();
+        ImportItems = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -68,6 +80,13 @@ public class AddItem extends javax.swing.JFrame {
 
         CategoryBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"", "Furnitures", "School Supplies","Equipments", "Others"}));
 
+        ImportItems.setText("Import Items");
+        ImportItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportItemsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,6 +95,8 @@ public class AddItem extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(ImportItems)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(AddItemButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Close_Button))
@@ -103,7 +124,8 @@ public class AddItem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
-                    .addComponent(AddItemButton))
+                    .addComponent(AddItemButton)
+                    .addComponent(ImportItems))
                 .addGap(35, 35, 35))
         );
 
@@ -138,9 +160,9 @@ public class AddItem extends javax.swing.JFrame {
                 pstmt.setString(1, ItemName);
                 pstmt.setString(2, Category);
                 pstmt.executeUpdate();
-                //JOptionPane.showMessageDialog(this, "Added Successfully");
-                
+                ItemNameField.setText("");
 
+                
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             } finally {
@@ -154,6 +176,90 @@ public class AddItem extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_AddItemButtonActionPerformed
+
+    private void ImportItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportItemsActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            importFromExcel(selectedFile);
+        }
+    }//GEN-LAST:event_ImportItemsActionPerformed
+    
+    public void importFromExcel(File file) {
+        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+        String USER = "root";
+        String PASSWORD = "";
+        int batchSize = 20;
+        Connection connection = null;
+
+        try {
+            long start = System.currentTimeMillis();
+
+            FileInputStream inputStream = new FileInputStream(file);
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            Sheet firstSheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = firstSheet.iterator();
+
+            connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            connection.setAutoCommit(false);
+
+            String sql = "INSERT INTO items (item_name, category) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            int count = 0;
+            rowIterator.next(); // skip the header row
+
+            while (rowIterator.hasNext()) {
+                Row nextRow = rowIterator.next();
+                String name = null;
+                String position = null;
+
+                for (Cell cell : nextRow) {
+                    int columnIndex = cell.getColumnIndex();
+
+                    switch (columnIndex) {
+                        case 0:
+                            if (cell.getCellType() == CellType.STRING) {
+                                name = cell.getStringCellValue();
+                            } else if (cell.getCellType() == CellType.NUMERIC) {
+                                name = String.valueOf(cell.getNumericCellValue());
+                            }
+                            break;
+                        case 1:
+                            if (cell.getCellType() == CellType.STRING) {
+                                position = cell.getStringCellValue();
+                            } else if (cell.getCellType() == CellType.NUMERIC) {
+                                position = String.valueOf(cell.getNumericCellValue());
+                            }
+                            break;
+                    }
+                }
+
+                statement.setString(1, name);
+                statement.setString(2, position);
+                statement.addBatch();
+
+                if (++count % batchSize == 0) {
+                    statement.executeBatch();
+                }
+            }
+
+            workbook.close();
+            statement.executeBatch(); // execute the remaining queries
+            connection.commit();
+            connection.close();
+
+            long end = System.currentTimeMillis();
+            System.out.printf("Import done in %d ms\n", (end - start));
+        } catch (IOException ex1) {
+            System.out.println("Error reading file");
+            ex1.printStackTrace();
+        } catch (SQLException ex2) {
+            System.out.println("Database error");
+            ex2.printStackTrace();
+        }
+    }
     
     public static DefaultTableModel getFurnituresData() {
         DefaultTableModel model = new DefaultTableModel(new String[]{"Furniture No.", "Furniture Name"}, 0);
@@ -273,6 +379,7 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JButton AddItemButton;
     private javax.swing.JComboBox<String> CategoryBox;
     private javax.swing.JButton Close_Button;
+    private javax.swing.JButton ImportItems;
     private javax.swing.JTextField ItemNameField;
     private javax.swing.JLabel ItemNamelabel;
     private javax.swing.JLabel Item_Category_Label;

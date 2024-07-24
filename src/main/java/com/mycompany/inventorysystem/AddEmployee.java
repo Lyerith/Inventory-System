@@ -10,7 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.*;
+import java.util.Iterator;
 
 /**
  *
@@ -41,7 +50,7 @@ public class AddEmployee extends javax.swing.JFrame {
         EmployeePositionField = new javax.swing.JTextField();
         Close_Button = new javax.swing.JButton();
         AddEmployeeButton = new javax.swing.JButton();
-        ImportEmployee = new javax.swing.JButton();
+        ImportEmployees = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -72,10 +81,10 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         });
 
-        ImportEmployee.setText("Import Employee Data");
-        ImportEmployee.addActionListener(new java.awt.event.ActionListener() {
+        ImportEmployees.setText("Import Employees");
+        ImportEmployees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ImportEmployeeActionPerformed(evt);
+                ImportEmployeesActionPerformed(evt);
             }
         });
 
@@ -87,7 +96,7 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ImportEmployee)
+                        .addComponent(ImportEmployees)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(AddEmployeeButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -117,7 +126,7 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
                     .addComponent(AddEmployeeButton)
-                    .addComponent(ImportEmployee))
+                    .addComponent(ImportEmployees))
                 .addGap(35, 35, 35))
         );
 
@@ -193,10 +202,90 @@ public class AddEmployee extends javax.swing.JFrame {
         return model;
     }
     
-    private void ImportEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportEmployeeActionPerformed
-        ImportEmployeeData Import = new ImportEmployeeData();
-        Import.show();
-    }//GEN-LAST:event_ImportEmployeeActionPerformed
+    private void ImportEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportEmployeesActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            importFromExcel(selectedFile);
+        }
+    }//GEN-LAST:event_ImportEmployeesActionPerformed
+    
+    public void importFromExcel(File file) {
+        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+        String USER = "root";
+        String PASSWORD = "";
+        int batchSize = 20;
+        Connection connection = null;
+
+        try {
+            long start = System.currentTimeMillis();
+
+            FileInputStream inputStream = new FileInputStream(file);
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            Sheet firstSheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = firstSheet.iterator();
+
+            connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            connection.setAutoCommit(false);
+
+            String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            int count = 0;
+            rowIterator.next(); // skip the header row
+
+            while (rowIterator.hasNext()) {
+                Row nextRow = rowIterator.next();
+                String name = null;
+                String position = null;
+
+                for (Cell cell : nextRow) {
+                    int columnIndex = cell.getColumnIndex();
+
+                    switch (columnIndex) {
+                        case 0:
+                            if (cell.getCellType() == CellType.STRING) {
+                                name = cell.getStringCellValue();
+                            } else if (cell.getCellType() == CellType.NUMERIC) {
+                                name = String.valueOf(cell.getNumericCellValue());
+                            }
+                            break;
+                        case 1:
+                            if (cell.getCellType() == CellType.STRING) {
+                                position = cell.getStringCellValue();
+                            } else if (cell.getCellType() == CellType.NUMERIC) {
+                                position = String.valueOf(cell.getNumericCellValue());
+                            }
+                            break;
+                    }
+                }
+
+                statement.setString(1, name);
+                statement.setString(2, position);
+                statement.addBatch();
+
+                if (++count % batchSize == 0) {
+                    statement.executeBatch();
+                }
+            }
+
+            workbook.close();
+            statement.executeBatch(); // execute the remaining queries
+            connection.commit();
+            connection.close();
+
+            long end = System.currentTimeMillis();
+            System.out.printf("Import done in %d ms\n", (end - start));
+        } catch (IOException ex1) {
+            System.out.println("Error reading file");
+            ex1.printStackTrace();
+        } catch (SQLException ex2) {
+            System.out.println("Database error");
+            ex2.printStackTrace();
+        }
+    }
+
 
 
     public static void main(String args[]) {
@@ -238,7 +327,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField EmployeePositionField;
     private javax.swing.JLabel Employee_Name_Label;
     private javax.swing.JLabel Employee_Position_Label;
-    private javax.swing.JButton ImportEmployee;
+    private javax.swing.JButton ImportEmployees;
     // End of variables declaration//GEN-END:variables
     private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
     private static final String USER = "root";
