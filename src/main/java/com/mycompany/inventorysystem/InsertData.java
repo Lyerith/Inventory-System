@@ -290,7 +290,16 @@ public class InsertData extends javax.swing.JFrame {
                 pstmt.setString(10, Value);
                 pstmt.setString(11, Remarks);
                 pstmt.executeUpdate(); 
-                JOptionPane.showMessageDialog(this, "Added Successfully");
+                
+                DescriptionField.setText("");
+                StockNoField.setText("");
+                UnitMeasureField.setText("");
+                UnitValueField.setText("");
+                BalPerCardField.setText("");
+                OnHandCountField.setText("");
+                QuantityField.setText("");
+                ValueField.setText("");
+                RemarksField.setText("");
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
