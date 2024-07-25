@@ -261,12 +261,33 @@ public class AddItem extends javax.swing.JFrame {
         }
     }
     
+    public static DefaultTableModel getAllItemsData() {
+        
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name", "Item Category"}, 0);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items ")) {
+
+            while (rs.next()) {
+                int id = rs.getInt("item_id");
+                String name = rs.getString("item_name");
+                String category = rs.getString("category");
+                model.addRow(new Object[]{id, name, category});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return model;
+    }
+    
     public static DefaultTableModel getFurnituresData() {
         DefaultTableModel model = new DefaultTableModel(new String[]{"Furniture No.", "Furniture Name"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Furnitures'")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Furnitures' OR category ='furnitures' OR category='Furniture' OR category='furniture'")) {
 
             while (rs.next()) {
                 int id = rs.getInt("item_id");
@@ -285,7 +306,7 @@ public class AddItem extends javax.swing.JFrame {
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='School Supplies'")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='School Supplies' OR category='School supplies' OR category='school Supplies' OR category='school supplies' or category='SchoolSupplies' OR category='schoolSupplies' OR category='Schoolsupplies' OR category='schoolsupplies' OR category ='School Supply' OR category = 'school supply' OR category = 'Schoolsupply'")) {
 
             while (rs.next()) {
                 int id = rs.getInt("item_id");
@@ -304,7 +325,7 @@ public class AddItem extends javax.swing.JFrame {
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Equipments'")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Equipments' OR category='Equipment' OR category='equipments' OR category='equipment'")) {
 
             while (rs.next()) {
                 int id = rs.getInt("item_id");
@@ -323,16 +344,16 @@ public class AddItem extends javax.swing.JFrame {
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Others'")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE category='Others' OR category='others'OR category='Other' OR category='other'")) {
 
             while (rs.next()) {
                 int id = rs.getInt("item_id");
                 String name = rs.getString("item_name");
-                String position = rs.getString("category");
-                model.addRow(new Object[]{id, name});
+                String category = rs.getString("category");
+                model.addRow(new Object[]{id, name, category});
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
         return model;
     }

@@ -198,6 +198,7 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            //JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return model;
     }
@@ -212,9 +213,6 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_ImportEmployeesActionPerformed
     
     public void importFromExcel(File file) {
-        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
-        String USER = "root";
-        String PASSWORD = "";
         int batchSize = 20;
         Connection connection = null;
 
@@ -239,25 +237,24 @@ public class AddEmployee extends javax.swing.JFrame {
                 Row nextRow = rowIterator.next();
                 String name = null;
                 String position = null;
-
                 for (Cell cell : nextRow) {
                     int columnIndex = cell.getColumnIndex();
 
                     switch (columnIndex) {
-                        case 0:
+                        case 0 -> {
                             if (cell.getCellType() == CellType.STRING) {
                                 name = cell.getStringCellValue();
                             } else if (cell.getCellType() == CellType.NUMERIC) {
                                 name = String.valueOf(cell.getNumericCellValue());
                             }
-                            break;
-                        case 1:
+                        }
+                        case 1 -> {
                             if (cell.getCellType() == CellType.STRING) {
                                 position = cell.getStringCellValue();
                             } else if (cell.getCellType() == CellType.NUMERIC) {
                                 position = String.valueOf(cell.getNumericCellValue());
                             }
-                            break;
+                        }
                     }
                 }
 
@@ -276,17 +273,13 @@ public class AddEmployee extends javax.swing.JFrame {
             connection.close();
 
             long end = System.currentTimeMillis();
-            System.out.printf("Import done in %d ms\n", (end - start));
+
         } catch (IOException ex1) {
-            System.out.println("Error reading file");
-            ex1.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error reading file");
         } catch (SQLException ex2) {
-            System.out.println("Database error");
-            ex2.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database Error");
         }
     }
-
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
