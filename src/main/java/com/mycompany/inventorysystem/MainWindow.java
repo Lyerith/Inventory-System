@@ -14,7 +14,6 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-
 public class MainWindow extends javax.swing.JFrame {
 
     public MainWindow() {
@@ -50,29 +49,27 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         EmployeeTable = new javax.swing.JTable();
         Items = new javax.swing.JPanel();
-        ItemsContent = new javax.swing.JTabbedPane();
-        FurnituresPanel = new javax.swing.JPanel();
-        FurnituresPane = new javax.swing.JScrollPane();
-        FurnituresTable = new javax.swing.JTable();
-        SchoolSuppliesPanel = new javax.swing.JPanel();
-        SchoolSuppliesPane = new javax.swing.JScrollPane();
-        SchoolSuppliesTable = new javax.swing.JTable();
-        OfficeSuppliesEtcPanel = new javax.swing.JPanel();
-        OfficeSuppliesEtcPane = new javax.swing.JScrollPane();
-        EquipmentsTable = new javax.swing.JTable();
-        EquipmentsPanel = new javax.swing.JPanel();
-        OfficeSuppliesEtcPane1 = new javax.swing.JScrollPane();
-        OthersTable = new javax.swing.JTable();
         SearchEmployeeLabel1 = new javax.swing.JLabel();
         ItemSearchBar = new javax.swing.JTextField();
         Add_Item_Button = new javax.swing.JButton();
         Export_Button2 = new javax.swing.JButton();
         Close_Button2 = new javax.swing.JButton();
         Search_Item_Button = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        AllItemsPane = new javax.swing.JScrollPane();
+        AllItemsTable = new javax.swing.JTable();
+        FurnituresPane = new javax.swing.JScrollPane();
+        FurnituresTable = new javax.swing.JTable();
+        SchoolSuppliesPane = new javax.swing.JScrollPane();
+        SchoolSuppliesTable = new javax.swing.JTable();
+        EquipmentsPane = new javax.swing.JScrollPane();
+        EquipmentsTable = new javax.swing.JTable();
+        OthersPane = new javax.swing.JScrollPane();
+        OthersTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
-        setPreferredSize(new java.awt.Dimension(965, 605));
+        setPreferredSize(new java.awt.Dimension(1000, 605));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -134,7 +131,7 @@ public class MainWindow extends javax.swing.JFrame {
         BlankTab.setLayout(BlankTabLayout);
         BlankTabLayout.setHorizontalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 861, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
         BlankTabLayout.setVerticalGroup(
             BlankTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,169 +310,12 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button1)
                     .addComponent(Export_Button1))
-                .addContainerGap())
+                .addGap(41, 41, 41))
         );
 
         Tabs.addTab("tab1", Employee);
 
         Items.setPreferredSize(new java.awt.Dimension(866, 605));
-
-        ItemsContent.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        ItemsContent.setMinimumSize(new java.awt.Dimension(150, 80));
-
-        FurnituresPanel.setPreferredSize(new java.awt.Dimension(750, 80));
-
-        FurnituresTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Furniture  No.", "Furniture Name"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        FurnituresTable.getTableHeader().setReorderingAllowed(false);
-        FurnituresPane.setViewportView(FurnituresTable);
-        if (FurnituresTable.getColumnModel().getColumnCount() > 0) {
-            FurnituresTable.getColumnModel().getColumn(0).setMinWidth(250);
-            FurnituresTable.getColumnModel().getColumn(0).setMaxWidth(250);
-        }
-
-        javax.swing.GroupLayout FurnituresPanelLayout = new javax.swing.GroupLayout(FurnituresPanel);
-        FurnituresPanel.setLayout(FurnituresPanelLayout);
-        FurnituresPanelLayout.setHorizontalGroup(
-            FurnituresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FurnituresPane, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
-        );
-        FurnituresPanelLayout.setVerticalGroup(
-            FurnituresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FurnituresPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-        );
-
-        ItemsContent.addTab("Furnitures", FurnituresPanel);
-
-        SchoolSuppliesPanel.setPreferredSize(new java.awt.Dimension(750, 80));
-
-        SchoolSuppliesTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "School Supply No.", "School Supply Name"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        SchoolSuppliesTable.getTableHeader().setReorderingAllowed(false);
-        SchoolSuppliesPane.setViewportView(SchoolSuppliesTable);
-        if (SchoolSuppliesTable.getColumnModel().getColumnCount() > 0) {
-            SchoolSuppliesTable.getColumnModel().getColumn(0).setMinWidth(250);
-            SchoolSuppliesTable.getColumnModel().getColumn(0).setMaxWidth(250);
-        }
-
-        javax.swing.GroupLayout SchoolSuppliesPanelLayout = new javax.swing.GroupLayout(SchoolSuppliesPanel);
-        SchoolSuppliesPanel.setLayout(SchoolSuppliesPanelLayout);
-        SchoolSuppliesPanelLayout.setHorizontalGroup(
-            SchoolSuppliesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SchoolSuppliesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
-        );
-        SchoolSuppliesPanelLayout.setVerticalGroup(
-            SchoolSuppliesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SchoolSuppliesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-        );
-
-        ItemsContent.addTab("School Supplies", SchoolSuppliesPanel);
-
-        OfficeSuppliesEtcPanel.setPreferredSize(new java.awt.Dimension(750, 80));
-
-        EquipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Equipment No.", "Equipment Name"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        EquipmentsTable.getTableHeader().setReorderingAllowed(false);
-        OfficeSuppliesEtcPane.setViewportView(EquipmentsTable);
-        if (EquipmentsTable.getColumnModel().getColumnCount() > 0) {
-            EquipmentsTable.getColumnModel().getColumn(0).setMinWidth(250);
-            EquipmentsTable.getColumnModel().getColumn(0).setMaxWidth(250);
-        }
-
-        javax.swing.GroupLayout OfficeSuppliesEtcPanelLayout = new javax.swing.GroupLayout(OfficeSuppliesEtcPanel);
-        OfficeSuppliesEtcPanel.setLayout(OfficeSuppliesEtcPanelLayout);
-        OfficeSuppliesEtcPanelLayout.setHorizontalGroup(
-            OfficeSuppliesEtcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OfficeSuppliesEtcPane, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
-        );
-        OfficeSuppliesEtcPanelLayout.setVerticalGroup(
-            OfficeSuppliesEtcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OfficeSuppliesEtcPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-        );
-
-        ItemsContent.addTab("Equipments", OfficeSuppliesEtcPanel);
-
-        OthersTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Office Supply No.", "Office Supply Name"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        OthersTable.getTableHeader().setReorderingAllowed(false);
-        OfficeSuppliesEtcPane1.setViewportView(OthersTable);
-        if (OthersTable.getColumnModel().getColumnCount() > 0) {
-            OthersTable.getColumnModel().getColumn(0).setMinWidth(250);
-            OthersTable.getColumnModel().getColumn(0).setMaxWidth(250);
-        }
-
-        javax.swing.GroupLayout EquipmentsPanelLayout = new javax.swing.GroupLayout(EquipmentsPanel);
-        EquipmentsPanel.setLayout(EquipmentsPanelLayout);
-        EquipmentsPanelLayout.setHorizontalGroup(
-            EquipmentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OfficeSuppliesEtcPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
-        );
-        EquipmentsPanelLayout.setVerticalGroup(
-            EquipmentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(OfficeSuppliesEtcPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
-        );
-
-        ItemsContent.addTab("Others", EquipmentsPanel);
 
         SearchEmployeeLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SearchEmployeeLabel1.setText("Search:");
@@ -513,28 +353,108 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        AllItemsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Item ID", "Item Name", "Item Category"
+            }
+        ));
+        AllItemsTable.getTableHeader().setReorderingAllowed(false);
+        AllItemsPane.setViewportView(AllItemsTable);
+
+        jTabbedPane1.addTab("All Items", AllItemsPane);
+
+        FurnituresTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Item ID", "Item Name", "Item Category"
+            }
+        ));
+        FurnituresTable.getTableHeader().setReorderingAllowed(false);
+        FurnituresPane.setViewportView(FurnituresTable);
+
+        jTabbedPane1.addTab("Furnitures", FurnituresPane);
+
+        SchoolSuppliesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Item ID", "Item Name", "Item Category"
+            }
+        ));
+        SchoolSuppliesTable.getTableHeader().setReorderingAllowed(false);
+        SchoolSuppliesPane.setViewportView(SchoolSuppliesTable);
+
+        jTabbedPane1.addTab("School Supplies", SchoolSuppliesPane);
+
+        EquipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Item ID", "Item Name", "Item Category"
+            }
+        ));
+        EquipmentsTable.getTableHeader().setReorderingAllowed(false);
+        EquipmentsPane.setViewportView(EquipmentsTable);
+
+        jTabbedPane1.addTab("Equipments", EquipmentsPane);
+
+        OthersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Item ID", "Item Name", "Item Category"
+            }
+        ));
+        OthersTable.getTableHeader().setReorderingAllowed(false);
+        OthersPane.setViewportView(OthersTable);
+
+        jTabbedPane1.addTab("Others", OthersPane);
+
         javax.swing.GroupLayout ItemsLayout = new javax.swing.GroupLayout(Items);
         Items.setLayout(ItemsLayout);
         ItemsLayout.setHorizontalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ItemsLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(ItemsLayout.createSequentialGroup()
-                        .addComponent(Export_Button2)
-                        .addGap(18, 18, 18)
-                        .addComponent(Close_Button2))
-                    .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(ItemsLayout.createSequentialGroup()
-                            .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Export_Button2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(ItemSearchBar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Search_Item_Button)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Add_Item_Button))
-                        .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                            .addComponent(Close_Button2)))
+                    .addGroup(ItemsLayout.createSequentialGroup()
+                        .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ItemSearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Search_Item_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Add_Item_Button)))
+                .addGap(147, 147, 147))
         );
         ItemsLayout.setVerticalGroup(
             ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,12 +466,12 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search_Item_Button))
                 .addGap(18, 18, 18)
-                .addComponent(ItemsContent, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button2)
                     .addComponent(Export_Button2))
-                .addGap(41, 41, 41))
+                .addContainerGap())
         );
 
         Tabs.addTab("tab3", Items);
@@ -561,7 +481,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+                
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
         DefaultTableModel model= AddEmployee.getEmployeeData();
@@ -583,6 +503,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void Items_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items_ButtonActionPerformed
         Tabs.setSelectedIndex(3);
+        DefaultTableModel model0 = AddItem.getAllItemsData();
+        AllItemsTable.setModel(model0);
         DefaultTableModel model1 = AddItem.getFurnituresData();
         FurnituresTable.setModel(model1);
         DefaultTableModel model2 = AddItem.getSchoolSuppliesData();
@@ -620,7 +542,15 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_Button2ActionPerformed
 
     private void Search_Item_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Item_ButtonActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) AllItemsTable.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        AllItemsTable.setRowSorter(sorter);
+        String searchText = ItemSearchBar.getText();
+        sorter.setRowFilter(RowFilter.regexFilter(searchText));
+
+        if (sorter.getViewRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No matching item found.", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_Search_Item_ButtonActionPerformed
 
     private void Search_Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Employee_ButtonActionPerformed
@@ -639,18 +569,15 @@ public class MainWindow extends javax.swing.JFrame {
         Tabs.setSelectedIndex(1);
         EmployeeCombo();
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
-
-    private void EmployeeDropdownBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBoxActionPerformed
+      
+    private void EmployeeDropdownBoxActionPerformed(java.awt.event.ActionEvent evt){
         String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
         if (selectedEmployee != null) {
             updateInventoryTable(selectedEmployee);
         }
-    }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
+    }
       
     private void updateInventoryTable(String employeeName) {
-        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
-        String USER = "root";
-        String PASSWORD = "";
 
         String sql = "SELECT item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory WHERE name = ?";
 
@@ -670,11 +597,11 @@ public class MainWindow extends javax.swing.JFrame {
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
                 String unitMeasure = rs.getString("unitmeasure");
-                double unitValue = rs.getDouble("unitvalue");
-                int balancePerCard = rs.getInt("balpercard");
-                int onHandPerCount = rs.getInt("onhandcount");
-                int shortageOverageQuantity = rs.getInt("quantity");
-                double shortageOverageValue = rs.getDouble("value");
+                String unitValue = rs.getString("unitvalue");
+                String balancePerCard = rs.getString("balpercard");
+                String onHandPerCount = rs.getString("onhandcount");
+                String shortageOverageQuantity = rs.getString("quantity");
+                String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
                 model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
@@ -682,15 +609,11 @@ public class MainWindow extends javax.swing.JFrame {
             InventoryTable.setModel(model);
 
         } catch (SQLException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
     private void EmployeeCombo() {
-        String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
-        String USER = "root";
-        String PASSWORD = "";
 
         String sql = "SELECT name FROM employees";
 
@@ -698,18 +621,17 @@ public class MainWindow extends javax.swing.JFrame {
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
 
-            EmployeeDropdownBox.removeAllItems();
+            EmployeeDropdownBox.removeAllItems(); // Clear existing items
 
             while (rs.next()) {
                 EmployeeDropdownBox.addItem(rs.getString("name"));
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-            
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -722,6 +644,8 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
     private javax.swing.JButton Add_Item_Button;
+    private javax.swing.JScrollPane AllItemsPane;
+    private javax.swing.JTable AllItemsTable;
     private javax.swing.JPanel BlankTab;
     private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JLabel ChooseEmployeeLabel;
@@ -732,13 +656,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> EmployeeDropdownBox;
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JButton Employee_Button;
-    private javax.swing.JPanel EquipmentsPanel;
+    private javax.swing.JScrollPane EquipmentsPane;
     private javax.swing.JTable EquipmentsTable;
     private javax.swing.JButton Export_Button;
     private javax.swing.JButton Export_Button1;
     private javax.swing.JButton Export_Button2;
     private javax.swing.JScrollPane FurnituresPane;
-    private javax.swing.JPanel FurnituresPanel;
     private javax.swing.JTable FurnituresTable;
     private javax.swing.JButton InsertDataButton;
     private javax.swing.JPanel Inventory;
@@ -747,14 +670,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Inventory_Button;
     private javax.swing.JTextField ItemSearchBar;
     private javax.swing.JPanel Items;
-    private javax.swing.JTabbedPane ItemsContent;
     private javax.swing.JButton Items_Button;
-    private javax.swing.JScrollPane OfficeSuppliesEtcPane;
-    private javax.swing.JScrollPane OfficeSuppliesEtcPane1;
-    private javax.swing.JPanel OfficeSuppliesEtcPanel;
+    private javax.swing.JScrollPane OthersPane;
     private javax.swing.JTable OthersTable;
     private javax.swing.JScrollPane SchoolSuppliesPane;
-    private javax.swing.JPanel SchoolSuppliesPanel;
     private javax.swing.JTable SchoolSuppliesTable;
     private javax.swing.JTextField SearchBar;
     private javax.swing.JLabel SearchEmployeeLabel;
@@ -763,5 +682,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Search_Item_Button;
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 }
