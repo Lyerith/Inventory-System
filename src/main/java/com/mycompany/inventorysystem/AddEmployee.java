@@ -189,6 +189,7 @@ public class AddEmployee extends javax.swing.JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             importFromExcel(selectedFile);
         }
+        dispose();
     }//GEN-LAST:event_ImportEmployeesActionPerformed
     
     public void importFromExcel(File file) {

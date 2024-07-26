@@ -228,9 +228,7 @@ public class InsertData extends javax.swing.JFrame {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Optionally, show a message dialog
-            JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
         }
     }
     
@@ -249,9 +247,7 @@ public class InsertData extends javax.swing.JFrame {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Optionally, show a message dialog
-            JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            
         }
     }
     
@@ -309,7 +305,7 @@ public class InsertData extends javax.swing.JFrame {
                     if (pstmt != null) pstmt.close();
                     if (con != null) con.close();
                 } catch (SQLException ex) {
-                    System.out.println("Error closing resources: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
     }//GEN-LAST:event_InsertButtonActionPerformed
@@ -329,16 +325,16 @@ public class InsertData extends javax.swing.JFrame {
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
                 String unitMeasure = rs.getString("unitmeasure");
-                double unitValue = rs.getDouble("unitvalue");
-                int balancePerCard = rs.getInt("balpercard");
-                int onHandPerCount = rs.getInt("onhandcount");
-                int shortageOverageQuantity = rs.getInt("quantity");
-                double shortageOverageValue = rs.getDouble("value");
+                String unitValue = rs.getString("unitvalue");
+                String balancePerCard = rs.getString("balpercard");
+                String onHandPerCount = rs.getString("onhandcount");
+                String shortageOverageQuantity = rs.getString("quantity");
+                String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
                 model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            
         }
         return model;
     }
