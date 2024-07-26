@@ -466,8 +466,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(SearchEmployeeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search_Item_Button))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(ItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button2)
                     .addComponent(Export_Button2))
@@ -614,6 +614,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void EmployeeCombo() {
+
         String sql = "SELECT name FROM employees";
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -683,7 +684,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 }

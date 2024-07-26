@@ -42,11 +42,7 @@ public class InventorySystem {
                 createInventoryTable(databaseName);
                 MainWindow log = new MainWindow();
                 log.show();
-                
-            } else {
-                MainWindow log = new MainWindow();
-                log.show();
-            }            
+            }           
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -96,10 +92,9 @@ public class InventorySystem {
                     + "item_name VARCHAR(255) NOT NULL, "
                     + "category VARCHAR(255) NOT NULL)";
             stmt.executeUpdate(createItemsTable);
-            System.out.println("Table 'items' has been created or already exists."); 
             
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 if (stmt != null) stmt.close();
@@ -150,6 +145,8 @@ public class InventorySystem {
     private static final String PASSWORD = "";
 
     public static void main(String[] args) {
+        MainWindow Window=new MainWindow();
+        Window.show();
         CheckConnect();
     }
 }
