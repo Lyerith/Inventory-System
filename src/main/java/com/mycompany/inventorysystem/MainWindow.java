@@ -1225,43 +1225,7 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    /*private void updateInventoryTable(String employeeName) {
-
-        String sql = "SELECT item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory WHERE name = ?";
-
-        DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
-        }, 0);
-
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement pst = con.prepareStatement(sql)) {
-
-            pst.setString(1, employeeName);
-            ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                String item = rs.getString("item");
-                String description = rs.getString("description");
-                String stockNo = rs.getString("stockno");
-                String unitMeasure = rs.getString("unitmeasure");
-                String unitValue = rs.getString("unitvalue");
-                String balancePerCard = rs.getString("balpercard");
-                String onHandPerCount = rs.getString("onhandcount");
-                String shortageOverageQuantity = rs.getString("quantity");
-                String shortageOverageValue = rs.getString("value");
-                String remarks = rs.getString("remarks");
-
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
-            }
-            AllItemsInventory.setModel(model);
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
-    
+       
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {
