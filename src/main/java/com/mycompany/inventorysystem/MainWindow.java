@@ -4,6 +4,8 @@
  */
 package com.mycompany.inventorysystem;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,23 +13,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javax.swing.table.TableModel;
+
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -503,36 +502,66 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     private void Export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_ButtonActionPerformed
-        
-        //String excelFilePath = "Desktop\\InventoryData.xlsx";
-
-        try {
-            Class.forName("driverName");
-            Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("Select * from employees");
-            HSSFWorkbook workbook = new HSSFWorkbook();
-            HSSFSheet sheet = workbook.createSheet("Employee Data");
-            HSSFRow rowhead = sheet.createRow((short) 0);
-            rowhead.createCell((short) 0).setCellValue("CellHeadName1");
-            rowhead.createCell((short) 1).setCellValue("CellHeadName2");
-            rowhead.createCell((short) 2).setCellValue("CellHeadName3");
-            int i = 1;
-            while (rs.next()){
-                HSSFRow row = sheet.createRow((short) i);
-                row.createCell((short) 0).setCellValue(Integer.toString(rs.getInt("column1")));
-                row.createCell((short) 1).setCellValue(rs.getString("column2"));
-                row.createCell((short) 2).setCellValue(rs.getString("column3"));
-                i++;
-            }
-            String yemi = "C:\\test.xls";
-            try (FileOutputStream fileOut = new FileOutputStream(yemi)) {
-                workbook.write(fileOut);
-            }
-            } catch (ClassNotFoundException | SQLException | IOException e1) {
-            }
+        exportexcel(InventoryTable);        
     }//GEN-LAST:event_Export_ButtonActionPerformed
 
+    public void openFile(String file){
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException ioe) {
+            JOptionPane.showMessageDialog(this, "Error opening file: " + ioe.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void exportexcel(JTable InventoryTable){
+        
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File saveFile = fileChooser.getSelectedFile();
+            if (!saveFile.toString().endsWith(".xlsx")) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+            }
+
+            try (Workbook wb = new XSSFWorkbook();
+                 FileOutputStream out = new FileOutputStream(saveFile)) {
+
+                Sheet sheet = wb.createSheet("Inventory Data");
+                TableModel model = InventoryTable.getModel();
+
+                // Write column headers
+                Row headerRow = sheet.createRow(0);
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(model.getColumnName(i));
+                }
+
+                // Write data rows
+                for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
+                    Row row = sheet.createRow(rowIdx + 1);
+                    for (int colIdx = 0; colIdx < model.getColumnCount(); colIdx++) {
+                        Cell cell = row.createCell(colIdx);
+                        Object value = model.getValueAt(rowIdx, colIdx);
+                        if (value != null) {
+                            cell.setCellValue(value.toString());
+                        }
+                    }
+                }
+
+                wb.write(out);
+                openFile(saveFile.toString());
+
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "File not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Cancelled", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
     private void Close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_ButtonActionPerformed
         dispose();
     }//GEN-LAST:event_Close_ButtonActionPerformed
@@ -655,19 +684,14 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void EmployeeCombo() {
-
         String sql = "SELECT name FROM employees";
-
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
-
             EmployeeDropdownBox.removeAllItems(); // Clear existing items
-
             while (rs.next()) {
                 EmployeeDropdownBox.addItem(rs.getString("name"));
             }
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -675,10 +699,8 @@ public class MainWindow extends javax.swing.JFrame {
     
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainWindow().setVisible(true);
         });
     }
 

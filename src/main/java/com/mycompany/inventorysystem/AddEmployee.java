@@ -139,8 +139,6 @@ public class AddEmployee extends javax.swing.JFrame {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
                     stmt = con.createStatement();
-
-                    // Insert data into the table
                     String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
                     pstmt = con.prepareStatement(sql);
                     pstmt.setString(1, employee);
@@ -148,8 +146,7 @@ public class AddEmployee extends javax.swing.JFrame {
                     pstmt.executeUpdate();
                     EmployeeNameField.setText("");
                     EmployeePositionField.setText("");
-
-            } catch (Exception e) {
+            } catch (ClassNotFoundException | SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
                 try {
@@ -267,22 +264,16 @@ public class AddEmployee extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddEmployee().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new AddEmployee().setVisible(true);
         });
     }
 
