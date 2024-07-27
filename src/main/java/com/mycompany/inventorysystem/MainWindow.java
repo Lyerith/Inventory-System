@@ -145,7 +145,6 @@ public class MainWindow extends javax.swing.JFrame {
         ChooseEmployeeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ChooseEmployeeLabel.setText("Choose Employee:");
 
-        EmployeeDropdownBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         EmployeeDropdownBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EmployeeDropdownBoxActionPerformed(evt);

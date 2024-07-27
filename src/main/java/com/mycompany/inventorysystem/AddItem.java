@@ -171,6 +171,7 @@ public class AddItem extends javax.swing.JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             importFromExcel(selectedFile);
         }
+        dispose();
     }//GEN-LAST:event_ImportItemsActionPerformed
     
     public void importFromExcel(File file) {
