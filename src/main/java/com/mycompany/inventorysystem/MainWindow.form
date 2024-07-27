@@ -515,9 +515,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="ItemSearchBar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&#xa;"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="Add_Item_Button">
               <Properties>
