@@ -530,8 +530,15 @@ public class MainWindow extends javax.swing.JFrame {
                 Sheet sheet = wb.createSheet("Inventory Data");
                 TableModel model = InventoryTable.getModel();
 
+                String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
+
+                // Write selected employee
+                Row employeeRow = sheet.createRow(0);
+                Cell employeeCell = employeeRow.createCell(0);
+                employeeCell.setCellValue("Employee: " + selectedEmployee);
+
                 // Write column headers
-                Row headerRow = sheet.createRow(0);
+                Row headerRow = sheet.createRow(1);
                 for (int i = 0; i < model.getColumnCount(); i++) {
                     Cell cell = headerRow.createCell(i);
                     cell.setCellValue(model.getColumnName(i));
@@ -539,7 +546,7 @@ public class MainWindow extends javax.swing.JFrame {
 
                 // Write data rows
                 for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
-                    Row row = sheet.createRow(rowIdx + 1);
+                    Row row = sheet.createRow(rowIdx + 2);
                     for (int colIdx = 0; colIdx < model.getColumnCount(); colIdx++) {
                         Cell cell = row.createCell(colIdx);
                         Object value = model.getValueAt(rowIdx, colIdx);
@@ -548,7 +555,6 @@ public class MainWindow extends javax.swing.JFrame {
                         }
                     }
                 }
-
                 wb.write(out);
                 openFile(saveFile.toString());
 
