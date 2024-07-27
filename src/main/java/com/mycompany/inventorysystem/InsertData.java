@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,6 +54,8 @@ public class InsertData extends javax.swing.JFrame {
         EmployeeBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         ItemBox = new javax.swing.JComboBox<>();
+        Category = new javax.swing.JLabel();
+        CategoryBox = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -107,6 +110,9 @@ public class InsertData extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Employee:");
 
+        Category.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Category.setText("Item Category:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,10 +120,6 @@ public class InsertData extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(InsertButton)
-                        .addGap(15, 15, 15)
-                        .addComponent(Cancel_Button))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -144,12 +146,21 @@ public class InsertData extends javax.swing.JFrame {
                             .addComponent(StockLabel)
                             .addComponent(Item, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(StockNoField)
-                            .addComponent(DescriptionField)
-                            .addComponent(EmployeeBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ItemBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(EmployeeBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ItemBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(DescriptionField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(StockNoField)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(InsertButton)
+                        .addGap(15, 15, 15)
+                        .addComponent(Cancel_Button))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Category, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -163,6 +174,10 @@ public class InsertData extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Item)
                     .addComponent(ItemBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Category)
+                    .addComponent(CategoryBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(DescLabel)
@@ -200,12 +215,12 @@ public class InsertData extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RemarksLabel)
-                    .addComponent(RemarksField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RemarksField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(InsertButton)
                     .addComponent(Cancel_Button))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -234,27 +249,41 @@ public class InsertData extends javax.swing.JFrame {
     
     private void ItemCombo() {
 
-        String sql = "SELECT item_name FROM items";
+    String sql = "SELECT item_name, category FROM items";
 
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement pst = con.prepareStatement(sql); 
-             ResultSet rs = pst.executeQuery()) {
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+         PreparedStatement pst = con.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
 
-            ItemBox.removeAllItems(); // Clear existing items
+        ItemBox.removeAllItems(); // Clear existing items
+        HashMap<String, String> itemCategoryMap = new HashMap<>();
 
-            while (rs.next()) {
-                ItemBox.addItem(rs.getString("item_name"));
-            }
+        while (rs.next()) {
+            String itemName = rs.getString("item_name");
+            String itemCategory = rs.getString("category");
 
-        } catch (SQLException e) {
-            
+            ItemBox.addItem(itemName);
+            itemCategoryMap.put(itemName, itemCategory);
         }
+
+        // Add an action listener to the ItemBox to update the category text box when an item is selected
+        ItemBox.addActionListener(e -> {
+            String selectedItem = (String) ItemBox.getSelectedItem();
+            if (selectedItem != null && itemCategoryMap.containsKey(selectedItem)) {
+                CategoryBox.setText(itemCategoryMap.get(selectedItem));
+            }
+        });
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error fetching item data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
     
     private void InsertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertButtonActionPerformed
         
             String Name = (String) EmployeeBox.getSelectedItem();
             String Item = (String) ItemBox.getSelectedItem();
+            String Category = CategoryBox.getText();
             String Description = DescriptionField.getText();
             String StockNo = StockNoField.getText();
             String UnitMeasure = UnitMeasureField.getText();
@@ -272,19 +301,20 @@ public class InsertData extends javax.swing.JFrame {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
 
                 // Insert data into the table
-                String sql = "INSERT INTO inventory (name, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO inventory (name, item, category, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Name);
                 pstmt.setString(2, Item);
-                pstmt.setString(3, Description);
-                pstmt.setString(4, StockNo);
-                pstmt.setString(5, UnitMeasure);
-                pstmt.setString(6, UnitValue);
-                pstmt.setString(7, BalPerCard);
-                pstmt.setString(8, OnHandCount);
-                pstmt.setString(9, Quantity);
-                pstmt.setString(10, Value);
-                pstmt.setString(11, Remarks);
+                pstmt.setString(3, Category);
+                pstmt.setString(4, Description);
+                pstmt.setString(5, StockNo);
+                pstmt.setString(6, UnitMeasure);
+                pstmt.setString(7, UnitValue);
+                pstmt.setString(8, BalPerCard);
+                pstmt.setString(9, OnHandCount);
+                pstmt.setString(10, Quantity);
+                pstmt.setString(11, Value);
+                pstmt.setString(12, Remarks);
                 pstmt.executeUpdate(); 
                 
                 DescriptionField.setText("");
@@ -312,16 +342,17 @@ public class InsertData extends javax.swing.JFrame {
     
     public static DefaultTableModel getInventoryData() {
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "Item", "Category", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
             "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory")) {
+             ResultSet rs = stmt.executeQuery("SELECT item, category, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory")) {
 
             while (rs.next()) {
                 String item = rs.getString("item");
+                String category = rs.getString("category");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
                 String unitMeasure = rs.getString("unitmeasure");
@@ -378,6 +409,8 @@ public class InsertData extends javax.swing.JFrame {
     private javax.swing.JLabel BalCardLabel;
     private javax.swing.JTextField BalPerCardField;
     private javax.swing.JButton Cancel_Button;
+    private javax.swing.JLabel Category;
+    private javax.swing.JTextField CategoryBox;
     private javax.swing.JLabel DescLabel;
     private javax.swing.JTextField DescriptionField;
     private javax.swing.JComboBox<String> EmployeeBox;

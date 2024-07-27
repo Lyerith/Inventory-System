@@ -107,6 +107,7 @@ public class InventorySystem {
                 + "inventory_id INT PRIMARY KEY AUTO_INCREMENT, "
                 + "name VARCHAR(255) NOT NULL, "
                 + "item VARCHAR(255) NOT NULL, "
+                + "category VARCHAR(255) NOT NULL, "
                 + "description VARCHAR(255) NULL, "
                 + "stockno VARCHAR(255) NULL, "
                 + "unitmeasure VARCHAR(255) NULL, "
