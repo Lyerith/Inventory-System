@@ -165,7 +165,7 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="Export_Button" min="-2" max="-2" attributes="0"/>
+                              <Component id="InventoryExport_Button" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="Close_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -198,7 +198,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Close_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Export_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="InventoryExport_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
@@ -257,12 +257,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="Export_Button">
+            <Component class="javax.swing.JButton" name="InventoryExport_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Export"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Export_ButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InventoryExport_ButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Close_Button">
@@ -313,7 +313,7 @@
                               <Component id="AddEmployeeButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="Export_Button1" min="-2" max="-2" attributes="0"/>
+                              <Component id="EmployeeExport_Button" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="Close_Button1" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -338,7 +338,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Close_Button1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Export_Button1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EmployeeExport_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
@@ -356,12 +356,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="SearchBar">
             </Component>
-            <Component class="javax.swing.JButton" name="Export_Button1">
+            <Component class="javax.swing.JButton" name="EmployeeExport_Button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Export"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Export_Button1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EmployeeExport_ButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="Close_Button1">

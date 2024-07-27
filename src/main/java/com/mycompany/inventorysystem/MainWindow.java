@@ -50,13 +50,13 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeDropdownBox = new javax.swing.JComboBox<>();
         InventoryPane = new javax.swing.JScrollPane();
         InventoryTable = new javax.swing.JTable();
-        Export_Button = new javax.swing.JButton();
+        InventoryExport_Button = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
         InsertDataButton = new javax.swing.JButton();
         Employee = new javax.swing.JPanel();
         AddEmployeeButton = new javax.swing.JButton();
         SearchBar = new javax.swing.JTextField();
-        Export_Button1 = new javax.swing.JButton();
+        EmployeeExport_Button = new javax.swing.JButton();
         Close_Button1 = new javax.swing.JButton();
         SearchEmployeeLabel = new javax.swing.JLabel();
         Search_Employee_Button = new javax.swing.JButton();
@@ -178,10 +178,10 @@ public class MainWindow extends javax.swing.JFrame {
         ));
         InventoryPane.setViewportView(InventoryTable);
 
-        Export_Button.setText("Export");
-        Export_Button.addActionListener(new java.awt.event.ActionListener() {
+        InventoryExport_Button.setText("Export");
+        InventoryExport_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Export_ButtonActionPerformed(evt);
+                InventoryExport_ButtonActionPerformed(evt);
             }
         });
 
@@ -207,7 +207,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(InventoryLayout.createSequentialGroup()
-                        .addComponent(Export_Button)
+                        .addComponent(InventoryExport_Button)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button))
                     .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -233,7 +233,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(InventoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
-                    .addComponent(Export_Button))
+                    .addComponent(InventoryExport_Button))
                 .addGap(47, 47, 47))
         );
 
@@ -248,10 +248,10 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        Export_Button1.setText("Export");
-        Export_Button1.addActionListener(new java.awt.event.ActionListener() {
+        EmployeeExport_Button.setText("Export");
+        EmployeeExport_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Export_Button1ActionPerformed(evt);
+                EmployeeExport_ButtonActionPerformed(evt);
             }
         });
 
@@ -302,7 +302,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AddEmployeeButton))
                     .addGroup(EmployeeLayout.createSequentialGroup()
-                        .addComponent(Export_Button1)
+                        .addComponent(EmployeeExport_Button)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,7 +322,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button1)
-                    .addComponent(Export_Button1))
+                    .addComponent(EmployeeExport_Button))
                 .addGap(41, 41, 41))
         );
 
@@ -501,9 +501,9 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeTable.setModel(model);
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
-    private void Export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_ButtonActionPerformed
+    private void InventoryExport_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryExport_ButtonActionPerformed
         exportexcel(InventoryTable);        
-    }//GEN-LAST:event_Export_ButtonActionPerformed
+    }//GEN-LAST:event_InventoryExport_ButtonActionPerformed
 
     public void openFile(String file){
         try {
@@ -585,10 +585,58 @@ public class MainWindow extends javax.swing.JFrame {
         OthersTable.setModel(model4);
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
-    private void Export_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Export_Button1ActionPerformed
+    private void EmployeeExport_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeExport_ButtonActionPerformed
+        exportexcel1(EmployeeTable);
+    }//GEN-LAST:event_EmployeeExport_ButtonActionPerformed
 
+    public void exportexcel1(JTable EmployeeTable){
+        
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File saveFile = fileChooser.getSelectedFile();
+            if (!saveFile.toString().endsWith(".xlsx")) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+            }
+
+            try (Workbook wb = new XSSFWorkbook();
+                 FileOutputStream out = new FileOutputStream(saveFile)) {
+
+                Sheet sheet = wb.createSheet("Employees Data");
+                TableModel model = EmployeeTable.getModel();
+
+                // Write column headers
+                Row headerRow = sheet.createRow(0);
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(model.getColumnName(i));
+                }
+
+                // Write data rows
+                for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
+                    Row row = sheet.createRow(rowIdx + 1);
+                    for (int colIdx = 0; colIdx < model.getColumnCount(); colIdx++) {
+                        Cell cell = row.createCell(colIdx);
+                        Object value = model.getValueAt(rowIdx, colIdx);
+                        if (value != null) {
+                            cell.setCellValue(value.toString());
+                        }
+                    }
+                }
+
+                wb.write(out);
+                openFile(saveFile.toString());
+
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "File not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Cancelled", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
     private void Close_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_Button1ActionPerformed
         dispose();
     }//GEN-LAST:event_Close_Button1ActionPerformed
@@ -604,9 +652,57 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
 
     private void Export_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button2ActionPerformed
-        // TODO add your handling code here:
+        exportexcel2(AllItemsTable);
     }//GEN-LAST:event_Export_Button2ActionPerformed
 
+    public void exportexcel2(JTable AllItemsTable){
+        
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File saveFile = fileChooser.getSelectedFile();
+            if (!saveFile.toString().endsWith(".xlsx")) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+            }
+
+            try (Workbook wb = new XSSFWorkbook();
+                 FileOutputStream out = new FileOutputStream(saveFile)) {
+
+                Sheet sheet = wb.createSheet("All Items Data");
+                TableModel model = AllItemsTable.getModel();
+
+                // Write column headers
+                Row headerRow = sheet.createRow(0);
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    Cell cell = headerRow.createCell(i);
+                    cell.setCellValue(model.getColumnName(i));
+                }
+
+                // Write data rows
+                for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
+                    Row row = sheet.createRow(rowIdx + 1);
+                    for (int colIdx = 0; colIdx < model.getColumnCount(); colIdx++) {
+                        Cell cell = row.createCell(colIdx);
+                        Object value = model.getValueAt(rowIdx, colIdx);
+                        if (value != null) {
+                            cell.setCellValue(value.toString());
+                        }
+                    }
+                }
+
+                wb.write(out);
+                openFile(saveFile.toString());
+
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "File not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Cancelled", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+    
     private void Close_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_Button2ActionPerformed
         dispose();
     }//GEN-LAST:event_Close_Button2ActionPerformed
@@ -717,17 +813,17 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Close_Button2;
     private javax.swing.JPanel Employee;
     private javax.swing.JComboBox<String> EmployeeDropdownBox;
+    private javax.swing.JButton EmployeeExport_Button;
     private javax.swing.JTable EmployeeTable;
     private javax.swing.JButton Employee_Button;
     private javax.swing.JScrollPane EquipmentsPane;
     private javax.swing.JTable EquipmentsTable;
-    private javax.swing.JButton Export_Button;
-    private javax.swing.JButton Export_Button1;
     private javax.swing.JButton Export_Button2;
     private javax.swing.JScrollPane FurnituresPane;
     private javax.swing.JTable FurnituresTable;
     private javax.swing.JButton InsertDataButton;
     private javax.swing.JPanel Inventory;
+    private javax.swing.JButton InventoryExport_Button;
     private javax.swing.JScrollPane InventoryPane;
     private javax.swing.JTable InventoryTable;
     private javax.swing.JButton Inventory_Button;
