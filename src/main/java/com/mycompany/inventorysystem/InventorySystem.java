@@ -32,17 +32,12 @@ public class InventorySystem {
             String checkDbQuery = "SHOW DATABASES LIKE '" + databaseName + "'";
             var rs = stmt.executeQuery(checkDbQuery);
             if (!rs.next()) {
-                // Database does not exist, create it
                 String createDbQuery = "CREATE DATABASE " + databaseName;
-                stmt.executeUpdate(createDbQuery);
-                System.out.println("A new database has been created.");  
-
+                stmt.executeUpdate(createDbQuery); 
                 createEmployeeTable(databaseName);
                 createItemsTable(databaseName);
                 createInventoryTable(databaseName);
-                MainWindow log = new MainWindow();
-                log.show();
-            }           
+            }          
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -92,7 +87,6 @@ public class InventorySystem {
                     + "item_name VARCHAR(255) NOT NULL, "
                     + "category VARCHAR(255) NOT NULL)";
             stmt.executeUpdate(createItemsTable);
-            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -126,8 +120,6 @@ public class InventorySystem {
                 + "value VARCHAR(255) NULL, "
                 + "remarks VARCHAR(255) NULL)";
         stmt.executeUpdate(createInventoryTable);
-        System.out.println("Table 'inventory' has been created or already exists.");
-            
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
@@ -145,8 +137,8 @@ public class InventorySystem {
     private static final String PASSWORD = "";
 
     public static void main(String[] args) {
-        MainWindow Window=new MainWindow();
-        Window.show();
         CheckConnect();
+        MainWindow log = new MainWindow();
+        log.show();
     }
 }

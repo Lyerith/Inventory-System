@@ -4,15 +4,30 @@
  */
 package com.mycompany.inventorysystem;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class MainWindow extends javax.swing.JFrame {
 
@@ -488,7 +503,34 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     private void Export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_ButtonActionPerformed
-        // TODO add your handling code here:
+        
+        //String excelFilePath = "Desktop\\InventoryData.xlsx";
+
+        try {
+            Class.forName("driverName");
+            Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("Select * from employees");
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("Employee Data");
+            HSSFRow rowhead = sheet.createRow((short) 0);
+            rowhead.createCell((short) 0).setCellValue("CellHeadName1");
+            rowhead.createCell((short) 1).setCellValue("CellHeadName2");
+            rowhead.createCell((short) 2).setCellValue("CellHeadName3");
+            int i = 1;
+            while (rs.next()){
+                HSSFRow row = sheet.createRow((short) i);
+                row.createCell((short) 0).setCellValue(Integer.toString(rs.getInt("column1")));
+                row.createCell((short) 1).setCellValue(rs.getString("column2"));
+                row.createCell((short) 2).setCellValue(rs.getString("column3"));
+                i++;
+            }
+            String yemi = "C:\\test.xls";
+            try (FileOutputStream fileOut = new FileOutputStream(yemi)) {
+                workbook.write(fileOut);
+            }
+            } catch (ClassNotFoundException | SQLException | IOException e1) {
+            }
     }//GEN-LAST:event_Export_ButtonActionPerformed
 
     private void Close_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_ButtonActionPerformed
