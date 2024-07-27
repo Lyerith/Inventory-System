@@ -18,8 +18,6 @@ public class InventorySystem {
             
         }
     }
-    
-    
     public static void createDatabaseIfNotExists(String databaseName) {
         
         Connection conn = null;
@@ -98,7 +96,6 @@ public class InventorySystem {
             }
         }
     }
-    
     public static void createInventoryTable(String databaseName) {
         Connection conn = null;
         Statement stmt = null;
@@ -131,11 +128,9 @@ public class InventorySystem {
             }
         }
     }
-    
     private static final String DB_URL = "jdbc:mysql://localhost:3306/";
     private static final String USER = "root";
     private static final String PASSWORD = "";
-
     public static void main(String[] args) {
         CheckConnect();
         MainWindow log = new MainWindow();

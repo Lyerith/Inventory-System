@@ -297,7 +297,7 @@ public class InsertData extends javax.swing.JFrame {
                 ValueField.setText("");
                 RemarksField.setText("");
 
-            } catch (Exception e) {
+            } catch (ClassNotFoundException | SQLException e) {
                 System.out.println("Error: " + e.getMessage());
                 JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
@@ -369,10 +369,8 @@ public class InsertData extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InsertData().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new InsertData().setVisible(true);
         });
     }
 

@@ -150,7 +150,7 @@ public class AddItem extends javax.swing.JFrame {
                 pstmt.executeUpdate();
                 ItemNameField.setText("");
 
-            } catch (Exception e) {
+            } catch (ClassNotFoundException | SQLException e) {
 
             } finally {
                 try {
