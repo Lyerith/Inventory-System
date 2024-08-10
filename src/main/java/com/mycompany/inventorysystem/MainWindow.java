@@ -692,8 +692,6 @@ public class MainWindow extends javax.swing.JFrame {
         SearchEmployeeLabel1.setMinimumSize(new java.awt.Dimension(109, 20));
         SearchEmployeeLabel1.setPreferredSize(new java.awt.Dimension(109, 20));
 
-        ItemSearchBar.setText("\n");
-
         Add_Item_Button.setText("Add Item/s");
         Add_Item_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
