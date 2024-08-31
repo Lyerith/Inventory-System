@@ -41,12 +41,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         ButtonsPanel = new javax.swing.JPanel();
         Inventory_Button = new javax.swing.JButton();
-        EmployeeItemsButton = new javax.swing.JButton();
         Employee_Button = new javax.swing.JButton();
         Items_Button = new javax.swing.JButton();
+        Home_Page = new javax.swing.JButton();
         Tabs = new javax.swing.JTabbedPane();
         HomePage = new javax.swing.JPanel();
-        EmployeeDropdownBox1 = new javax.swing.JComboBox<>();
+        EmployeeDropdownBox3 = new javax.swing.JComboBox<>();
         ChooseEmployeeLabel1 = new javax.swing.JLabel();
         AllItemsPane2 = new javax.swing.JScrollPane();
         AllItemsTable1 = new javax.swing.JTable();
@@ -83,24 +83,6 @@ public class MainWindow extends javax.swing.JFrame {
         InventoryExport_Button = new javax.swing.JButton();
         Close_Button = new javax.swing.JButton();
         InsertDataButton = new javax.swing.JButton();
-        EmployeeItemsPanel = new javax.swing.JPanel();
-        SearchEmployeeLabel2 = new javax.swing.JLabel();
-        ItemSearchBar1 = new javax.swing.JTextField();
-        Add_Item_Button1 = new javax.swing.JButton();
-        Export_Button3 = new javax.swing.JButton();
-        Close_Button3 = new javax.swing.JButton();
-        Search_Item_Button1 = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        AllItemsPane1 = new javax.swing.JScrollPane();
-        AllEmployeeItems = new javax.swing.JTable();
-        FurnituresPane1 = new javax.swing.JScrollPane();
-        AllEmployeeFurnitures = new javax.swing.JTable();
-        SchoolSuppliesPane1 = new javax.swing.JScrollPane();
-        AllEmployeeSchoolSupplies = new javax.swing.JTable();
-        EquipmentsPane1 = new javax.swing.JScrollPane();
-        AllEmployeeEquipments = new javax.swing.JTable();
-        OthersPane1 = new javax.swing.JScrollPane();
-        AllEmployeeOthers = new javax.swing.JTable();
         EmployeePanel = new javax.swing.JPanel();
         AddEmployeeButton = new javax.swing.JButton();
         SearchBar = new javax.swing.JTextField();
@@ -145,14 +127,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        EmployeeItemsButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        EmployeeItemsButton.setText("Employee Items");
-        EmployeeItemsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeItemsButtonActionPerformed(evt);
-            }
-        });
-
         Employee_Button.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Employee_Button.setText("Employees");
         Employee_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +143,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        Home_Page.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Home_Page.setText("Home");
+        Home_Page.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Home_Page_ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
         ButtonsPanel.setLayout(ButtonsPanelLayout);
         ButtonsPanelLayout.setHorizontalGroup(
@@ -179,16 +161,16 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(Employee_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Inventory_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Items_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EmployeeItemsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Home_Page, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         ButtonsPanelLayout.setVerticalGroup(
             ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(20, 20, 20)
+                .addComponent(Home_Page, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Inventory_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(EmployeeItemsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Employee_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -200,9 +182,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         HomePage.setPreferredSize(new java.awt.Dimension(866, 605));
 
-        EmployeeDropdownBox1.addActionListener(new java.awt.event.ActionListener() {
+        EmployeeDropdownBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmployeeDropdownBox1ActionPerformed(evt);
+                EmployeeDropdownBox3ActionPerformed(evt);
             }
         });
 
@@ -249,12 +231,6 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeDesignationLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EmployeeDesignationLabel.setText("Designation:");
 
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField2");
-
-        jTextField4.setText("jTextField2");
-
         jToggleButton1.setText("New Employee");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,8 +240,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Employee_Namelabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Employee_Namelabel1.setText("Name:");
-
-        jTextField5.setText("jTextField2");
 
         DetailsLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DetailsLabel1.setText("Employee Items:");
@@ -313,7 +287,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(HomePageLayout.createSequentialGroup()
                                 .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(EmployeeDropdownBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(EmployeeDropdownBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HomePageLayout.createSequentialGroup()
                                             .addComponent(Employee_Namelabel)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,15 +315,16 @@ public class MainWindow extends javax.swing.JFrame {
         HomePageLayout.setVerticalGroup(
             HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomePageLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChooseEmployeeLabel1)
-                    .addComponent(DetailsLabel1)
+                .addGap(15, 15, 15)
+                .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ChooseEmployeeLabel1)
+                        .addComponent(DetailsLabel1))
                     .addComponent(EmployeeDropdownBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomePageLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(EmployeeDropdownBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EmployeeDropdownBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(DetailsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -382,7 +357,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
-        Tabs.addTab("tab4", HomePage);
+        Tabs.addTab("tab0", HomePage);
 
         InventoryPanel.setPreferredSize(new java.awt.Dimension(866, 605));
 
@@ -578,211 +553,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         Tabs.addTab("tab1", InventoryPanel);
 
-        EmployeeItemsPanel.setPreferredSize(new java.awt.Dimension(866, 605));
-
-        SearchEmployeeLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        SearchEmployeeLabel2.setText("Search:");
-        SearchEmployeeLabel2.setMaximumSize(new java.awt.Dimension(109, 20));
-        SearchEmployeeLabel2.setMinimumSize(new java.awt.Dimension(109, 20));
-        SearchEmployeeLabel2.setPreferredSize(new java.awt.Dimension(109, 20));
-
-        ItemSearchBar1.setText("\n");
-
-        Add_Item_Button1.setText("Add Item/s");
-        Add_Item_Button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Add_Item_Button1ActionPerformed(evt);
-            }
-        });
-
-        Export_Button3.setText("Export");
-        Export_Button3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Export_Button3ActionPerformed(evt);
-            }
-        });
-
-        Close_Button3.setText("Close");
-        Close_Button3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Close_Button3ActionPerformed(evt);
-            }
-        });
-
-        Search_Item_Button1.setText("Search Item");
-        Search_Item_Button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Search_Item_Button1ActionPerformed(evt);
-            }
-        });
-
-        AllEmployeeItems.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Item ID", "Item Name", "Item Category"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        AllEmployeeItems.getTableHeader().setReorderingAllowed(false);
-        AllItemsPane1.setViewportView(AllEmployeeItems);
-        if (AllEmployeeItems.getColumnModel().getColumnCount() > 0) {
-            AllEmployeeItems.getColumnModel().getColumn(0).setResizable(false);
-            AllEmployeeItems.getColumnModel().getColumn(0).setHeaderValue("Item ID");
-        }
-
-        jTabbedPane2.addTab("All Items", AllItemsPane1);
-
-        AllEmployeeFurnitures.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Item ID", "Item Name", "Item Category"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        AllEmployeeFurnitures.getTableHeader().setReorderingAllowed(false);
-        FurnituresPane1.setViewportView(AllEmployeeFurnitures);
-
-        jTabbedPane2.addTab("Furnitures", FurnituresPane1);
-
-        AllEmployeeSchoolSupplies.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Item ID", "Item Name", "Item Category"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        AllEmployeeSchoolSupplies.getTableHeader().setReorderingAllowed(false);
-        SchoolSuppliesPane1.setViewportView(AllEmployeeSchoolSupplies);
-
-        jTabbedPane2.addTab("School Supplies", SchoolSuppliesPane1);
-
-        AllEmployeeEquipments.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Item ID", "Item Name", "Item Category"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        AllEmployeeEquipments.getTableHeader().setReorderingAllowed(false);
-        EquipmentsPane1.setViewportView(AllEmployeeEquipments);
-
-        jTabbedPane2.addTab("Equipments", EquipmentsPane1);
-
-        AllEmployeeOthers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Item ID", "Item Name", "Item Category"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        AllEmployeeOthers.getTableHeader().setReorderingAllowed(false);
-        OthersPane1.setViewportView(AllEmployeeOthers);
-
-        jTabbedPane2.addTab("Others", OthersPane1);
-
-        javax.swing.GroupLayout EmployeeItemsPanelLayout = new javax.swing.GroupLayout(EmployeeItemsPanel);
-        EmployeeItemsPanel.setLayout(EmployeeItemsPanelLayout);
-        EmployeeItemsPanelLayout.setHorizontalGroup(
-            EmployeeItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeeItemsPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(EmployeeItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(EmployeeItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(EmployeeItemsPanelLayout.createSequentialGroup()
-                            .addComponent(Export_Button3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Close_Button3)))
-                    .addGroup(EmployeeItemsPanelLayout.createSequentialGroup()
-                        .addComponent(SearchEmployeeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ItemSearchBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Search_Item_Button1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Add_Item_Button1)))
-                .addGap(147, 147, 147))
-        );
-        EmployeeItemsPanelLayout.setVerticalGroup(
-            EmployeeItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EmployeeItemsPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(EmployeeItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ItemSearchBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Add_Item_Button1)
-                    .addComponent(SearchEmployeeLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Search_Item_Button1))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(EmployeeItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Close_Button3)
-                    .addComponent(Export_Button3))
-                .addContainerGap())
-        );
-
-        Tabs.addTab("tab3", EmployeeItemsPanel);
-
         EmployeePanel.setPreferredSize(new java.awt.Dimension(866, 605));
 
         AddEmployeeButton.setText("Add Employee");
@@ -889,7 +659,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
-        Tabs.addTab("tab1", EmployeePanel);
+        Tabs.addTab("tab2", EmployeePanel);
 
         ItemsPanel.setPreferredSize(new java.awt.Dimension(866, 605));
 
@@ -1346,43 +1116,16 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeCombo();
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
 
-    private void Add_Item_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Item_Button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Add_Item_Button1ActionPerformed
-
-    private void Export_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Export_Button3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Export_Button3ActionPerformed
-
-    private void Close_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_Button3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Close_Button3ActionPerformed
-
-    private void Search_Item_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_Item_Button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Search_Item_Button1ActionPerformed
-
-    private void EmployeeItemsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeItemsButtonActionPerformed
-        Tabs.setSelectedIndex(2);
-        DefaultTableModel model0 = Items.getAllItemsData();
-        AllItemsTable.setModel(model0);
-        DefaultTableModel model1 = Items.getFurnituresData();
-        FurnituresTable.setModel(model1);
-        DefaultTableModel model2 = Items.getSchoolSuppliesData();
-        SchoolSuppliesTable.setModel(model2);
-        DefaultTableModel model3 = Items.getEquipmentsData();
-        EquipmentsTable.setModel(model3);
-        DefaultTableModel model4 = Items.getOthersData();
-        OthersTable.setModel(model4);
-    }//GEN-LAST:event_EmployeeItemsButtonActionPerformed
-
     private void EmployeeDropdownBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EmployeeDropdownBox2ActionPerformed
 
-    private void EmployeeDropdownBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmployeeDropdownBox1ActionPerformed
+    private void EmployeeDropdownBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBox3ActionPerformed
+        String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
+        if (selectedEmployee != null) {
+            updateInventoryTable(selectedEmployee);
+        }
+    }//GEN-LAST:event_EmployeeDropdownBox3ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
@@ -1391,6 +1134,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void Home_Page_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_Page_ActionPerformed
+        Tabs.setSelectedIndex(0);
+    }//GEN-LAST:event_Home_Page_ActionPerformed
       
     private void EmployeeDropdownBoxActionPerformed(java.awt.event.ActionEvent evt){
         String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
@@ -1460,16 +1207,9 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
     private javax.swing.JButton Add_Item_Button;
-    private javax.swing.JButton Add_Item_Button1;
-    private javax.swing.JTable AllEmployeeEquipments;
-    private javax.swing.JTable AllEmployeeFurnitures;
-    private javax.swing.JTable AllEmployeeItems;
-    private javax.swing.JTable AllEmployeeOthers;
-    private javax.swing.JTable AllEmployeeSchoolSupplies;
     private javax.swing.JScrollPane AllItems;
     private javax.swing.JTable AllItemsInventory;
     private javax.swing.JScrollPane AllItemsPane;
-    private javax.swing.JScrollPane AllItemsPane1;
     private javax.swing.JScrollPane AllItemsPane2;
     private javax.swing.JTable AllItemsTable;
     private javax.swing.JTable AllItemsTable1;
@@ -1479,17 +1219,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton Close_Button;
     private javax.swing.JButton Close_Button1;
     private javax.swing.JButton Close_Button2;
-    private javax.swing.JButton Close_Button3;
     private javax.swing.JLabel DetailsLabel;
     private javax.swing.JLabel DetailsLabel1;
     private javax.swing.JLabel DetailsLabel2;
     private javax.swing.JLabel EmployeeDesignationLabel;
     private javax.swing.JComboBox<String> EmployeeDropdownBox;
-    private javax.swing.JComboBox<String> EmployeeDropdownBox1;
     private javax.swing.JComboBox<String> EmployeeDropdownBox2;
+    private javax.swing.JComboBox<String> EmployeeDropdownBox3;
     private javax.swing.JButton EmployeeExport_Button;
-    private javax.swing.JButton EmployeeItemsButton;
-    private javax.swing.JPanel EmployeeItemsPanel;
     private javax.swing.JPanel EmployeePanel;
     private javax.swing.JLabel EmployeePositionLabel;
     private javax.swing.JTable EmployeeTable;
@@ -1499,46 +1236,38 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane Equipment;
     private javax.swing.JTable EquipmentInventory;
     private javax.swing.JScrollPane EquipmentsPane;
-    private javax.swing.JScrollPane EquipmentsPane1;
     private javax.swing.JTable EquipmentsTable;
     private javax.swing.JButton Export_Button2;
-    private javax.swing.JButton Export_Button3;
     private javax.swing.JScrollPane Furnitures;
     private javax.swing.JTable FurnituresInventory;
     private javax.swing.JScrollPane FurnituresPane;
-    private javax.swing.JScrollPane FurnituresPane1;
     private javax.swing.JTable FurnituresTable;
     private javax.swing.JPanel HomePage;
+    private javax.swing.JButton Home_Page;
     private javax.swing.JButton InsertDataButton;
     private javax.swing.JButton InventoryExport_Button;
     private javax.swing.JPanel InventoryPanel;
     private javax.swing.JButton Inventory_Button;
     private javax.swing.JTextField ItemSearchBar;
-    private javax.swing.JTextField ItemSearchBar1;
     private javax.swing.JPanel ItemsPanel;
     private javax.swing.JButton Items_Button;
     private javax.swing.JScrollPane Others;
     private javax.swing.JTable OthersInventory;
     private javax.swing.JScrollPane OthersPane;
-    private javax.swing.JScrollPane OthersPane1;
     private javax.swing.JTable OthersTable;
     private javax.swing.JScrollPane SchoolSupplies;
     private javax.swing.JTable SchoolSuppliesInventory;
     private javax.swing.JScrollPane SchoolSuppliesPane;
-    private javax.swing.JScrollPane SchoolSuppliesPane1;
     private javax.swing.JTable SchoolSuppliesTable;
     private javax.swing.JTextField SearchBar;
     private javax.swing.JLabel SearchEmployeeLabel;
     private javax.swing.JLabel SearchEmployeeLabel1;
-    private javax.swing.JLabel SearchEmployeeLabel2;
     private javax.swing.JButton Search_Employee_Button;
     private javax.swing.JButton Search_Item_Button;
-    private javax.swing.JButton Search_Item_Button1;
     private javax.swing.JTabbedPane Tabs;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
