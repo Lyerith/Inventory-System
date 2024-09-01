@@ -41,6 +41,8 @@ public class AddEmployee extends javax.swing.JFrame {
         Close_Button = new javax.swing.JButton();
         AddEmployeeButton = new javax.swing.JButton();
         ImportEmployees = new javax.swing.JButton();
+        Employee_Position_Label1 = new javax.swing.JLabel();
+        EmployeeDesignationField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -72,6 +74,9 @@ public class AddEmployee extends javax.swing.JFrame {
             }
         });
 
+        Employee_Position_Label1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Employee_Position_Label1.setText("Employee Designation");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,25 +85,31 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ImportEmployees)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AddEmployeeButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Close_Button))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Employee_Position_Label)
                             .addComponent(Employee_Name_Label))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(EmployeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EmployeePositionField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(EmployeePositionField, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ImportEmployees)
+                            .addComponent(Employee_Position_Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(AddEmployeeButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Close_Button))
+                            .addComponent(EmployeeDesignationField))))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(EmployeeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Employee_Name_Label))
@@ -106,12 +117,16 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Employee_Position_Label)
                     .addComponent(EmployeePositionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Employee_Position_Label1)
+                    .addComponent(EmployeeDesignationField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Close_Button)
                     .addComponent(AddEmployeeButton)
                     .addComponent(ImportEmployees))
-                .addGap(35, 35, 35))
+                .addContainerGap())
         );
 
         pack();
@@ -126,6 +141,7 @@ public class AddEmployee extends javax.swing.JFrame {
         
         String employee = EmployeeNameField.getText();
         String position = EmployeePositionField.getText();
+        String designation = EmployeeDesignationField.getText();
 
         if (employee.equals("") && position.equals("")) {
             JOptionPane.showMessageDialog(this, "No Input Added");
@@ -139,13 +155,15 @@ public class AddEmployee extends javax.swing.JFrame {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
                     stmt = con.createStatement();
-                    String sql = "INSERT INTO employees (name, position) VALUES (?, ?)";
+                    String sql = "INSERT INTO employees (name, position, designation) VALUES (?, ?, ?)";
                     pstmt = con.prepareStatement(sql);
                     pstmt.setString(1, employee);
                     pstmt.setString(2, position);
+                    pstmt.setString(3, designation);
                     pstmt.executeUpdate();
                     EmployeeNameField.setText("");
                     EmployeePositionField.setText("");
+                    EmployeeDesignationField.setText("");
             } catch (ClassNotFoundException | SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
@@ -161,7 +179,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
     
     public static DefaultTableModel getEmployeeData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Employee ID","Employee Name", " Employee Position"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Employee ID","Employee Name", " Employee Position", "Employee Designation"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
@@ -171,7 +189,8 @@ public class AddEmployee extends javax.swing.JFrame {
                 int id = rs.getInt("employee_id");
                 String name = rs.getString("name");
                 String position = rs.getString("position");
-                model.addRow(new Object[]{id, name, position});
+                String designation = rs.getString("designation");
+                model.addRow(new Object[]{id, name, position, designation});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -280,10 +299,12 @@ public class AddEmployee extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
     private javax.swing.JButton Close_Button;
+    private javax.swing.JTextField EmployeeDesignationField;
     private javax.swing.JTextField EmployeeNameField;
     private javax.swing.JTextField EmployeePositionField;
     private javax.swing.JLabel Employee_Name_Label;
     private javax.swing.JLabel Employee_Position_Label;
+    private javax.swing.JLabel Employee_Position_Label1;
     private javax.swing.JButton ImportEmployees;
     // End of variables declaration//GEN-END:variables
     private static final String DB_URL = "jdbc:mysql://localhost:3306/inventory_system";
