@@ -47,6 +47,7 @@ public class InventorySystem {
             }
         }
     }
+    
     public static void createEmployeeTable(String databaseName) {
         Connection conn = null;
         Statement stmt = null;
@@ -58,7 +59,8 @@ public class InventorySystem {
             String createEmployeeTable = "CREATE TABLE IF NOT EXISTS employees ("
                     + "employee_id INT PRIMARY KEY AUTO_INCREMENT, "
                     + "name VARCHAR(255) NOT NULL, "
-                    + "position VARCHAR(255) NOT NULL)";
+                    + "position VARCHAR(255) NOT NULL, "
+                    + "designation VARCHAR(255))";
             stmt.executeUpdate(createEmployeeTable);
             
         } catch (SQLException e) {

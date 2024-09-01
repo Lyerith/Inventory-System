@@ -1194,7 +1194,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void HomeEmployee() {
-        String sql = "SELECT employee_id, name, position FROM employees";
+        String sql = "SELECT employee_id, name, position, designation FROM employees";
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
@@ -1207,7 +1207,8 @@ public class MainWindow extends javax.swing.JFrame {
                 String[] employeeDetails = new String[] {
                     rs.getString("employee_id"),
                     employeeName,
-                    rs.getString("position")
+                    rs.getString("position"),
+                    rs.getString("designation")
                 };
                 employeeMap.put(employeeName, employeeDetails);
                 EmployeeDropdownBox1.addItem(employeeName);
@@ -1220,6 +1221,7 @@ public class MainWindow extends javax.swing.JFrame {
                     IDTextField.setText(selectedEmployeeDetails[0]);
                     NameTextfield.setText(selectedEmployeeDetails[1]);
                     PositionTextField.setText(selectedEmployeeDetails[2]);
+                    DesignationTextField.setText(selectedEmployeeDetails[3]);
                 }
             });
             

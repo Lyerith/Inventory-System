@@ -28,13 +28,6 @@
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="ImportEmployees" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="AddEmployeeButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="Close_Button" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Employee_Position_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Employee_Name_Label" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -45,6 +38,22 @@
                           <Component id="EmployeePositionField" min="-2" pref="265" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ImportEmployees" min="-2" max="-2" attributes="0"/>
+                          <Component id="Employee_Position_Label1" min="-2" pref="147" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="AddEmployeeButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="Close_Button" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="EmployeeDesignationField" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
@@ -53,7 +62,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="EmployeeNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Employee_Name_Label" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -63,13 +72,18 @@
                   <Component id="Employee_Position_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="EmployeePositionField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="Employee_Position_Label1" min="-2" max="-2" attributes="0"/>
+                  <Component id="EmployeeDesignationField" min="-2" pref="22" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Close_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="AddEmployeeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ImportEmployees" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,6 +132,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ImportEmployeesActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Employee_Position_Label1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Employee Designation"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="EmployeeDesignationField">
     </Component>
   </SubComponents>
 </Form>
