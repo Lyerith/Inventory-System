@@ -306,7 +306,7 @@ public class InsertData extends javax.swing.JFrame {
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_system", "root", "");
 
                 // Insert data into the table
-                String sql = "INSERT INTO inventory (name, item, category, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO inventory (name, item, category, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, Name);
                 pstmt.setString(2, Item);
