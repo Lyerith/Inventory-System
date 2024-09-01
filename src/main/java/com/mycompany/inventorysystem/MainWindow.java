@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -49,7 +50,7 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeDropdownBox1 = new javax.swing.JComboBox<>();
         ChooseEmployeeLabel1 = new javax.swing.JLabel();
         AllItemsPane2 = new javax.swing.JScrollPane();
-        AllItemsTable1 = new javax.swing.JTable();
+        EmployeeItems = new javax.swing.JTable();
         EmployeeDropdownBox2 = new javax.swing.JComboBox<>();
         DetailsLabel = new javax.swing.JLabel();
         Employee_Namelabel = new javax.swing.JLabel();
@@ -191,11 +192,8 @@ public class MainWindow extends javax.swing.JFrame {
         ChooseEmployeeLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ChooseEmployeeLabel1.setText("Select Employee:");
 
-        AllItemsTable1.setModel(new javax.swing.table.DefaultTableModel(
+        EmployeeItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
                 {null, null}
             },
             new String [] {
@@ -210,8 +208,8 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        AllItemsTable1.getTableHeader().setReorderingAllowed(false);
-        AllItemsPane2.setViewportView(AllItemsTable1);
+        EmployeeItems.getTableHeader().setReorderingAllowed(false);
+        AllItemsPane2.setViewportView(EmployeeItems);
 
         EmployeeDropdownBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,8 +525,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(InventoryPanelLayout.createSequentialGroup()
                         .addComponent(ChooseEmployeeLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(EmployeeDropdownBox, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addComponent(EmployeeDropdownBox, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(InsertDataButton)))
                 .addGap(94, 94, 94))
             .addGroup(InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1196,19 +1194,82 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void HomeEmployee() {
-        String sql = "SELECT name FROM employees";
+        String sql = "SELECT employee_id, name, position FROM employees";
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              PreparedStatement pst = con.prepareStatement(sql);
              ResultSet rs = pst.executeQuery()) {
+
             EmployeeDropdownBox1.removeAllItems(); // Clear existing items
+            HashMap<String, String[]> employeeMap = new HashMap<>();
+
             while (rs.next()) {
-                EmployeeDropdownBox1.addItem(rs.getString("name"));
+                String employeeName = rs.getString("name");
+                String[] employeeDetails = new String[] {
+                    rs.getString("employee_id"),
+                    employeeName,
+                    rs.getString("position")
+                };
+                employeeMap.put(employeeName, employeeDetails);
+                EmployeeDropdownBox1.addItem(employeeName);
             }
+
+            EmployeeDropdownBox1.addActionListener(e -> {
+                String selectedItem = (String) EmployeeDropdownBox1.getSelectedItem();
+                if (selectedItem != null && employeeMap.containsKey(selectedItem)) {
+                    String[] selectedEmployeeDetails = employeeMap.get(selectedItem);
+                    IDTextField.setText(selectedEmployeeDetails[0]);
+                    NameTextfield.setText(selectedEmployeeDetails[1]);
+                    PositionTextField.setText(selectedEmployeeDetails[2]);
+                }
+            });
+            
+        String selectedEmployee = (String) EmployeeDropdownBox1.getSelectedItem();
+        if (selectedEmployee != null) {
+            updateEmployeeItems(selectedEmployee);
+        }
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-       
+    
+    private void updateEmployeeItems(String employeeName) {
+    String sql = "SELECT item, category FROM inventory WHERE name = ?";
+    DefaultTableModel model = new DefaultTableModel(new String[]{
+        "Item Name", "Item Category",
+    }, 0);
+
+    if (employeeName == null || employeeName.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Employee name is not specified.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+         PreparedStatement pst = con.prepareStatement(sql)) {
+
+        pst.setString(1, employeeName);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            String item = rs.getString("item");
+            String category = rs.getString("category");
+            model.addRow(new Object[]{item, category});
+        }
+        
+        if (model.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No items found for the selected employee.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        EmployeeItems.setModel(model);
+        EmployeeItems.revalidate();
+        EmployeeItems.repaint();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {
@@ -1224,7 +1285,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane AllItemsPane;
     private javax.swing.JScrollPane AllItemsPane2;
     private javax.swing.JTable AllItemsTable;
-    private javax.swing.JTable AllItemsTable1;
     private javax.swing.JPanel ButtonsPanel;
     private javax.swing.JLabel ChooseEmployeeLabel;
     private javax.swing.JLabel ChooseEmployeeLabel1;
@@ -1239,6 +1299,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> EmployeeDropdownBox1;
     private javax.swing.JComboBox<String> EmployeeDropdownBox2;
     private javax.swing.JButton EmployeeExport_Button;
+    private javax.swing.JTable EmployeeItems;
     private javax.swing.JLabel EmployeeItemsLabel;
     private javax.swing.JPanel EmployeePanel;
     private javax.swing.JLabel EmployeePositionLabel;
