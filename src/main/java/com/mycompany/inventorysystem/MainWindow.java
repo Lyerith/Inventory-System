@@ -252,6 +252,11 @@ public class MainWindow extends javax.swing.JFrame {
         recentaddedlabel.setText("Recently Added Data:");
 
         Close_Button3.setText("Close");
+        Close_Button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Close_Button3ActionPerformed(evt);
+            }
+        });
 
         NewEmployeeButton.setText("New Employee");
         NewEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1141,6 +1146,10 @@ public class MainWindow extends javax.swing.JFrame {
             updateInventoryTable(selectedEmployee);
         }
     }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
+
+    private void Close_Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Close_Button3ActionPerformed
+        dispose();
+    }//GEN-LAST:event_Close_Button3ActionPerformed
             
     private void updateInventoryTable(String employeeName) {
 
@@ -1206,7 +1215,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String employeeName = rs.getString("name");
                 String[] employeeDetails = new String[] {
                     rs.getString("employee_id"),
-                    employeeName,
+                    employeeName,                       
                     rs.getString("position"),
                     rs.getString("designation")
                 };
@@ -1222,54 +1231,51 @@ public class MainWindow extends javax.swing.JFrame {
                     NameTextfield.setText(selectedEmployeeDetails[1]);
                     PositionTextField.setText(selectedEmployeeDetails[2]);
                     DesignationTextField.setText(selectedEmployeeDetails[3]);
+                    updateEmployeeItems(selectedItem);
                 }
             });
-            
-        String selectedEmployee = (String) EmployeeDropdownBox1.getSelectedItem();
-        if (selectedEmployee != null) {
-            updateEmployeeItems(selectedEmployee);
-        }
+
+            // Optionally, you can trigger an initial update if you want to load the first employee's data automatically
+            if (EmployeeDropdownBox1.getItemCount() > 0) {
+                EmployeeDropdownBox1.setSelectedIndex(0); // Select the first item
+                String selectedEmployee = (String) EmployeeDropdownBox1.getSelectedItem();
+                if (selectedEmployee != null) {
+                    updateEmployeeItems(selectedEmployee);
+                }
+            }
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void updateEmployeeItems(String employeeName) {
-    String sql = "SELECT item, category FROM inventory WHERE name = ?";
-    DefaultTableModel model = new DefaultTableModel(new String[]{
-        "Item Name", "Item Category",
-    }, 0);
+        String sql = "SELECT item, category FROM inventory WHERE name = ?";
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "Item Name", "Item Category",
+        }, 0);
 
-    if (employeeName == null || employeeName.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Employee name is not specified.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
+            pst.setString(1, employeeName);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String item = rs.getString("item");
+                String category = rs.getString("category");
+                model.addRow(new Object[]{item, category});
+            }
+
+            EmployeeItems.setModel(model);
+            EmployeeItems.revalidate(); // Refresh the table display
+            EmployeeItems.repaint();    // Refresh the table display
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-         PreparedStatement pst = con.prepareStatement(sql)) {
-
-        pst.setString(1, employeeName);
-        ResultSet rs = pst.executeQuery();
-
-        while (rs.next()) {
-            String item = rs.getString("item");
-            String category = rs.getString("category");
-            model.addRow(new Object[]{item, category});
-        }
-        
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No items found for the selected employee.", "Info", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        EmployeeItems.setModel(model);
-        EmployeeItems.revalidate();
-        EmployeeItems.repaint();
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
 
     
     public static void main(String args[]) {
