@@ -907,11 +907,11 @@ public class MainWindow extends javax.swing.JFrame {
 
             // Prompt the user to specify the sheet, row, and column
             String sheetName = JOptionPane.showInputDialog(this, "Enter the sheet name:", "Sheet1");
-            String rowInput = JOptionPane.showInputDialog(this, "Enter the row number (0-based index):", "0");
-            String colInput = JOptionPane.showInputDialog(this, "Enter the column number (0-based index):", "0");
+            String rowInput = JOptionPane.showInputDialog(this, "Enter the row number:", "0");
+            String colInput = JOptionPane.showInputDialog(this, "Enter the column number:", "0");
 
-            int startRow = Integer.parseInt(rowInput);
-            int startCol = Integer.parseInt(colInput);
+            int startRow = Integer.parseInt(rowInput) - 1;
+            int startCol = Integer.parseInt(colInput) - 1;
 
             Sheet sheet = wb.getSheet(sheetName);
             if (sheet == null) {
@@ -919,12 +919,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
 
             TableModel model = InventoryTable.getModel();
-            String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
-
-            // Write selected employee
-            Row employeeRow = sheet.createRow(startRow);
-            Cell employeeCell = employeeRow.createCell(startCol);
-            employeeCell.setCellValue("Employee: " + selectedEmployee);
 
             // Write data rows without headers
             for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
@@ -1184,7 +1178,7 @@ public class MainWindow extends javax.swing.JFrame {
         String sql = "SELECT category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory WHERE name = ?";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Category","Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
             "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
         }, 0);
 
@@ -1195,7 +1189,6 @@ public class MainWindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
-                String Category = rs.getString("category");
                 String item = rs.getString("item");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
@@ -1207,7 +1200,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{Category,item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
             }
             AllItemsInventory.setModel(model);
 
