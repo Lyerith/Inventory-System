@@ -26,10 +26,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.table.TableModel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook; // For .xls files
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook; // For .xlsx files
 
 
@@ -586,17 +584,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Employee Name", "Employee Position", "Employee Designation"
+                "Actions", "Employee ID", "Employee Name", "Employee Position", "Employee Designation"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -687,17 +685,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         AllItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Item Category"
+                "Actions", "Item ID", "Item Name", "Item Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -706,25 +704,22 @@ public class MainWindow extends javax.swing.JFrame {
         });
         AllItemsTable.getTableHeader().setReorderingAllowed(false);
         AllItemsPane.setViewportView(AllItemsTable);
-        if (AllItemsTable.getColumnModel().getColumnCount() > 0) {
-            AllItemsTable.getColumnModel().getColumn(0).setHeaderValue("Item ID");
-        }
 
         jTabbedPane1.addTab("All Items", AllItemsPane);
 
         FurnituresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Item Category"
+                "Actions", "Item ID", "Item Name", "Item Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -738,17 +733,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         SchoolSuppliesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Item Category"
+                "Actions", "Item ID", "Item Name", "Item Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -762,17 +757,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         EquipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Item Category"
+                "Actions", "Item ID", "Item Name", "Item Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -786,17 +781,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         OthersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Item Category"
+                "Actions", "Item ID", "Item Name", "Item Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -872,76 +867,111 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
     
-    public void exportexcel(JTable InventoryTable) {
-    JFileChooser fileChooser = new JFileChooser();
-    int result = fileChooser.showOpenDialog(this); // Change to open dialog to select an existing file
-    if (result == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
+    public void exportexcel(JTable[] tables) {
+    // Define the specific table names
+    String[] tableNames = {"All Items", "Furnitures", "School Supplies", "Equipment", "Others"};
 
-        Workbook wb = null;
-        try (FileInputStream fis = new FileInputStream(selectedFile)) {
-            // Determine the file extension
-            if (selectedFile.getName().endsWith(".xls")) {
-                wb = new HSSFWorkbook(fis); // For .xls files
-            } else if (selectedFile.getName().endsWith(".xlsx")) {
-                wb = new XSSFWorkbook(fis); // For .xlsx files
-            } else {
-                JOptionPane.showMessageDialog(this, "Unsupported file format. Please choose a .xls or .xlsx file.", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+    // Prompt the user to select which table to export
+    String selectedTableName = (String) JOptionPane.showInputDialog(this, 
+        "Select the table to export:", 
+        "Select Table", 
+        JOptionPane.QUESTION_MESSAGE, 
+        null, 
+        tableNames, 
+        tableNames[0]);
 
-            // Prompt the user to specify the sheet, row, and column
-            String sheetName = JOptionPane.showInputDialog(this, "Enter the sheet name:", "Sheet1");
-            String rowInput = JOptionPane.showInputDialog(this, "Enter the row number:", "0");
-            String colInput = JOptionPane.showInputDialog(this, "Enter the column number:", "0");
+    if (selectedTableName == null) {
+        JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Cancelled", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-            int startRow = Integer.parseInt(rowInput) - 1;
-            int startCol = Integer.parseInt(colInput) - 1;
+    // Find the index of the selected table
+    int selectedIndex = -1;
+    for (int i = 0; i < tableNames.length; i++) {
+        if (tableNames[i].equals(selectedTableName)) {
+            selectedIndex = i;
+            break;
+        }
+    }
 
-            Sheet sheet = wb.getSheet(sheetName);
-            if (sheet == null) {
-                sheet = wb.createSheet(sheetName);
-            }
+    // If the table name was found, proceed with the export
+    if (selectedIndex != -1) {
+        JTable selectedTable = tables[selectedIndex];
 
-            TableModel model = InventoryTable.getModel();
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showOpenDialog(this); // Change to open dialog to select an existing file
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
 
-            // Write data rows without headers
-            for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
-                Row row = sheet.createRow(startRow + 1 + rowIdx);
-                for (int colIdx = 0; colIdx < model.getColumnCount(); colIdx++) {
-                    Cell cell = row.createCell(startCol + colIdx);
-                    Object value = model.getValueAt(rowIdx, colIdx);
-                    if (value != null) {
-                        cell.setCellValue(value.toString());
+            Workbook wb = null;
+            try (FileInputStream fis = new FileInputStream(selectedFile)) {
+                // Determine the file extension
+                if (selectedFile.getName().endsWith(".xls")) {
+                    wb = new HSSFWorkbook(fis); // For .xls files
+                } else if (selectedFile.getName().endsWith(".xlsx")) {
+                    wb = new XSSFWorkbook(fis); // For .xlsx files
+                } else {
+                    JOptionPane.showMessageDialog(this, "Unsupported file format. Please choose a .xls or .xlsx file.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Prompt the user to specify the sheet, row, and column
+                String sheetName = JOptionPane.showInputDialog(this, "Enter the sheet name:", "Sheet1");
+                String rowInput = JOptionPane.showInputDialog(this, "Enter the row number:", "1");
+                String colInput = JOptionPane.showInputDialog(this, "Enter the column number:", "1");
+
+                int startRow = Integer.parseInt(rowInput) - 1;
+                int startCol = Integer.parseInt(colInput) - 1;
+
+                Sheet sheet = wb.getSheet(sheetName);
+                if (sheet == null) {
+                    sheet = wb.createSheet(sheetName);
+                }
+
+                TableModel model = selectedTable.getModel();
+
+                // Write data rows without headers
+                for (int rowIdx = 0; rowIdx < model.getRowCount(); rowIdx++) {
+                    Row row = sheet.createRow(startRow + 1 + rowIdx);
+                    for (int colIdx = 0; colIdx < model.getColumnCount(); colIdx++) {
+                        Cell cell = row.createCell(startCol + colIdx);
+                        Object value = model.getValueAt(rowIdx, colIdx);
+                        if (value != null) {
+                            cell.setCellValue(value.toString());
+                        }
+                    }
+                }
+
+                fis.close(); // Close the input stream before writing to the file
+
+                try (FileOutputStream out = new FileOutputStream(selectedFile)) {
+                    wb.write(out);
+                }
+
+                openFile(selectedFile.toString());
+
+            } catch (FileNotFoundException e) {
+                JOptionPane.showMessageDialog(this, "File not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                if (wb != null) {
+                    try {
+                        wb.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }
-
-            fis.close(); // Close the input stream before writing to the file
-
-            try (FileOutputStream out = new FileOutputStream(selectedFile)) {
-                wb.write(out);
-            }
-
-            openFile(selectedFile.toString());
-
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(this, "File not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            if (wb != null) {
-                try {
-                    wb.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Cancelled", JOptionPane.WARNING_MESSAGE);
         }
     } else {
-        JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Cancelled", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Table not found.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+
 
     
     private void Items_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items_ButtonActionPerformed
@@ -1124,7 +1154,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_Close_ButtonActionPerformed
 
     private void InventoryExport_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventoryExport_ButtonActionPerformed
-        exportexcel(AllItemsInventory);
+        exportexcel(new JTable[]{AllItemsInventory, FurnituresInventory, SchoolSuppliesInventory, EquipmentInventory, OthersInventory});
     }//GEN-LAST:event_InventoryExport_ButtonActionPerformed
 
     private void EmployeeDropdownBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBoxActionPerformed
@@ -1460,8 +1490,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
-
-    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {
