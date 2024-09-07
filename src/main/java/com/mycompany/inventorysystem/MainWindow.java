@@ -115,7 +115,8 @@ public class MainWindow extends javax.swing.JFrame {
         OthersTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setMinimumSize(new java.awt.Dimension(966, 606));
+        setPreferredSize(new java.awt.Dimension(1000, 606));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -524,8 +525,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(InventoryPanelLayout.createSequentialGroup()
                     .addGap(26, 26, 26)
-                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(87, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(92, Short.MAX_VALUE)))
         );
         InventoryPanelLayout.setVerticalGroup(
             InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,7 +610,7 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeePanelLayout.setHorizontalGroup(
             EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EmployeePanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addGroup(EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(EmployeePanelLayout.createSequentialGroup()
                         .addComponent(AddEmployeeButton)
@@ -625,7 +626,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(Search_Employee_Button))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(94, 94, 94))
         );
         EmployeePanelLayout.setVerticalGroup(
             EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
