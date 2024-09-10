@@ -39,12 +39,6 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         setTitle("Inventory System");
         HomeEmployee();
-        EmployeeTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        AllItemsTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        FurnituresTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        SchoolSuppliesTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        EquipmentsTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        OthersTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
     }
 
     @SuppressWarnings("unchecked")
@@ -600,7 +594,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Actions", "Employee ID", "Employee Name", "Employee Position", "Employee Designation"
+                "Employee ID", "Employee Name", "Employee Position", "Employee Designation", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {

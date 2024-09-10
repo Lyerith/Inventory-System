@@ -179,24 +179,26 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_AddEmployeeButtonActionPerformed
     
     public static DefaultTableModel getEmployeeData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Employee ID","Employee Name", " Employee Position", "Employee Designation"}, 0);
+    DefaultTableModel model = new DefaultTableModel(new String[]{"Employee ID","Employee Name", "Employee Position", "Employee Designation", "Actions"}, 0);
 
-        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             Statement stmt = con.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM employees")) {
+    try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+         Statement stmt = con.createStatement();
+         ResultSet rs = stmt.executeQuery("SELECT * FROM employees")) {
 
-            while (rs.next()) {
-                int id = rs.getInt("employee_id");
-                String name = rs.getString("name");
-                String position = rs.getString("position");
-                String designation = rs.getString("designation");
-                model.addRow(new Object[]{id, name, position, designation});
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        while (rs.next()) {
+            int id = rs.getInt("employee_id");
+            String name = rs.getString("name");
+            String position = rs.getString("position");
+            String designation = rs.getString("designation");
+            
+            // Add row with data and placeholder for "Actions" column
+            model.addRow(new Object[]{id, name, position, designation, ""});
         }
-        return model;
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+    return model;
+}
     
     private void ImportEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportEmployeesActionPerformed
         JFileChooser fileChooser = new JFileChooser();
