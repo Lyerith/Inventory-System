@@ -16,10 +16,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import org.apache.poi.ss.usermodel.Cell;
@@ -37,6 +39,12 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         setTitle("Inventory System");
         HomeEmployee();
+        EmployeeTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
+        AllItemsTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
+        FurnituresTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
+        SchoolSuppliesTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
+        EquipmentsTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
+        OthersTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
     }
 
     @SuppressWarnings("unchecked")
@@ -116,7 +124,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(966, 606));
-        setPreferredSize(new java.awt.Dimension(1000, 606));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -210,6 +217,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        EmployeeItems.setRowHeight(30);
         EmployeeItems.getTableHeader().setReorderingAllowed(false);
         AllItemsPane2.setViewportView(EmployeeItems);
 
@@ -377,6 +385,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        AllItemsInventory.setRowHeight(30);
         AllItemsInventory.getTableHeader().setReorderingAllowed(false);
         AllItems.setViewportView(AllItemsInventory);
 
@@ -585,23 +594,24 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Employee Name", "Employee Position", "Employee Designation"
+                "Actions", "Employee ID", "Employee Name", "Employee Position", "Employee Designation"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        EmployeeTable.setRowHeight(30);
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(EmployeeTable);
 
@@ -686,23 +696,24 @@ public class MainWindow extends javax.swing.JFrame {
 
         AllItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item ID", "Item Name", "Item Category"
+                "Actions", "Item ID", "Item Name", "Item Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        AllItemsTable.setRowHeight(30);
         AllItemsTable.getTableHeader().setReorderingAllowed(false);
         AllItemsPane.setViewportView(AllItemsTable);
 
@@ -727,6 +738,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        FurnituresTable.setRowHeight(30);
         FurnituresTable.getTableHeader().setReorderingAllowed(false);
         FurnituresPane.setViewportView(FurnituresTable);
 
@@ -751,6 +763,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        SchoolSuppliesTable.setRowHeight(30);
         SchoolSuppliesTable.getTableHeader().setReorderingAllowed(false);
         SchoolSuppliesPane.setViewportView(SchoolSuppliesTable);
 
@@ -775,6 +788,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        EquipmentsTable.setRowHeight(30);
         EquipmentsTable.getTableHeader().setReorderingAllowed(false);
         EquipmentsPane.setViewportView(EquipmentsTable);
 
@@ -799,6 +813,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        OthersTable.setRowHeight(30);
         OthersTable.getTableHeader().setReorderingAllowed(false);
         OthersPane.setViewportView(OthersTable);
 
@@ -1488,6 +1503,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public class ActionButton extends JButton{
+        public ActionButton(){
+            setContentAreaFilled(false);
+            setBorder(new EmptyBorder(3,3,3,3));
         }
     }
 
