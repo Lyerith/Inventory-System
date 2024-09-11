@@ -35,7 +35,7 @@ class EmployeeButtonEditor extends AbstractCellEditor implements TableCellEditor
     // Edit Action
     private void editAction() {
         int row = table.getSelectedRow();
-        int employeeId = (int) table.getValueAt(row, 0); // Get the employee ID
+        int employeeId = (int) table.getValueAt(row, 0); 
         
         // Edit logic here, e.g., prompt the user to edit the employee name
         String updatedName = JOptionPane.showInputDialog("Edit Name:", table.getValueAt(row, 1));

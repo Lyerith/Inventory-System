@@ -10,13 +10,13 @@ import java.awt.Component;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
-class ItemsButtonEditor extends AbstractCellEditor implements TableCellEditor {
+class InventoryButtonEditor extends AbstractCellEditor implements TableCellEditor {
     private final JPanel panel;
     private final JButton editButton;
     private final JButton deleteButton;
     private final JTable table;
 
-    public ItemsButtonEditor(JTable table) {
+    public InventoryButtonEditor(JTable table) {
         this.table = table;
         panel = new JPanel(new java.awt.FlowLayout());
 
@@ -28,46 +28,21 @@ class ItemsButtonEditor extends AbstractCellEditor implements TableCellEditor {
         panel.add(deleteButton);
 
         // Add action listeners for Edit and Delete buttons
-        editButton.addActionListener(e -> editAction());
+        //editButton.addActionListener(e -> editAction());
         deleteButton.addActionListener(e -> deleteAction());
-    }
-
-    // Edit Action
-    private void editAction() {
-        int row = table.getSelectedRow();
-        int ItemId = (int) table.getValueAt(row, 0); // Get the employee ID
-        
-        // Edit logic here, e.g., prompt the user to edit the employee name
-        String updatedName = JOptionPane.showInputDialog("Edit Name:", table.getValueAt(row, 1));
-        if (updatedName != null) {
-            try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-                String query = "UPDATE items SET item_name = ? WHERE item_id = ?";
-                PreparedStatement pstmt = con.prepareStatement(query);
-                pstmt.setString(1, updatedName);
-                pstmt.setInt(2, ItemId);
-                pstmt.executeUpdate();
-
-                // Update the table data
-                table.setValueAt(updatedName, row, 1);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error updating employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-        fireEditingStopped();  // Stop cell editing
     }
 
     // Delete Action
     private void deleteAction() {
         int row = table.getSelectedRow();
-        int ItemId = (int) table.getValueAt(row, 0);
+        int InventoryId = (int) table.getValueAt(row, 0);
         
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this item?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-                String query = "DELETE FROM items WHERE item_id = ?";
+                String query = "DELETE FROM inventory WHERE inventory_id = ?";
                 PreparedStatement pstmt = con.prepareStatement(query);
-                pstmt.setInt(1, ItemId);
+                pstmt.setInt(1, InventoryId);
                 pstmt.executeUpdate();
 
                 // Remove the row from the table

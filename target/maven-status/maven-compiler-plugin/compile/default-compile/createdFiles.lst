@@ -21,6 +21,7 @@ com\mycompany\inventorysystem\MainWindow$14.class
 com\mycompany\inventorysystem\MainWindow$29.class
 com\mycompany\inventorysystem\MainWindow$15.class
 com\mycompany\inventorysystem\MainWindow$25.class
+com\mycompany\inventorysystem\MainWindow$35.class
 com\mycompany\inventorysystem\MainWindow$4.class
 com\mycompany\inventorysystem\MainWindow$12.class
 com\mycompany\inventorysystem\MainWindow$18.class
@@ -32,8 +33,8 @@ com\mycompany\inventorysystem\MainWindow$5.class
 com\mycompany\inventorysystem\MainWindow$32.class
 com\mycompany\inventorysystem\MainWindow$8.class
 com\mycompany\inventorysystem\EmployeeButtonEditor.class
-com\mycompany\inventorysystem\MainWindow$ActionButton.class
 com\mycompany\inventorysystem\MainWindow$1.class
 com\mycompany\inventorysystem\MainWindow$21.class
 com\mycompany\inventorysystem\MainWindow$19.class
 com\mycompany\inventorysystem\MainWindow$24.class
+com\mycompany\inventorysystem\InventoryButtonEditor.class
