@@ -10,13 +10,13 @@ import java.awt.Component;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
-class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
+class EmployeeButtonEditor extends AbstractCellEditor implements TableCellEditor {
     private final JPanel panel;
     private final JButton editButton;
     private final JButton deleteButton;
     private final JTable table;
 
-    public ButtonEditor(JTable table) {
+    public EmployeeButtonEditor(JTable table) {
         this.table = table;
         panel = new JPanel(new java.awt.FlowLayout());
 

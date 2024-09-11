@@ -739,7 +739,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        FurnituresTable.setRowHeight(30);
+        FurnituresTable.setRowHeight(40);
         FurnituresTable.getTableHeader().setReorderingAllowed(false);
         FurnituresPane.setViewportView(FurnituresTable);
 
@@ -764,7 +764,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SchoolSuppliesTable.setRowHeight(30);
+        SchoolSuppliesTable.setRowHeight(40);
         SchoolSuppliesTable.getTableHeader().setReorderingAllowed(false);
         SchoolSuppliesPane.setViewportView(SchoolSuppliesTable);
 
@@ -874,7 +874,7 @@ public class MainWindow extends javax.swing.JFrame {
         EmployeeTable.setModel(AddEmployee.getEmployeeData());
         TableColumn actionColumn = EmployeeTable.getColumnModel().getColumn(4);  // Actions column
         actionColumn.setCellRenderer(new ButtonRenderer());
-        actionColumn.setCellEditor(new ButtonEditor(EmployeeTable));
+        actionColumn.setCellEditor(new EmployeeButtonEditor(EmployeeTable));
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     public void openFile(String file){
@@ -991,20 +991,33 @@ public class MainWindow extends javax.swing.JFrame {
 }
 
 
-
-    
     private void Items_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items_ButtonActionPerformed
         Tabs.setSelectedIndex(3);
-        DefaultTableModel model0 = Items.getAllItemsData();
-        AllItemsTable.setModel(model0);
-        DefaultTableModel model1 = Items.getFurnituresData();
-        FurnituresTable.setModel(model1);
-        DefaultTableModel model2 = Items.getSchoolSuppliesData();
-        SchoolSuppliesTable.setModel(model2);
-        DefaultTableModel model3 = Items.getEquipmentsData();
-        EquipmentsTable.setModel(model3);
-        DefaultTableModel model4 = Items.getOthersData();
-        OthersTable.setModel(model4);
+        
+        AllItemsTable.setModel(Items.getAllItemsData());
+        TableColumn actionColumn = AllItemsTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new ItemsButtonEditor(AllItemsTable));
+        
+        FurnituresTable.setModel(Items.getFurnituresData());
+        TableColumn actionColumn1 = FurnituresTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn1.setCellRenderer(new ButtonRenderer());
+        actionColumn1.setCellEditor(new ItemsButtonEditor(FurnituresTable));
+        
+        SchoolSuppliesTable.setModel(Items.getSchoolSuppliesData());
+        TableColumn actionColumn2 = SchoolSuppliesTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn2.setCellRenderer(new ButtonRenderer());
+        actionColumn2.setCellEditor(new ItemsButtonEditor(SchoolSuppliesTable));
+        
+        EquipmentsTable.setModel(Items.getEquipmentsData());
+        TableColumn actionColumn3 = EquipmentsTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn3.setCellRenderer(new ButtonRenderer());
+        actionColumn3.setCellEditor(new ItemsButtonEditor(EquipmentsTable));
+        
+        OthersTable.setModel(Items.getOthersData());
+        TableColumn actionColumn4 = OthersTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn4.setCellRenderer(new ButtonRenderer());
+        actionColumn4.setCellEditor(new ItemsButtonEditor(OthersTable));
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
     private void EmployeeExport_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeExport_ButtonActionPerformed
