@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -605,7 +606,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        EmployeeTable.setRowHeight(30);
+        EmployeeTable.setRowHeight(40);
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(EmployeeTable);
 
@@ -696,7 +697,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -707,9 +708,15 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        AllItemsTable.setRowHeight(30);
+        AllItemsTable.setRowHeight(40);
         AllItemsTable.getTableHeader().setReorderingAllowed(false);
         AllItemsPane.setViewportView(AllItemsTable);
+        if (AllItemsTable.getColumnModel().getColumnCount() > 0) {
+            AllItemsTable.getColumnModel().getColumn(0).setResizable(false);
+            AllItemsTable.getColumnModel().getColumn(1).setResizable(false);
+            AllItemsTable.getColumnModel().getColumn(2).setResizable(false);
+            AllItemsTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jTabbedPane1.addTab("All Items", AllItemsPane);
 
@@ -721,7 +728,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -746,7 +753,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -771,7 +778,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -782,7 +789,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        EquipmentsTable.setRowHeight(30);
+        EquipmentsTable.setRowHeight(40);
         EquipmentsTable.getTableHeader().setReorderingAllowed(false);
         EquipmentsPane.setViewportView(EquipmentsTable);
 
@@ -796,7 +803,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -807,7 +814,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        OthersTable.setRowHeight(30);
+        OthersTable.setRowHeight(40);
         OthersTable.getTableHeader().setReorderingAllowed(false);
         OthersPane.setViewportView(OthersTable);
 
@@ -864,8 +871,10 @@ public class MainWindow extends javax.swing.JFrame {
                 
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
-        DefaultTableModel model= AddEmployee.getEmployeeData();
-        EmployeeTable.setModel(model);
+        EmployeeTable.setModel(AddEmployee.getEmployeeData());
+        TableColumn actionColumn = EmployeeTable.getColumnModel().getColumn(4);  // Actions column
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new ButtonEditor(EmployeeTable));
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     public void openFile(String file){
