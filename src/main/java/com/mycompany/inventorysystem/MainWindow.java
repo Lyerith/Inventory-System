@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -39,12 +40,6 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         setTitle("Inventory System");
         HomeEmployee();
-        EmployeeTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        AllItemsTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        FurnituresTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        SchoolSuppliesTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        EquipmentsTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
-        OthersTable.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender());
     }
 
     @SuppressWarnings("unchecked")
@@ -217,7 +212,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        EmployeeItems.setRowHeight(30);
+        EmployeeItems.setRowHeight(40);
         EmployeeItems.getTableHeader().setReorderingAllowed(false);
         AllItemsPane2.setViewportView(EmployeeItems);
 
@@ -232,6 +227,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeDesignationLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EmployeeDesignationLabel.setText("Designation:");
+
+        DesignationTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DesignationTextFieldActionPerformed(evt);
+            }
+        });
 
         Employee_Namelabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Employee_Namelabel1.setText("ID:");
@@ -329,26 +330,26 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomePageLayout.createSequentialGroup()
-                        .addComponent(EmployeeDropdownBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EmployeeDropdownBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(DetailsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Employee_Namelabel1)
-                            .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Employee_Namelabel)
-                            .addComponent(NameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(NameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(EmployeePositionLabel)
-                            .addComponent(PositionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PositionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EmployeeDesignationLabel)
-                            .addComponent(DesignationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(DesignationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EmployeeDesignationLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(HomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(InsertEmpItems, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(NewEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -368,24 +369,24 @@ public class MainWindow extends javax.swing.JFrame {
 
         AllItemsInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
+                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        AllItemsInventory.setRowHeight(30);
+        AllItemsInventory.setRowHeight(80);
         AllItemsInventory.getTableHeader().setReorderingAllowed(false);
         AllItems.setViewportView(AllItemsInventory);
 
@@ -393,92 +394,100 @@ public class MainWindow extends javax.swing.JFrame {
 
         FurnituresInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
+                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        FurnituresInventory.setRowHeight(80);
+        FurnituresInventory.getTableHeader().setReorderingAllowed(false);
         Furnitures.setViewportView(FurnituresInventory);
 
         jTabbedPane3.addTab("Furnitures", Furnitures);
 
         SchoolSuppliesInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
+                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        SchoolSuppliesInventory.setRowHeight(80);
+        SchoolSuppliesInventory.getTableHeader().setReorderingAllowed(false);
         SchoolSupplies.setViewportView(SchoolSuppliesInventory);
 
         jTabbedPane3.addTab("School Supplies", SchoolSupplies);
 
         EquipmentInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
+                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        EquipmentInventory.setRowHeight(80);
+        EquipmentInventory.getTableHeader().setReorderingAllowed(false);
         Equipment.setViewportView(EquipmentInventory);
 
         jTabbedPane3.addTab("Equipment", Equipment);
 
         OthersInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks"
+                "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        OthersInventory.setRowHeight(80);
+        OthersInventory.getTableHeader().setReorderingAllowed(false);
         Others.setViewportView(OthersInventory);
 
         jTabbedPane3.addTab("Others", Others);
@@ -600,7 +609,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Actions", "Employee ID", "Employee Name", "Employee Position", "Employee Designation"
+                "Employee ID", "Employee Name", "Employee Position", "Employee Designation", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -611,7 +620,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        EmployeeTable.setRowHeight(30);
+        EmployeeTable.setRowHeight(40);
         EmployeeTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(EmployeeTable);
 
@@ -702,7 +711,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -713,9 +722,15 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        AllItemsTable.setRowHeight(30);
+        AllItemsTable.setRowHeight(40);
         AllItemsTable.getTableHeader().setReorderingAllowed(false);
         AllItemsPane.setViewportView(AllItemsTable);
+        if (AllItemsTable.getColumnModel().getColumnCount() > 0) {
+            AllItemsTable.getColumnModel().getColumn(0).setResizable(false);
+            AllItemsTable.getColumnModel().getColumn(1).setResizable(false);
+            AllItemsTable.getColumnModel().getColumn(2).setResizable(false);
+            AllItemsTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jTabbedPane1.addTab("All Items", AllItemsPane);
 
@@ -727,7 +742,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -738,7 +753,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        FurnituresTable.setRowHeight(30);
+        FurnituresTable.setRowHeight(40);
         FurnituresTable.getTableHeader().setReorderingAllowed(false);
         FurnituresPane.setViewportView(FurnituresTable);
 
@@ -752,7 +767,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -763,7 +778,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        SchoolSuppliesTable.setRowHeight(30);
+        SchoolSuppliesTable.setRowHeight(40);
         SchoolSuppliesTable.getTableHeader().setReorderingAllowed(false);
         SchoolSuppliesPane.setViewportView(SchoolSuppliesTable);
 
@@ -777,7 +792,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -788,7 +803,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        EquipmentsTable.setRowHeight(30);
+        EquipmentsTable.setRowHeight(40);
         EquipmentsTable.getTableHeader().setReorderingAllowed(false);
         EquipmentsPane.setViewportView(EquipmentsTable);
 
@@ -802,7 +817,7 @@ public class MainWindow extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Actions", "Item ID", "Item Name", "Item Category"
+                "Item ID", "Item Name", "Item Category", "Actions"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -813,7 +828,7 @@ public class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        OthersTable.setRowHeight(30);
+        OthersTable.setRowHeight(40);
         OthersTable.getTableHeader().setReorderingAllowed(false);
         OthersPane.setViewportView(OthersTable);
 
@@ -870,8 +885,10 @@ public class MainWindow extends javax.swing.JFrame {
                 
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
-        DefaultTableModel model= AddEmployee.getEmployeeData();
-        EmployeeTable.setModel(model);
+        EmployeeTable.setModel(AddEmployee.getEmployeeData());
+        TableColumn actionColumn = EmployeeTable.getColumnModel().getColumn(4);  // Actions column
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new EmployeeButtonEditor(EmployeeTable));
     }//GEN-LAST:event_Employee_ButtonActionPerformed
 
     public void openFile(String file){
@@ -988,20 +1005,33 @@ public class MainWindow extends javax.swing.JFrame {
 }
 
 
-
-    
     private void Items_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Items_ButtonActionPerformed
         Tabs.setSelectedIndex(3);
-        DefaultTableModel model0 = Items.getAllItemsData();
-        AllItemsTable.setModel(model0);
-        DefaultTableModel model1 = Items.getFurnituresData();
-        FurnituresTable.setModel(model1);
-        DefaultTableModel model2 = Items.getSchoolSuppliesData();
-        SchoolSuppliesTable.setModel(model2);
-        DefaultTableModel model3 = Items.getEquipmentsData();
-        EquipmentsTable.setModel(model3);
-        DefaultTableModel model4 = Items.getOthersData();
-        OthersTable.setModel(model4);
+        
+        AllItemsTable.setModel(Items.getAllItemsData());
+        TableColumn actionColumn = AllItemsTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new ItemsButtonEditor(AllItemsTable));
+        
+        FurnituresTable.setModel(Items.getFurnituresData());
+        TableColumn actionColumn1 = FurnituresTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn1.setCellRenderer(new ButtonRenderer());
+        actionColumn1.setCellEditor(new ItemsButtonEditor(FurnituresTable));
+        
+        SchoolSuppliesTable.setModel(Items.getSchoolSuppliesData());
+        TableColumn actionColumn2 = SchoolSuppliesTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn2.setCellRenderer(new ButtonRenderer());
+        actionColumn2.setCellEditor(new ItemsButtonEditor(SchoolSuppliesTable));
+        
+        EquipmentsTable.setModel(Items.getEquipmentsData());
+        TableColumn actionColumn3 = EquipmentsTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn3.setCellRenderer(new ButtonRenderer());
+        actionColumn3.setCellEditor(new ItemsButtonEditor(EquipmentsTable));
+        
+        OthersTable.setModel(Items.getOthersData());
+        TableColumn actionColumn4 = OthersTable.getColumnModel().getColumn(3);  // Actions column
+        actionColumn4.setCellRenderer(new ButtonRenderer());
+        actionColumn4.setCellEditor(new ItemsButtonEditor(OthersTable));
     }//GEN-LAST:event_Items_ButtonActionPerformed
 
     private void EmployeeExport_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeExport_ButtonActionPerformed
@@ -1153,6 +1183,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
         EmployeeCombo();
+        TableColumn actionColumn4 = AllItemsInventory.getColumnModel().getColumn(10);  // Actions column
+        actionColumn4.setCellRenderer(new ButtonRenderer());
+        actionColumn4.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
 
     private void Home_Button_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_Button_ActionPerformed
@@ -1193,16 +1226,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void NewItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewItemButtonActionPerformed
         Tabs.setSelectedIndex(3);
-        DefaultTableModel model0 = Items.getAllItemsData();
-        AllItemsTable.setModel(model0);
-        DefaultTableModel model1 = Items.getFurnituresData();
-        FurnituresTable.setModel(model1);
-        DefaultTableModel model2 = Items.getSchoolSuppliesData();
-        SchoolSuppliesTable.setModel(model2);
-        DefaultTableModel model3 = Items.getEquipmentsData();
-        EquipmentsTable.setModel(model3);
-        DefaultTableModel model4 = Items.getOthersData();
-        OthersTable.setModel(model4);
+        AllItemsTable.setModel(Items.getAllItemsData());
+        FurnituresTable.setModel(Items.getFurnituresData());
+        SchoolSuppliesTable.setModel(Items.getSchoolSuppliesData());
+        EquipmentsTable.setModel(Items.getEquipmentsData());
+        OthersTable.setModel(Items.getOthersData());
         Items item = new Items();
         item.show();
     }//GEN-LAST:event_NewItemButtonActionPerformed
@@ -1229,6 +1257,10 @@ public class MainWindow extends javax.swing.JFrame {
             updateInventoryTable(selectedEmployee);
         }
     }//GEN-LAST:event_EmployeeDropdownBox1ActionPerformed
+
+    private void DesignationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DesignationTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DesignationTextFieldActionPerformed
             
     private void updateInventoryTable(String employeeName) {
 
@@ -1236,7 +1268,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
             "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -1257,7 +1289,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
             AllItemsInventory.setModel(model);
 
@@ -1506,13 +1538,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
     
-    public class ActionButton extends JButton{
-        public ActionButton(){
-            setContentAreaFilled(false);
-            setBorder(new EmptyBorder(3,3,3,3));
-        }
-    }
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(() -> {

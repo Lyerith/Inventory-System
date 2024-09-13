@@ -235,7 +235,7 @@ public class Items extends javax.swing.JFrame {
     
     public static DefaultTableModel getAllItemsData() {
         
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name", "Item Category"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name", "Item Category", "Actions"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
@@ -245,7 +245,7 @@ public class Items extends javax.swing.JFrame {
                 int id = rs.getInt("item_id");
                 String name = rs.getString("item_name");
                 String category = rs.getString("category");
-                model.addRow(new Object[]{id, name, category});
+                model.addRow(new Object[]{id, name, category, ""});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error fetching inventory data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -254,7 +254,7 @@ public class Items extends javax.swing.JFrame {
     }
     
     public static DefaultTableModel getFurnituresData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Furniture No.", "Furniture Name"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Furniture No.", "Furniture Name", "Category", "Actions"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
@@ -264,7 +264,7 @@ public class Items extends javax.swing.JFrame {
                 int id = rs.getInt("item_id");
                 String name = rs.getString("item_name");
                 String category = rs.getString("category");
-                model.addRow(new Object[]{id, name, category});
+                model.addRow(new Object[]{id, name, category, ""});
             }
         } catch (SQLException e) {
             
@@ -273,7 +273,7 @@ public class Items extends javax.swing.JFrame {
     }
     
     public static DefaultTableModel getSchoolSuppliesData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"School Supply No.", "School Supply Name"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"School Supply No.", "School Supply Name", "Category", "Actions"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
@@ -283,7 +283,7 @@ public class Items extends javax.swing.JFrame {
                 int id = rs.getInt("item_id");
                 String name = rs.getString("item_name");
                 String category = rs.getString("category");
-                model.addRow(new Object[]{id, name, category});
+                model.addRow(new Object[]{id, name, category, ""});
             }
         } catch (SQLException e) {
             
@@ -292,7 +292,7 @@ public class Items extends javax.swing.JFrame {
     }
     
     public static DefaultTableModel getEquipmentsData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Equipment No.", "Equipment Name"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Equipment No.", "Equipment Name", "Category", "Actions"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
@@ -302,7 +302,7 @@ public class Items extends javax.swing.JFrame {
                 int id = rs.getInt("item_id");
                 String name = rs.getString("item_name");
                 String category = rs.getString("category");
-                model.addRow(new Object[]{id, name, category});
+                model.addRow(new Object[]{id, name, category, ""});
             }
         } catch (SQLException e) {
             
@@ -311,7 +311,7 @@ public class Items extends javax.swing.JFrame {
     }
     
     public static DefaultTableModel getOthersData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Item No.", "Item Name", "Category", "Actions"}, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
              Statement stmt = con.createStatement();
@@ -321,7 +321,7 @@ public class Items extends javax.swing.JFrame {
                 int id = rs.getInt("item_id");
                 String name = rs.getString("item_name");
                 String category = rs.getString("category");
-                model.addRow(new Object[]{id, name, category});
+                model.addRow(new Object[]{id, name, category, ""});
             }
         } catch (SQLException e) {
 
