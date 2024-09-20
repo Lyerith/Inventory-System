@@ -7,6 +7,7 @@ package com.mycompany.inventorysystem;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,28 +35,50 @@ class ItemsButtonEditor extends AbstractCellEditor implements TableCellEditor {
 
     // Edit Action
     private void editAction() {
-        int row = table.getSelectedRow();
-        int ItemId = (int) table.getValueAt(row, 0); // Get the employee ID
+    int row = table.getSelectedRow();
+    int itemId = (int) table.getValueAt(row, 0); // Assuming item ID is in the first column
+    
+    // Existing item details
+    String currentItemName = (String) table.getValueAt(row, 1);  // Item name in the second column
+    String currentItemCategory = (String) table.getValueAt(row, 2);  // Item category in the third column
+    
+    // Create input fields for item name and item category
+    JTextField nameField = new JTextField(currentItemName);
+    JTextField categoryField = new JTextField(currentItemCategory);
+    
+    // Create the panel to hold the input fields
+    JPanel panel = new JPanel(new GridLayout(0, 1));
+    panel.add(new JLabel("Edit Item Name:"));
+    panel.add(nameField);
+    panel.add(new JLabel("Edit Item Category:"));
+    panel.add(categoryField);
+    
+    // Show input dialog
+    int result = JOptionPane.showConfirmDialog(null, panel, "Edit Item", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+    if (result == JOptionPane.OK_OPTION) {
+        String updatedName = nameField.getText();
+        String updatedCategory = categoryField.getText();
         
-        // Edit logic here, e.g., prompt the user to edit the employee name
-        String updatedName = JOptionPane.showInputDialog("Edit Name:", table.getValueAt(row, 1));
-        if (updatedName != null) {
-            try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-                String query = "UPDATE items SET item_name = ? WHERE item_id = ?";
-                PreparedStatement pstmt = con.prepareStatement(query);
-                pstmt.setString(1, updatedName);
-                pstmt.setInt(2, ItemId);
-                pstmt.executeUpdate();
-
-                // Update the table data
-                table.setValueAt(updatedName, row, 1);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error updating employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            // Update the item details in the database
+            String query = "UPDATE items SET item_name = ?, category = ? WHERE item_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, updatedName);
+            pstmt.setString(2, updatedCategory);
+            pstmt.setInt(3, itemId);
+            pstmt.executeUpdate();
+            
+            // Update the table data to reflect the changes
+            table.setValueAt(updatedName, row, 1);  // Update item name in table
+            table.setValueAt(updatedCategory, row, 2);  // Update item category in table
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating item: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        fireEditingStopped();  // Stop cell editing
     }
+
+    fireEditingStopped();  // Stop cell editing
+}
+
 
     // Delete Action
     private void deleteAction() {
