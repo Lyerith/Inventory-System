@@ -7,6 +7,7 @@ package com.mycompany.inventorysystem;
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.Component;
+import java.awt.GridLayout;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,20 +36,48 @@ class EmployeeButtonEditor extends AbstractCellEditor implements TableCellEditor
     // Edit Action
     private void editAction() {
         int row = table.getSelectedRow();
-        int employeeId = (int) table.getValueAt(row, 0); 
-        
-        // Edit logic here, e.g., prompt the user to edit the employee name
-        String updatedName = JOptionPane.showInputDialog("Edit Name:", table.getValueAt(row, 1));
-        if (updatedName != null) {
+        int employeeId = (int) table.getValueAt(row, 0); // Assuming employee ID is in the first column
+
+        // Existing employee details
+        String currentName = (String) table.getValueAt(row, 1);  // Name in the second column
+        String currentPosition = (String) table.getValueAt(row, 2);  // Position in the third column
+        String currentDesignation = (String) table.getValueAt(row, 3);  // Designation in the fourth column
+
+        // Create input fields for name, position, and designation
+        JTextField nameField = new JTextField(currentName);
+        JTextField positionField = new JTextField(currentPosition);
+        JTextField designationField = new JTextField(currentDesignation);
+
+        // Create the panel to hold the input fields
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Edit Name:"));
+        panel.add(nameField);
+        panel.add(new JLabel("Edit Position:"));
+        panel.add(positionField);
+        panel.add(new JLabel("Edit Designation:"));
+        panel.add(designationField);
+
+        // Show input dialog
+        int result = JOptionPane.showConfirmDialog(null, panel, "Edit Employee", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            String updatedName = nameField.getText();
+            String updatedPosition = positionField.getText();
+            String updatedDesignation = designationField.getText();
+
             try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-                String query = "UPDATE employees SET name = ? WHERE employee_id = ?";
+                // Update the employee details in the database
+                String query = "UPDATE employees SET name = ?, position = ?, designation = ? WHERE employee_id = ?";
                 PreparedStatement pstmt = con.prepareStatement(query);
                 pstmt.setString(1, updatedName);
-                pstmt.setInt(2, employeeId);
+                pstmt.setString(2, updatedPosition);
+                pstmt.setString(3, updatedDesignation);
+                pstmt.setInt(4, employeeId);
                 pstmt.executeUpdate();
 
-                // Update the table data
-                table.setValueAt(updatedName, row, 1);
+                // Update the table data to reflect the changes
+                table.setValueAt(updatedName, row, 1);  // Update name in table
+                table.setValueAt(updatedPosition, row, 2);  // Update position in table
+                table.setValueAt(updatedDesignation, row, 3);  // Update designation in table
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error updating employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

@@ -1183,7 +1183,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
         EmployeeCombo();
-        TableColumn actionColumn4 = AllItemsInventory.getColumnModel().getColumn(10);  // Actions column
+        TableColumn actionColumn4 = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
         actionColumn4.setCellRenderer(new ButtonRenderer());
         actionColumn4.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
@@ -1264,10 +1264,10 @@ public class MainWindow extends javax.swing.JFrame {
             
     private void updateInventoryTable(String employeeName) {
 
-        String sql = "SELECT category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory WHERE name = ?";
+        String sql = "SELECT inventory_id, category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks FROM inventory WHERE name = ?";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "Inventory ID", "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
             "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
@@ -1278,6 +1278,7 @@ public class MainWindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("inventory_id");
                 String item = rs.getString("item");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
@@ -1289,7 +1290,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
+                model.addRow(new Object[]{id, item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
             AllItemsInventory.setModel(model);
 
@@ -1485,24 +1486,32 @@ public class MainWindow extends javax.swing.JFrame {
                 EmployeeDropdownBox1.addItem(employeeName);
             }
 
-            EmployeeDropdownBox1.addActionListener(e -> {
-                String selectedItem = (String) EmployeeDropdownBox1.getSelectedItem();
-                if (selectedItem != null && employeeMap.containsKey(selectedItem)) {
-                    String[] selectedEmployeeDetails = employeeMap.get(selectedItem);
-                    IDTextField.setText(selectedEmployeeDetails[0]);
-                    NameTextfield.setText(selectedEmployeeDetails[1]);
-                    PositionTextField.setText(selectedEmployeeDetails[2]);
-                    DesignationTextField.setText(selectedEmployeeDetails[3]);
-                    updateEmployeeItems(selectedItem);
-                }
-            });
+            // Clear text fields if dropdown is empty
+            if (EmployeeDropdownBox1.getItemCount() == 0) {
+                IDTextField.setText("");
+                NameTextfield.setText("");
+                PositionTextField.setText("");
+                DesignationTextField.setText("");
+            } else {
+                EmployeeDropdownBox1.addActionListener(e -> {
+                    String selectedItem = (String) EmployeeDropdownBox1.getSelectedItem();
+                    if (selectedItem != null && employeeMap.containsKey(selectedItem)) {
+                        String[] selectedEmployeeDetails = employeeMap.get(selectedItem);
+                        IDTextField.setText(selectedEmployeeDetails[0]);
+                        NameTextfield.setText(selectedEmployeeDetails[1]);
+                        PositionTextField.setText(selectedEmployeeDetails[2]);
+                        DesignationTextField.setText(selectedEmployeeDetails[3]);
+                        updateEmployeeItems(selectedItem);
+                    }
+                });
 
-            // Optionally, you can trigger an initial update if you want to load the first employee's data automatically
-            if (EmployeeDropdownBox1.getItemCount() > 0) {
-                EmployeeDropdownBox1.setSelectedIndex(0); // Select the first item
-                String selectedEmployee = (String) EmployeeDropdownBox1.getSelectedItem();
-                if (selectedEmployee != null) {
-                    updateEmployeeItems(selectedEmployee);
+                // Trigger an initial update if you want to load the first employee's data automatically
+                if (EmployeeDropdownBox1.getItemCount() > 0) {
+                    EmployeeDropdownBox1.setSelectedIndex(0); // Select the first item
+                    String selectedEmployee = (String) EmployeeDropdownBox1.getSelectedItem();
+                    if (selectedEmployee != null) {
+                        updateEmployeeItems(selectedEmployee);
+                    }
                 }
             }
 
@@ -1510,6 +1519,7 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     private void updateEmployeeItems(String employeeName) {
         String sql = "SELECT item, category FROM inventory WHERE name = ?";
