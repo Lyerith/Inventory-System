@@ -1165,9 +1165,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
         EmployeeCombo();
-        TableColumn actionColumn = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
-        actionColumn.setCellRenderer(new ButtonRenderer());
-        actionColumn.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
 
     private void Home_Button_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_Button_ActionPerformed
@@ -1196,6 +1193,9 @@ public class MainWindow extends javax.swing.JFrame {
             updateSchoolSuppliesTable(selectedEmployee);
             updateEquipmentsTable(selectedEmployee);
             updateOthersTable(selectedEmployee);
+            TableColumn actionColumn = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
+            actionColumn.setCellRenderer(new ButtonRenderer());
+            actionColumn.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
         }
     }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
 

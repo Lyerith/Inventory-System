@@ -34,46 +34,23 @@ class InventoryButtonEditor extends AbstractCellEditor implements TableCellEdito
 
     // Delete Action
     private void deleteAction() {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-        // Check if the model has at least one row and one column
-        if (model.getRowCount() == 0 || model.getColumnCount() == 0) {
-            JOptionPane.showMessageDialog(null, "No data to delete.", "Error", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
         int row = table.getSelectedRow();
-
-        // Ensure a row is selected
-        if (row == -1) {
-            JOptionPane.showMessageDialog(null, "Please select an employee to delete.", "No Selection", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // Ensure the table has enough columns to access the employee ID
-        if (model.getColumnCount() > 0) {
-            int employeeId = (int) table.getValueAt(row, 0); // Get the employee ID
-            System.out.println(employeeId);
-
-            int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?", "Confirm", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-                    String query = "DELETE FROM employees WHERE employee_id = ?";
-                    PreparedStatement pstmt = con.prepareStatement(query);
-                    pstmt.setInt(1, employeeId);
-                    pstmt.executeUpdate();
-
-                    // Remove the row from the table
-                    model.removeRow(row);
-                } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error deleting employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
+        int InventoryId = (int) table.getValueAt(row, 0);
+        
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this item?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+                String query = "DELETE FROM inventory WHERE inventory_id = ?";
+                PreparedStatement pstmt = con.prepareStatement(query);
+                pstmt.setInt(1, InventoryId);
+                pstmt.executeUpdate();
+                // Remove the row from the table
+                ((DefaultTableModel) table.getModel()).removeRow(row);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error deleting Item: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            fireEditingStopped();  // Stop cell editing
-        } else {
-            JOptionPane.showMessageDialog(null, "Table has no valid columns.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        fireEditingStopped();  // Stop cell editing
     }
 
     @Override
