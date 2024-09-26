@@ -348,7 +348,7 @@ public class InsertData extends javax.swing.JFrame {
     public static DefaultTableModel getInventoryData() {
         DefaultTableModel model = new DefaultTableModel(new String[]{
             "Item", "Category", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -367,7 +367,7 @@ public class InsertData extends javax.swing.JFrame {
                 String shortageOverageQuantity = rs.getString("quantity");
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
         } catch (SQLException e) {
             

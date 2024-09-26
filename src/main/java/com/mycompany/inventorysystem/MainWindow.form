@@ -504,7 +504,8 @@
                     <Component class="javax.swing.JTable" name="AllItemsInventory">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="12" rowCount="0">
+                            <Column editable="false" title="Inventory ID" type="java.lang.Object"/>
                             <Column editable="false" title="Item" type="java.lang.Object"/>
                             <Column editable="false" title="Description" type="java.lang.Object"/>
                             <Column editable="false" title="Stock No." type="java.lang.Object"/>
@@ -520,6 +521,11 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -602,7 +608,8 @@
                     <Component class="javax.swing.JTable" name="FurnituresInventory">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="12" rowCount="0">
+                            <Column editable="false" title="Inventory ID" type="java.lang.Object"/>
                             <Column editable="false" title="Item" type="java.lang.Object"/>
                             <Column editable="false" title="Description" type="java.lang.Object"/>
                             <Column editable="false" title="Stock No." type="java.lang.Object"/>
@@ -618,6 +625,11 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -700,7 +712,8 @@
                     <Component class="javax.swing.JTable" name="SchoolSuppliesInventory">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="12" rowCount="0">
+                            <Column editable="false" title="Inventory ID" type="java.lang.Object"/>
                             <Column editable="false" title="Item" type="java.lang.Object"/>
                             <Column editable="false" title="Description" type="java.lang.Object"/>
                             <Column editable="false" title="Stock No." type="java.lang.Object"/>
@@ -716,6 +729,11 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -798,7 +816,8 @@
                     <Component class="javax.swing.JTable" name="EquipmentInventory">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="12" rowCount="0">
+                            <Column editable="false" title="Inventory ID" type="java.lang.Object"/>
                             <Column editable="false" title="Item" type="java.lang.Object"/>
                             <Column editable="false" title="Description" type="java.lang.Object"/>
                             <Column editable="false" title="Stock No." type="java.lang.Object"/>
@@ -814,6 +833,11 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -896,7 +920,8 @@
                     <Component class="javax.swing.JTable" name="OthersInventory">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="11" rowCount="4">
+                          <Table columnCount="12" rowCount="0">
+                            <Column editable="false" title="Inventory ID" type="java.lang.Object"/>
                             <Column editable="false" title="Item" type="java.lang.Object"/>
                             <Column editable="false" title="Description" type="java.lang.Object"/>
                             <Column editable="false" title="Stock No." type="java.lang.Object"/>
@@ -912,6 +937,11 @@
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -1045,7 +1075,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="AddEmployeeButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1053,16 +1083,14 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="Close_Button1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="SearchEmployeeLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="SearchBar" max="32767" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="Search_Employee_Button" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane1" alignment="0" min="-2" pref="775" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SearchEmployeeLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="SearchBar" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="Search_Employee_Button" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="775" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                   </Group>
@@ -1143,7 +1171,7 @@
                 <Component class="javax.swing.JTable" name="EmployeeTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="false" title="Employee ID" type="java.lang.Object"/>
                         <Column editable="false" title="Employee Name" type="java.lang.Object"/>
                         <Column editable="false" title="Employee Position" type="java.lang.Object"/>
