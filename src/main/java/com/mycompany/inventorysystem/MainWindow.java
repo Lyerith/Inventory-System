@@ -369,10 +369,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         AllItemsInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
@@ -394,10 +391,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         FurnituresInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
@@ -419,10 +413,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         SchoolSuppliesInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
@@ -444,10 +435,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         EquipmentInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
@@ -469,10 +457,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         OthersInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/OVerage(Value)", "Remarks", "Actions"
@@ -603,10 +588,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Employee ID", "Employee Name", "Employee Position", "Employee Designation", "Actions"
@@ -630,21 +612,20 @@ public class MainWindow extends javax.swing.JFrame {
             EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EmployeePanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(EmployeePanelLayout.createSequentialGroup()
                         .addComponent(AddEmployeeButton)
                         .addGap(18, 18, 18)
                         .addComponent(EmployeeExport_Button)
                         .addGap(18, 18, 18)
                         .addComponent(Close_Button1))
-                    .addGroup(EmployeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EmployeePanelLayout.createSequentialGroup()
-                            .addComponent(SearchEmployeeLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(SearchBar)
-                            .addGap(18, 18, 18)
-                            .addComponent(Search_Employee_Button))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EmployeePanelLayout.createSequentialGroup()
+                        .addComponent(SearchEmployeeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SearchBar)
+                        .addGap(18, 18, 18)
+                        .addComponent(Search_Employee_Button))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(94, 94, 94))
         );
         EmployeePanelLayout.setVerticalGroup(
@@ -885,6 +866,7 @@ public class MainWindow extends javax.swing.JFrame {
                 
     private void Employee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Employee_ButtonActionPerformed
         Tabs.setSelectedIndex(2);
+        
         EmployeeTable.setModel(AddEmployee.getEmployeeData());
         TableColumn actionColumn = EmployeeTable.getColumnModel().getColumn(4);  // Actions column
         actionColumn.setCellRenderer(new ButtonRenderer());
@@ -1183,9 +1165,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void Inventory_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Inventory_ButtonActionPerformed
         Tabs.setSelectedIndex(1);
         EmployeeCombo();
-        TableColumn actionColumn4 = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
-        actionColumn4.setCellRenderer(new ButtonRenderer());
-        actionColumn4.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
+        TableColumn actionColumn = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
     }//GEN-LAST:event_Inventory_ButtonActionPerformed
 
     private void Home_Button_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_Button_ActionPerformed
