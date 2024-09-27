@@ -31,7 +31,7 @@ class InventoryButtonEditor extends AbstractCellEditor implements TableCellEdito
         //editButton.addActionListener(e -> editAction());
         deleteButton.addActionListener(e -> deleteAction());
     }
-
+        
     // Delete Action
     private void deleteAction() {
         int row = table.getSelectedRow();
