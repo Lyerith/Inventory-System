@@ -46,6 +46,7 @@ class InventoryButtonEditor extends AbstractCellEditor implements TableCellEdito
                 pstmt.executeUpdate();
                 // Remove the row from the table
                 ((DefaultTableModel) table.getModel()).removeRow(row);
+
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error deleting Item: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

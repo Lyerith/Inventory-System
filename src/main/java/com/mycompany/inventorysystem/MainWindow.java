@@ -1283,13 +1283,13 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void updateFurnituresTable(String employeeName) {
 
-        String sql = "SELECT category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
+        String sql = "SELECT inventory_id, category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
                    + "FROM inventory "
-                   + "WHERE name = ? AND category = 'Furniture'";
+                   + "WHERE name = ? AND category = 'Furnitures'";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+            "Inventory ID", "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -1299,6 +1299,7 @@ public class MainWindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("inventory_id");
                 String item = rs.getString("item");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
@@ -1310,7 +1311,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{id, item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
             FurnituresInventory.setModel(model);
 
@@ -1321,13 +1322,13 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void updateSchoolSuppliesTable(String employeeName) {
 
-        String sql = "SELECT category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
+        String sql = "SELECT inventory_id, category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
                    + "FROM inventory "
                    + "WHERE name = ? AND category = 'School Supplies'";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+            "Inventory ID", "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -1337,6 +1338,7 @@ public class MainWindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("inventory_id");
                 String item = rs.getString("item");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
@@ -1348,7 +1350,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{id, item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
             SchoolSuppliesInventory.setModel(model);
 
@@ -1359,13 +1361,13 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void updateEquipmentsTable(String employeeName) {
 
-        String sql = "SELECT category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
+        String sql = "SELECT inventory_id, category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
                    + "FROM inventory "
-                   + "WHERE name = ? AND category = 'Equipment'";
+                   + "WHERE name = ? AND category = 'Equipments'";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+            "Inventory ID", "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -1375,6 +1377,7 @@ public class MainWindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("inventory_id");
                 String item = rs.getString("item");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
@@ -1386,7 +1389,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{id, item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
             EquipmentInventory.setModel(model);
 
@@ -1397,13 +1400,13 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void updateOthersTable(String employeeName) {
 
-        String sql = "SELECT category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
+        String sql = "SELECT inventory_id, category, item, description, stockno, unitmeasure, unitvalue, balpercard, onhandcount, quantity, value, remarks "
                    + "FROM inventory "
                    + "WHERE name = ? AND category = 'Others'";
 
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
-            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks"
+            "Inventory ID", "Item", "Description", "Stock No.", "Unit of Measure", "Unit Value", "Balance Per Card", 
+            "On Hand Per Count", "Shortage/Overage (Quantity)", "Shortage/Overage (Value)", "Remarks", "Actions"
         }, 0);
 
         try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
@@ -1413,6 +1416,7 @@ public class MainWindow extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+                int id = rs.getInt("inventory_id");
                 String item = rs.getString("item");
                 String description = rs.getString("description");
                 String stockNo = rs.getString("stockno");
@@ -1424,7 +1428,7 @@ public class MainWindow extends javax.swing.JFrame {
                 String shortageOverageValue = rs.getString("value");
                 String remarks = rs.getString("remarks");
 
-                model.addRow(new Object[]{item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks});
+                model.addRow(new Object[]{id, item, description, stockNo, unitMeasure, unitValue, balancePerCard, onHandPerCount, shortageOverageQuantity, shortageOverageValue, remarks, ""});
             }
             OthersInventory.setModel(model);
 
