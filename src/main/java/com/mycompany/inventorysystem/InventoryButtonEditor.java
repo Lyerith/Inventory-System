@@ -31,7 +31,7 @@ class InventoryButtonEditor extends AbstractCellEditor implements TableCellEdito
         //editButton.addActionListener(e -> editAction());
         deleteButton.addActionListener(e -> deleteAction());
     }
-
+        
     // Delete Action
     private void deleteAction() {
         int row = table.getSelectedRow();
@@ -46,6 +46,7 @@ class InventoryButtonEditor extends AbstractCellEditor implements TableCellEdito
                 pstmt.executeUpdate();
                 // Remove the row from the table
                 ((DefaultTableModel) table.getModel()).removeRow(row);
+
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error deleting Item: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
