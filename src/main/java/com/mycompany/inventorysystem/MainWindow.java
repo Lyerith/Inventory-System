@@ -198,7 +198,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeItems.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
                 "Item Name", "Item Category"
@@ -227,12 +227,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         EmployeeDesignationLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EmployeeDesignationLabel.setText("Designation:");
-
-        DesignationTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DesignationTextFieldActionPerformed(evt);
-            }
-        });
 
         Employee_Namelabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Employee_Namelabel1.setText("ID:");
@@ -1209,6 +1203,13 @@ public class MainWindow extends javax.swing.JFrame {
             actionColumn4.setCellRenderer(new ButtonRenderer());
             actionColumn4.setCellEditor(new InventoryButtonEditor(OthersInventory));
         }
+        else{
+            updateInventoryTable(selectedEmployee);
+            updateFurnituresTable(selectedEmployee);
+            updateSchoolSuppliesTable(selectedEmployee);
+            updateEquipmentsTable(selectedEmployee);
+            updateOthersTable(selectedEmployee);
+        }
     }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
 
     private void InsertEmpItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertEmpItemsActionPerformed
@@ -1249,12 +1250,12 @@ public class MainWindow extends javax.swing.JFrame {
         String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
         if (selectedEmployee != null) {
             updateInventoryTable(selectedEmployee);
+            updateFurnituresTable(selectedEmployee);
+            updateSchoolSuppliesTable(selectedEmployee);
+            updateEquipmentsTable(selectedEmployee);
+            updateOthersTable(selectedEmployee);
         }
     }//GEN-LAST:event_EmployeeDropdownBox1ActionPerformed
-
-    private void DesignationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DesignationTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DesignationTextFieldActionPerformed
             
     private void updateInventoryTable(String employeeName) {
 
@@ -1517,7 +1518,6 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error fetching employee data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
     private void updateEmployeeItems(String employeeName) {
         String sql = "SELECT item, category FROM inventory WHERE name = ?";
