@@ -1249,11 +1249,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void EmployeeDropdownBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeDropdownBox1ActionPerformed
         String selectedEmployee = (String) EmployeeDropdownBox.getSelectedItem();
         if (selectedEmployee != null) {
-            updateInventoryTable(selectedEmployee);
-            updateFurnituresTable(selectedEmployee);
-            updateSchoolSuppliesTable(selectedEmployee);
-            updateEquipmentsTable(selectedEmployee);
-            updateOthersTable(selectedEmployee);
+            updateEmployeeItems(selectedEmployee);
         }
     }//GEN-LAST:event_EmployeeDropdownBox1ActionPerformed
             
