@@ -1193,9 +1193,21 @@ public class MainWindow extends javax.swing.JFrame {
             updateSchoolSuppliesTable(selectedEmployee);
             updateEquipmentsTable(selectedEmployee);
             updateOthersTable(selectedEmployee);
-            TableColumn actionColumn = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
-            actionColumn.setCellRenderer(new ButtonRenderer());
-            actionColumn.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
+            TableColumn actionColumn0 = AllItemsInventory.getColumnModel().getColumn(11);  // Actions column
+            actionColumn0.setCellRenderer(new ButtonRenderer());
+            actionColumn0.setCellEditor(new InventoryButtonEditor(AllItemsInventory));
+            TableColumn actionColumn1 = FurnituresInventory.getColumnModel().getColumn(11);  // Actions column
+            actionColumn1.setCellRenderer(new ButtonRenderer());
+            actionColumn1.setCellEditor(new InventoryButtonEditor(FurnituresInventory));
+            TableColumn actionColumn2 = SchoolSuppliesInventory.getColumnModel().getColumn(11);  // Actions column
+            actionColumn2.setCellRenderer(new ButtonRenderer());
+            actionColumn2.setCellEditor(new InventoryButtonEditor(SchoolSuppliesInventory));
+            TableColumn actionColumn3 = EquipmentInventory.getColumnModel().getColumn(11);  // Actions column
+            actionColumn3.setCellRenderer(new ButtonRenderer());
+            actionColumn3.setCellEditor(new InventoryButtonEditor(EquipmentInventory));
+            TableColumn actionColumn4 = OthersInventory.getColumnModel().getColumn(11);  // Actions column
+            actionColumn4.setCellRenderer(new ButtonRenderer());
+            actionColumn4.setCellEditor(new InventoryButtonEditor(OthersInventory));
         }
     }//GEN-LAST:event_EmployeeDropdownBoxActionPerformed
 
