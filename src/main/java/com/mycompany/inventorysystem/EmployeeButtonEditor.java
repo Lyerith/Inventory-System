@@ -86,28 +86,52 @@ class EmployeeButtonEditor extends AbstractCellEditor implements TableCellEditor
         fireEditingStopped();  // Stop cell editing
     }
 
-    // Delete Action
     private void deleteAction() {
         int row = table.getSelectedRow();
-        int employeeId = (int) table.getValueAt(row, 0); // Get the employee ID
-        
-        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "Please select an employee to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Get the employee name (assuming it's in the second column, adjust if necessary)
+        String employeeName = (String) table.getValueAt(row, 1); // Get the employee name
+
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete employee '" + employeeName + "' and all related inventory records?", "Confirm", JOptionPane.YES_NO_OPTION);
+
         if (confirm == JOptionPane.YES_OPTION) {
             try (Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-                String query = "DELETE FROM employees WHERE employee_id = ?";
-                PreparedStatement pstmt = con.prepareStatement(query);
-                pstmt.setInt(1, employeeId);
-                pstmt.executeUpdate();
+                // Start a transaction
+                con.setAutoCommit(false);
+
+                // Delete the employee from the employees table
+                String deleteEmployeeQuery = "DELETE FROM employees WHERE name = ?";
+                try (PreparedStatement pstmtEmployee = con.prepareStatement(deleteEmployeeQuery)) {
+                    pstmtEmployee.setString(1, employeeName);
+                    pstmtEmployee.executeUpdate();
+                }
+
+                // Delete related inventory records from the inventory table
+                String deleteInventoryQuery = "DELETE FROM inventory WHERE name = ?";
+                try (PreparedStatement pstmtInventory = con.prepareStatement(deleteInventoryQuery)) {
+                    pstmtInventory.setString(1, employeeName);
+                    pstmtInventory.executeUpdate();
+                }
+
+                // Commit the transaction
+                con.commit();
 
                 // Remove the row from the table
                 ((DefaultTableModel) table.getModel()).removeRow(row);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error deleting employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error deleting employee or related inventory: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
-        fireEditingStopped();  // Stop cell editing
+        fireEditingStopped();  // Stop cell editing if applicable
     }
+
+
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
